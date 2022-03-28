@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8ce83d4b.css",
+    "main.js": "/static/js/main.b88dcb5d.js",
+    "static/js/415.4d6acbeb.chunk.js": "/static/js/415.4d6acbeb.chunk.js",
+    "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
+    "static/media/about.png": "/static/media/about.310cc1cf4fae7c6fd344.png",
+    "static/media/codeEditor.png": "/static/media/codeEditor.ba9458794dca1c746ef2.png",
+    "static/media/blog.png": "/static/media/blog.52102140f369ea233010.png",
+    "static/media/chatify.png": "/static/media/chatify.9373eddae1a258056c35.png",
+    "static/media/leaf.png": "/static/media/leaf.4c15d6eb3fc75cfef85b.png",
+    "static/media/myImg.png": "/static/media/myImg.b0a7d3f1d635a30121ee.png",
+    "static/media/profile.pdf": "/static/media/profile.cbc7840f1b85a3ef1bb4.pdf",
+    "static/media/suicide.png": "/static/media/suicide.b72f1f9ffeb4775a7803.png",
+    "static/media/home-main.svg": "/static/media/home-main.1563fc4aec0b8af7c48985e7d6c68d97.svg",
+    "static/media/emotion.jpeg": "/static/media/emotion.e92e314a236f65bb89af.jpeg",
+    "index.html": "/index.html",
+    "static/media/pre.svg": "/static/media/pre.7b35efec6d0fe8bd99f7.svg",
+    "main.8ce83d4b.css.map": "/static/css/main.8ce83d4b.css.map",
+    "main.b88dcb5d.js.map": "/static/js/main.b88dcb5d.js.map",
+    "415.4d6acbeb.chunk.js.map": "/static/js/415.4d6acbeb.chunk.js.map",
+    "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8ce83d4b.css",
+    "static/js/main.b88dcb5d.js"
+  ]
+}
