@@ -97,7 +97,7 @@ button:focus {
 
 .navbar-toggler span {
   display: block !important;
-  background-color: #FFC100 !important;
+  background-color: #000000 !important;
   height: 4px !important;
   width: 27px !important;
   margin-top: 5px !important;
@@ -251,7 +251,7 @@ button:focus {
 }
 
 .home-header {
-  padding-top: 80px !important;
+  padding-top: 50px !important;
 }
 
 .home-section {
@@ -318,8 +318,8 @@ button:focus {
 
 .home-about-section {
   position: relative;
-  padding-bottom: 70px !important;
-  padding-top: 70px !important;
+  padding-bottom: 50px !important;
+  padding-top: 10px !important;
 }
 
 .home-about-description {
@@ -542,7 +542,7 @@ button:focus {
 
 .about-section {
   position: relative !important;
-  padding-top: 150px !important;
+  padding-top: 100px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
   color:#000000 !important;

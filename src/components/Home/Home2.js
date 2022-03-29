@@ -19,42 +19,32 @@ function Home2() {
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
-              I fell in love with programming and I have at least learnt
-              something, I think… 🤷‍♂️
+             백엔드/데이터 분석/머신러닝 등등 다양한 분야에 관심을 갖고 도전하는 걸 좋아하는 사람입니다.
               <br />
-              <br />I am fluent in classics like
-              <i>
-                <b className="purple"> C++, Javascript and Python. </b>
-              </i>
+              <br />주로 
+                <b className="purple"> Python, Java </b>를 ,그리고 가끔은&nbsp;
+                <b className="purple">Javascript </b> 도 사용합니다. 
               <br />
               <br />
-              My field of Interest's are building new &nbsp;
-              <i>
-                <b className="purple">Web Technologies and Products </b> and
-                also in areas related to{" "}
+                <b className="purple">Backend Engineering, Data Engineering </b> 에 관심을 가지고 공부하는 중이고, 몇몇 프로젝트를 진행해보면서
+                {" "}
                 <b className="purple">
-                  Deep Learning and Natural Launguage Processing.
-                </b>
-              </i>
+                  Deep Learning</b>에도 흥미가 생겨 현재는 <b className="purple">Natural Launguage Processing
+                </b> 쪽으로 지식을 쌓아나가고 있습니다.
               <br />
               <br />
-              Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Node.js</b> and
-              <i>
-                <b className="purple">
-                  {" "}
-                  Modern Javascript Library and Frameworks
-                </b>
-              </i>
-              &nbsp; like
-              <i>
-                <b className="purple"> React.js and Next.js</b>
-              </i>
+              가능할 때마다 <b className="purple">Django</b>와
+              <b className="purple">&nbsp; React.js</b> 같은 <b className="purple">Javascript</b> 라이브러리를 활용해서 이것저것 개발해보고 있습니다.
             </p>
           </Col>
           <Col md={4} className="myAvtar">
             <Tilt>
-              <img src={myImg} className="img-fluid" alt="avatar" />
+              <img 
+                src={myImg} 
+                className="img-fluid" 
+                alt="avatar"
+                style={{ maxHeight: "290px"  }} 
+                />
             </Tilt>
           </Col>
         </Row>

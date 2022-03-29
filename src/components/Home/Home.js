@@ -24,18 +24,16 @@ function Home() {
                 I'm
                 <strong className="main-name"> Park Naeun</strong>
               </h1>
-
-              <div style={{ padding: 50, textAlign: "left" }}>
+              <div style={{ padding: 45, textAlign: "left" }}>
                 <Type />
               </div>
             </Col>
-
-            <Col md={5} style={{ paddingBottom: 20 }}>
+            <Col md={5}>
               <img
                 src={homeLogo}
                 alt="home pic"
                 className="img-fluid"
-                style={{ maxHeight: "450px",width:"700" }}
+                style={{ maxHeight: "450px"  }}
               />
             </Col>
           </Row>
