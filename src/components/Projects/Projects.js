@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import leaf from "../../Assets/Projects/leaf.png";
+import ridi from "../../Assets/Projects/ridibooks.png";
 import emotion from "../../Assets/Projects/emotion.jpeg";
-import editor from "../../Assets/Projects/codeEditor.png";
-import chatify from "../../Assets/Projects/chatify.png";
-import suicide from "../../Assets/Projects/suicide.png";
-import bitsOfCode from "../../Assets/Projects/blog.png";
+import joara from "../../Assets/Projects/joara.png";
+import SSumUp from "../../Assets/Projects/SSumUp.png";
+import mib from "../../Assets/Projects/mib.png";
+import whichOTT from "../../Assets/Projects/whichOTT.jpg";
 
 function Projects() {
   return (
@@ -18,67 +18,46 @@ function Projects() {
           My Recent <strong className="purple">Works </strong>
         </h1>
         <p style={{ color: '#000000' }}>
-          Here are a few projects I've worked on recently.
+          Here are a few projects I've worked on alone or as a team recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          <Col md={4} className="project-card">
+          <Col md={3} className="project-card">
             <ProjectCard
-              imgPath={chatify}
+              imgPath={SSumUp}
               isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              link="https://github.com/soumyajit4419/Chatify"
+              title="SSum UP"
+              description="유튜브를 더 효율적으로 이용할 수 있도록 영어로 된 영상의 자막에서 핵심만 간추린 요약문을 제공하는 서비스입니다. 요약문과 영상의 전체 영어 자막, 요약문 번역 또한 동시에 제공합니다. 부가적으로 최근 검색해본 영상 목록을 다시 살펴볼 수 있고, 추후 다시 보고싶은 영상과 자막을  재생목록을 만들어 저장할 수 있습니다.  "
+              link="https://github.com/Ssum-Up-project/Ssum-Up"
             />
           </Col>
 
-          <Col md={4} className="project-card">
+          <Col md={3} className="project-card">
             <ProjectCard
-              imgPath={bitsOfCode}
+              imgPath={whichOTT}
               isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              link="https://github.com/soumyajit4419/Bits-0f-C0de"
+              title="which OTT"
+              description="콘텐츠 기반 추천 알고리즘을 사용해 자신에게 알맞은 OTT 서비스를 추천하는 서비스입니다.추가적으로, 각 OTT서비스 분석을 통해 각 OTT 별 콘텐츠 통계 자료를 제공합니다."
+              link="https://github.com/world970511/which-OTT"
             />
           </Col>
 
-          <Col md={4} className="project-card">
+          <Col md={3} className="project-card">
             <ProjectCard
-              imgPath={editor}
+              imgPath={joara}
               isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              link="https://github.com/soumyajit4419/Editor.io"
+              title="Joara 로판 소설 제목 및 소개글에 사용된 명사 빈도분석"
+              description="joara에 게시된 로맨스 판타지 소설들 중 1~6월에 100위 안에 든 것들만 제목과 소개글을 크롤링해 사용된 명사를 분석했습니다. 소설 제목/ 소개글에 자주 사용되는 명사의 사용 빈도를 통해 웹소설 트랜드를 분석하는 것을 목적으로 진행했습니다. "
+              link="https://github.com/world970511/joara_-Analysis"
             />
           </Col>
 
-          <Col md={4} className="project-card">
+          <Col md={3} className="project-card">
             <ProjectCard
-              imgPath={leaf}
+              imgPath={ridi}
               isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              link="https://github.com/soumyajit4419/Plant_AI"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={suicide}
-              isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              link="https://github.com/soumyajit4419/AI_For_Social_Good"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={emotion}
-              isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              link="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
+              title="리디북스 로맨스 웹소설 리뷰 감성분류"
+              description="리디북스에 판매중인 로맨스 웹소설 5000권의 579,867개 리뷰를 크롤링하여 110,868개로 정제한 후 이를 keras,konlpy를 사용하여 긍부정을 분류하였습니다. 이를 통해 각 소설리뷰를 통해 소설에서 긍정적으로 판단되는 부분과 부정적으로 판단되는 부분을 분류하는 것을 목적으로 하였습니다. "
+              link="https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_AnalysisI"
             />
           </Col>
         </Row>
