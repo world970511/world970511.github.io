@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.bf81135d.css",
-    "main.js": "/static/js/main.fa3f190d.js",
+    "main.js": "/static/js/main.715c268a.js",
     "static/js/415.4d6acbeb.chunk.js": "/static/js/415.4d6acbeb.chunk.js",
     "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
     "static/media/ridibooks.png": "/static/media/ridibooks.614eeddcde6607ce186e.png",
@@ -9,7 +9,7 @@
     "static/media/SSumUp.png": "/static/media/SSumUp.746c28a435fa98f859f3.png",
     "static/media/joara.png": "/static/media/joara.e8ffbb37b4511d9034f5.png",
     "static/media/myImg.png": "/static/media/myImg.b0a7d3f1d635a30121ee.png",
-    "static/media/ParkNaeun_profile.pdf": "/static/media/ParkNaeun_profile.3a2dcb6de5b13356c721.pdf",
+    "static/media/ParkNaeun_profile.pdf": "/static/media/ParkNaeun_profile.53d61349eabe295dd420.pdf",
     "static/media/home-main.svg": "/static/media/home-main.d3a72381a902c3c20034949fbb79eb4f.svg",
     "static/media/whichOTT.jpg": "/static/media/whichOTT.cde0f94cf0823873ee0c.jpg",
     "static/media/mib.png": "/static/media/mib.aab65ea8ca3b0ac4163a.png",
@@ -17,12 +17,12 @@
     "static/media/pre.svg": "/static/media/pre.7b35efec6d0fe8bd99f7.svg",
     "index.html": "/index.html",
     "main.bf81135d.css.map": "/static/css/main.bf81135d.css.map",
-    "main.fa3f190d.js.map": "/static/js/main.fa3f190d.js.map",
+    "main.715c268a.js.map": "/static/js/main.715c268a.js.map",
     "415.4d6acbeb.chunk.js.map": "/static/js/415.4d6acbeb.chunk.js.map",
     "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bf81135d.css",
-    "static/js/main.fa3f190d.js"
+    "static/js/main.715c268a.js"
   ]
 }
