@@ -1,0 +1,53 @@
+# .github/workflows/build-blog.yml
+name: Build and Deploy Blog
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'blog/posts/*.md'
+      - 'assets/js/build-blog.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install marked gray-matter glob
+      
+    - name: Build blog posts
+      run: node assets/js/build-blog.js
+      
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add blog/*.html blog/posts/*.html assets/js/blog-posts.json
+        git diff --cached --quiet || git commit -m "🤖 Build: Update blog posts from markdown"
+        git push
+      
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./

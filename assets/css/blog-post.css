@@ -1,0 +1,254 @@
+/* ===================================
+   Blog Post Full Page Styles
+   =================================== */
+
+.blog-post-full {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.blog-post-full .post-header {
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 30px;
+}
+
+.blog-post-full .post-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.blog-post-full .post-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+/* ===================================
+   Blog Post Content Styles
+   =================================== */
+
+.post-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.post-content h1 {
+    font-size: 2em;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+
+.post-content h2 {
+    font-size: 1.6em;
+}
+
+.post-content h3 {
+    font-size: 1.3em;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+}
+
+.post-content ul,
+.post-content ol {
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+
+.post-content li {
+    margin-bottom: 10px;
+}
+
+.post-content strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.post-content em {
+    font-style: italic;
+}
+
+/* Code Styles */
+.post-content code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #e74c3c;
+}
+
+.post-content pre {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.post-content pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* Images */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Links */
+.post-content a {
+    color: #3498db;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.post-content a:hover {
+    border-bottom-color: #3498db;
+}
+
+/* Blockquotes */
+.post-content blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #666;
+}
+
+/* Tables */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.post-content th,
+.post-content td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.post-content th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.post-content tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* ===================================
+   Post Footer Styles
+   =================================== */
+
+.post-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #ecf0f1;
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-to-blog {
+    color: #3498db;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    transition: gap 0.3s;
+}
+
+.back-to-blog:hover {
+    gap: 10px;
+}
+
+/* ===================================
+   Syntax Highlighting (Prism.js compatible)
+   =================================== */
+
+.language-python .token.keyword {
+    color: #ff79c6;
+}
+
+.language-python .token.string {
+    color: #f1fa8c;
+}
+
+.language-python .token.function {
+    color: #8be9fd;
+}
+
+.language-python .token.comment {
+    color: #6272a4;
+}
+
+.language-javascript .token.keyword {
+    color: #ff79c6;
+}
+
+.language-javascript .token.string {
+    color: #f1fa8c;
+}
+
+/* ===================================
+   Responsive Styles
+   =================================== */
+
+@media (max-width: 768px) {
+    .blog-post-full {
+        padding: 20px;
+    }
+    
+    .blog-post-full .post-title {
+        font-size: 2em;
+    }
+    
+    .post-content {
+        font-size: 1em;
+    }
+    
+    .post-content pre {
+        padding: 15px;
+        font-size: 0.85em;
+    }
+    
+    .blog-post-full .post-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
