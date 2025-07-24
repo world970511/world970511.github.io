@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naeun Park - Portfolio</title>
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="./images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
+    
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- html2pdf library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="#" onclick="showTab('resume'); return false;">
+                <span data-lang="ko">박나은</span>
+                <span data-lang="en" style="display: none;">Naeun Park</span>
+            </a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="./blog/blog-index.html">Blog</a>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="changeLanguage('ko')">KOR</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+                </div>
+                <button class="download-btn" onclick="downloadPDF()" id="downloadBtn">
+                    <span data-lang="ko">📄 PDF 다운로드</span>
+                    <span data-lang="en" style="display: none;">📄 Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Resume Section -->
+        <div id="resume-section" class="content-section active">
+            <div class="resume-container">
+                <div id="resume-content">
+                    <header class="header">
+                        <h1 class="name">
+                            <span data-lang="ko">박나은</span>
+                            <span data-lang="en" style="display: none;">Naeun Park</span>
+                        </h1>
+                        <div class="contact-info">
+                            <span>📧 helloworld970511@naver.com</span>
+                            <span>🔗<a href="https://www.linkedin.com/in/nepark97/" target="_blank">linkedin.com/in/nepark</a></span>
+                            <span>💻 <a href="https://github.com/world970511" target="_blank">github.com/world970511</a></span>
+                        </div>
+                    </header>
+                    
+                    <section class="summary">
+                        <p data-lang="ko">3년차 AI 데이터 학습 매니저로 40만+ 규모의 Vision AI 데이터 파이프라인을 구축하고 자동화했습니다. Python 기반 데이터 처리 자동화로 업무 효율을 90% 향상시켰으며, React+Django 풀스택 개발 경험을 보유하고 있습니다. 대용량 데이터 처리와 ML 모델 학습 데이터 구축에 특화되어 있습니다.</p>
+                        <p data-lang="en" style="display: none;">AI Data Learning Manager with 3 years of experience, built and automated Vision AI data pipelines handling 400K+ data. Improved work efficiency by 90% through Python-based data processing automation. Experienced in React+Django full-stack development, specialized in large-scale data processing and ML model training data construction.</p>
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">💼 경력사항</span>
+                            <span data-lang="en" style="display: none;">💼 Experience</span>
+                        </h2>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">주식회사 포지큐브</span>
+                                    <span data-lang="en" style="display: none;">POSICUBE Co., Ltd.</span>
+                                </h3>
+                                <span class="period">
+                                    <span data-lang="ko">2022.08 - 현재 (3년)</span>
+                                    <span data-lang="en" style="display: none;">2022.08 - Present (3 years)</span>
+                                </span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">AI 학습 데이터 관리 매니저</span>
+                                <span data-lang="en" style="display: none;">AI Learning Data Management Manager</span>
+                            </div>
+                            
+                            <!-- Vision AI 데이터 파이프라인 구축 -->
+                            <div class="project-section">
+                                <div class="project-header-with-toggle">
+                                    <h4>
+                                        <span data-lang="ko">Vision AI 데이터 파이프라인 구축</span>
+                                        <span data-lang="en" style="display: none;">Vision AI Data Pipeline Construction</span>
+                                    </h4>
+                                    <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
+                                        <span class="toggle-text-ko">상세 내용 보기 ▶</span>
+                                        <span class="toggle-text-en" style="display: none;">Show Details ▶</span>
+                                    </button>
+                                </div>
+                                <div class="project-details collapsed">
+                                    <ul class="achievement-list">
+                                        <li data-lang="ko"><strong>데이터 처리 자동화 툴 구현</strong></li>
+                                        <li data-lang="ko">중복 제거: ImageHash 활용 15% 중복 제거</li>
+                                        <li data-lang="ko">자동 분류: ML 기반 신분증 분류로 수작업 90% 감소</li>
+                                        <li data-lang="ko">품질 검증: Annotation 검증 자동화로 오류율 5% → 0.5% 개선</li>
+                                        <li data-lang="ko">민감정보 처리: ML 기반 자동 마스킹 툴 구현</li>
+                                        <li data-lang="ko">GT Dataset 자동 생성: OCR 엔진을 사용한 베트남 신분증 GT 자동 생성 스크립트 구현</li>
+                                        <li data-lang="ko">그 외 기타 사내 라이브러리 구현, 스크립트 관리 및 문서화 진행</li>
+                                        
+                                        <li data-lang="en" style="display: none;"><strong>Implemented Data Processing Automation Tools</strong></li>
+                                        <li data-lang="en" style="display: none;">Deduplication: 15% duplicate removal using ImageHash</li>
+                                        <li data-lang="en" style="display: none;">Auto-classification: 90% reduction in manual work with ML-based ID classification</li>
+                                        <li data-lang="en" style="display: none;">Quality Verification: Error rate improved from 5% to 0.5% through annotation automation</li>
+                                        <li data-lang="en" style="display: none;">Sensitive Data Processing: Implemented ML-based automatic masking tools</li>
+                                        <li data-lang="en" style="display: none;">GT Dataset Auto-generation: Implemented Vietnamese ID GT auto-generation scripts using OCR engine</li>
+                                        <li data-lang="en" style="display: none;">Implemented internal libraries, managed scripts and documentation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- OCR 데이터 수집 및 관리 -->
+                            <div class="project-section">
+                                <div class="project-header-with-toggle">
+                                    <h4>
+                                        <span data-lang="ko">OCR 데이터 수집 및 관리</span>
+                                        <span data-lang="en" style="display: none;">OCR Data Collection and Management</span>
+                                    </h4>
+                                    <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
+                                        <span class="toggle-text-ko">상세 내용 보기 ▶</span>
+                                        <span class="toggle-text-en" style="display: none;">Show Details ▶</span>
+                                    </button>
+                                </div>
+                                <div class="project-details collapsed">
+                                    <ul class="achievement-list">
+                                        <li data-lang="ko"><strong>문서 OCR</strong>: 의료문서, 지로용지 등 문서 수집, GT 작성 및 검수</li>
+                                        <li data-lang="ko"><strong>카드 OCR</strong>: 신용카드 데이터셋 구축, 이미지 합성 툴 구현, 라벨링 가이드 구축</li>
+                                        <li data-lang="ko"><strong>필기체 인식</strong>: 폰트 데이터 크롤링, 필기체 이미지 수집</li>
+                                        
+                                        <li data-lang="en" style="display: none;"><strong>Document OCR</strong>: Collected medical documents, giro forms, created GT and reviewed</li>
+                                        <li data-lang="en" style="display: none;"><strong>Card OCR</strong>: Built credit card dataset, implemented image synthesis tools, created labeling guides</li>
+                                        <li data-lang="en" style="display: none;"><strong>Handwriting Recognition</strong>: Font data crawling, handwritten image collection</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- 신분증 위변조 판별 -->
+                            <div class="project-section">
+                                <div class="project-header-with-toggle">
+                                    <h4>
+                                        <span data-lang="ko">신분증 위변조 판별(Fake Detection)</span>
+                                        <span data-lang="en" style="display: none;">ID Forgery Detection</span>
+                                    </h4>
+                                    <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
+                                        <span class="toggle-text-ko">상세 내용 보기 ▶</span>
+                                        <span class="toggle-text-en" style="display: none;">Show Details ▶</span>
+                                    </button>
+                                </div>
+                                <div class="project-details collapsed">
+                                    <ul class="achievement-list">
+                                        <li data-lang="ko">40만+ 국내외 신분증 데이터셋 구축</li>
+                                        <li data-lang="ko">데이터 수집 및 분류, 라벨링 가이드 구축</li>
+                                        <li data-lang="ko">Annotation 데이터의 검수, 관리, 필터링</li>
+                                        
+                                        <li data-lang="en" style="display: none;">Built 400K+ domestic and international ID dataset</li>
+                                        <li data-lang="en" style="display: none;">Data collection and classification, created labeling guides</li>
+                                        <li data-lang="en" style="display: none;">Annotation data review, management, and filtering</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- 데이터 관리 사이트 구현 -->
+                            <div class="project-section">
+                                <div class="project-header-with-toggle">
+                                    <h4>
+                                        <span data-lang="ko">데이터 관리 사이트 구현</span>
+                                        <span data-lang="en" style="display: none;">Data Management Site Implementation</span>
+                                    </h4>
+                                    <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
+                                        <span class="toggle-text-ko">상세 내용 보기 ▶</span>
+                                        <span class="toggle-text-en" style="display: none;">Show Details ▶</span>
+                                    </button>
+                                </div>
+                                <div class="project-details collapsed">
+                                    <ul class="achievement-list">
+                                        <li data-lang="ko">Django/DRF를 활용하여 로그인/검색/업로드/다운로드/삭제/복구 등의 API 구현</li>
+                                        <li data-lang="ko">Celery/Redis를 사용하여 삭제/업로드/다운로드 등의 기능 비동기 처리화</li>
+                                        <li data-lang="ko">React를 사용하여 대시보드 및 데이터 검색 결과 확인, 갤러리 등의 기능 구현, Redux를 사용하여 상태 관리</li>
+                                        <li data-lang="ko">도커 컴포즈를 사용하여 온프레미스 서버에 배포</li>
+                                        
+                                        <li data-lang="en" style="display: none;">Implemented APIs for login/search/upload/download/delete/restore using Django/DRF</li>
+                                        <li data-lang="en" style="display: none;">Asynchronous processing for delete/upload/download functions using Celery/Redis</li>
+                                        <li data-lang="en" style="display: none;">Implemented dashboard, data search results, gallery features using React, state management with Redux</li>
+                                        <li data-lang="en" style="display: none;">Deployed to on-premise server using Docker Compose</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🛠 기술 스택</span>
+                            <span data-lang="en" style="display: none;">🛠 Technical Skills</span>
+                        </h2>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h4>Backend</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Django/DRF</span>
+                                    <span class="skill-tag">FastAPI</span>
+                                    <span class="skill-tag">Celery</span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Frontend</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Redux</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">HTML/CSS</span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Data & AI</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Pandas/Numpy</span>
+                                    <span class="skill-tag">TensorFlow</span>
+                                    <span class="skill-tag">Keras</span>
+                                    <span class="skill-tag" data-lang="ko">데이터 파이프라인</span>
+                                    <span class="skill-tag" data-lang="en" style="display: none;">Data Pipeline</span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Infrastructure & Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Redis</span>
+                                    <span class="skill-tag">Git/GitHub</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🚀 주요 프로젝트</span>
+                            <span data-lang="en" style="display: none;">🚀 Key Projects</span>
+                        </h2>
+                        <a href="https://github.com/world970511/kakao_webtoon_reco" target="_blank" class="github-link">
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <h3 class="project-title">
+                                        <span data-lang="ko">카카오 웹툰 추천 서비스</span>
+                                        <span data-lang="en" style="display: none;">Kakao Webtoon Recommendation Service</span>
+                                    </h3>
+                                    <span class="period">2022</span>
+                                </div>
+                                <p data-lang="ko">행렬 분해(Matrix Factorization) 모델을 활용한 개인화 웹툰 추천 서비스</p>
+                                <p data-lang="en" style="display: none;">Personalized webtoon recommendation service using Matrix Factorization model</p>
+                                <ul class="achievement-list">
+                                    <li data-lang="ko">7,000+ 키워드 기반 추천 알고리즘 구현</li>
+                                    <li data-lang="ko">무한 스크롤, 워드클라우드 등 프론트엔드 전체 구현</li>
+                                    <li data-lang="en" style="display: none;">Implemented 7,000+ keyword-based recommendation algorithm</li>
+                                    <li data-lang="en" style="display: none;">Implemented entire frontend including infinite scroll and word cloud</li>
+                                </ul>
+                                <div class="project-tech">
+                                    <span class="tech-tag">Django</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Bootstrap</span>
+                                    <span class="tech-tag">jQuery</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis" target="_blank" class="github-link">
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <h3 class="project-title">
+                                        <span data-lang="ko">리디북스 로맨스 리뷰 감성분석</span>
+                                        <span data-lang="en" style="display: none;">Ridibooks Romance Review Sentiment Analysis</span>
+                                    </h3>
+                                    <span class="period">2021</span>
+                                </div>
+                                <p data-lang="ko">50만+ 리뷰 데이터 수집 및 딥러닝 기반 감성분석 모델 개발</p>
+                                <p data-lang="en" style="display: none;">Collected 500K+ review data and developed deep learning-based sentiment analysis model</p>
+                                <ul class="achievement-list">
+                                    <li data-lang="ko">579,867건 리뷰 크롤링 및 전처리</li>
+                                    <li data-lang="ko">긍부정 분류 정확도 90% 달성</li>
+                                    <li data-lang="en" style="display: none;">Crawled and preprocessed 579,867 reviews</li>
+                                    <li data-lang="en" style="display: none;">Achieved 90% accuracy in sentiment classification</li>
+                                </ul>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">TensorFlow</span>
+                                        <span class="tech-tag">Keras</span>
+                                        <span class="tech-tag">Selenium</span>
+                                        <span class="tech-tag">BeautifulSoup</span>
+                                    </div>
+                            </div>
+                        </a>
+
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🎓 학력</span>
+                            <span data-lang="en" style="display: none;">🎓 Education</span>
+                        </h2>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">한국방송통신대학교</span>
+                                    <span data-lang="en" style="display: none;">Korea National Open University</span>
+                                </h3>
+                                <span class="period">
+                                    <span data-lang="ko">2025.03 - 2027.01 (예정)</span>
+                                    <span data-lang="en" style="display: none;">2025.03 - 2027.01 (Expected)</span>
+                                </span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">컴퓨터과학과 학사</span>
+                                <span data-lang="en" style="display: none;">Bachelor of Computer Science</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">성공회대학교</span>
+                                    <span data-lang="en" style="display: none;">Sungkonghoe University</span>
+                                </h3>
+                                <span class="period">2017.03 - 2022.08</span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">글로컬IT 전공, 소프트웨어학과 부전공 학사</span>
+                                <span data-lang="en" style="display: none;">Bachelor in Glocal IT, Minor in Software</span>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">👨‍💻 교육</span>
+                            <span data-lang="en" style="display: none;">👨‍💻 Training</span>
+                        </h2>
+                        
+                        <ul class="achievement-list">
+                            <li>
+                                <span data-lang="ko"><strong>데이터 청년 캠퍼스</strong> - 빅리더 아카데미 과정 수료 (2021.08)</span>
+                                <span data-lang="en" style="display: none;"><strong>Data Youth Campus</strong> - Big Leader Academy Course Completion (2021.08)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>앨리스 AI 트랙 3기</strong> - AI 서비스 기획 개발 교육 과정 수료 (2022.03)</span>
+                                <span data-lang="en" style="display: none;"><strong>Elice AI Track 3rd</strong> - AI Service Planning and Development Course Completion (2022.03)</span>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🏆 수상 및 자격증</span>
+                            <span data-lang="en" style="display: none;">🏆 Awards & Certifications</span>
+                        </h2>
+                        
+                        <ul class="achievement-list">
+                            <li>
+                                <span data-lang="ko"><strong>최우수상</strong> - 창원시, GIS 데이터 활용 등산코스 추천 서비스 (2021.08)</span>
+                                <span data-lang="en" style="display: none;"><strong>First Prize</strong> -  Hiking Course Recommendation Service using GIS Data (Changwon City,2021.08)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>공로상</strong> - 국립공원공단, AI 디지털트윈 기술 활용 서비스 제안 (2021.09)</span>
+                                <span data-lang="en" style="display: none;"><strong>Merit Award</strong> -AI Digital Twin Technology Service Proposal (Korea National Park Service, 2021.09)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>정보처리기사</strong> (2022.06)</span>
+                                <span data-lang="en" style="display: none;"><strong>Engineer Information Processing</strong> (Human Resources Development Service of Korea
+,2022.06)</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- External JavaScript -->
+    <script src="assets/js/multilingual.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
