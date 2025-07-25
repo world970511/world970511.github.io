@@ -1,7 +1,7 @@
 {
   "posts": [
     {
-      "slug": "250715",
+      "slug": "250724",
       "title": "250724 일상",
       "date": "2025-07-25",
       "category": "life",
@@ -10,9 +10,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-07-25T00:06:26.784Z"
+      "lastModified": "2025-07-25T00:10:46.838Z"
     }
   ],
-  "lastUpdated": "2025-07-25T00:06:27.126Z",
+  "lastUpdated": "2025-07-25T00:10:47.050Z",
   "totalPosts": 1
 }
