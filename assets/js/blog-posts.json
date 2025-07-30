@@ -1,9 +1,23 @@
 {
   "posts": [
     {
+      "slug": "250730",
+      "title": "python 을 이용한 중복 이미지 제거",
+      "date": "2025-07-30",
+      "category": "tech",
+      "tags": [
+        "python",
+        "Hash",
+        "Data processing"
+      ],
+      "excerpt": "회사에서 진행했던 일들 정리(1) : python을 이용한 중복 이미지 제거",
+      "readTime": 5,
+      "lastModified": "2025-07-30T07:44:49.531Z"
+    },
+    {
       "slug": "250729",
       "title": "250729 일상",
-      "date": "2025-07-29",
+      "date": "2025-07-30",
       "category": "life",
       "tags": [
         "대학원 준비",
@@ -12,21 +26,21 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-07-29T04:44:26.209Z"
+      "lastModified": "2025-07-30T07:44:49.744Z"
     },
     {
       "slug": "250724",
       "title": "250724 일상",
-      "date": "2025-07-29",
+      "date": "2025-07-30",
       "category": "life",
       "tags": [
         "일상"
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-07-29T04:44:26.452Z"
+      "lastModified": "2025-07-30T07:44:49.746Z"
     }
   ],
-  "lastUpdated": "2025-07-29T04:44:26.454Z",
-  "totalPosts": 2
+  "lastUpdated": "2025-07-30T07:44:49.748Z",
+  "totalPosts": 3
 }
