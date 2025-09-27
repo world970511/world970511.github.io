@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI의 편향성과 공정성 - 박나은</title>
+    <meta name="description" content="AI 스터디 내용 정리">
+    <meta property="og:title" content="AI의 편향성과 공정성">
+    <meta property="og:description" content="AI 스터디 내용 정리">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">AI의 편향성과 공정성</h1>
+                <div class="post-meta">
+                    <span>📅 2025년 9월 27일</span>
+                    <span>⏱️ 5분 읽기</span>
+                    <span>📁 Tech</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#편향성</span><span class="post-tag">#AI</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="ai의-편향성과-공정성">AI의 편향성과 공정성</h1>
+<p>이전에 스터디하면서 들었던 내용인데 흥미롭기도 하고 이쪽으로 갈 생각도 있기 때문에 블로그에 따로 정리해보았다. </p>
+<h2 id="💡-ai-편향성이란-무엇인가">💡 AI 편향성이란 무엇인가?</h2>
+<p><strong>편향성</strong>: 의사결정 과정에서 발생하는 체계적 오류. 불공정한 결과를 초래하는 현상</p>
+<ul>
+<li>AI 시스템에서의 편향성은 데이터 수집/알고리즘 설계/인간의 해석 등 다양한 단계에서 발생</li>
+<li>머신러닝 모델은 학습 데이터에 존재하는 편향된 패턴을 학습/복제하여 불공정하거나 차별적인 결과 초래.</li>
+</ul>
+<h3 id="✅-ai-편향성의-유형">✅ AI 편향성의 유형</h3>
+<table>
+<thead>
+<tr>
+<th align="left">유형</th>
+<th align="left">정의</th>
+<th align="left">특징 및 발생 원인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>데이터 편향</strong> (Data Bias)</td>
+<td align="left">학습 데이터가 현실 세계를 불균형하게 또는 대표성 없이 반영할 때 발생</td>
+<td align="left">특정 집단이 과소 또는 과대 표현되어 모델 예측에 불균형한 영향</td>
+</tr>
+<tr>
+<td align="left"><strong>알고리즘 편향</strong> (Algorithmic Bias)</td>
+<td align="left">알고리즘 설계 자체에 내재된 편향으로, 특정 속성이나 기준을 과도하게 우선시할 때 발생</td>
+<td align="left">설계자의 의도와 다르게 모델이 차별적인 결론을 도출</td>
+</tr>
+<tr>
+<td align="left"><strong>사용자 편향</strong> (User Bias)</td>
+<td align="left">AI 시스템의 사용자나 개발자가 의식적 또는 무의식적으로 자신의 편견을 시스템에 반영할 때 발생</td>
+<td align="left">주로 주석 달기(Annotation)나 시스템 활용 방식에서 나타남</td>
+</tr>
+<tr>
+<td align="left"><strong>생성적 편향</strong> (Generative Bias)</td>
+<td align="left">생성형 AI 모델이 학습 데이터의 편향된 패턴을 반영하여 편향된 콘텐츠를 생성할 때 발생</td>
+<td align="left">텍스트-이미지 생성 시 고정관념을 강화하는 결과물을 내놓는 것이 대표적</td>
+</tr>
+</tbody></table>
+<h3 id="📌-ai-편향성-관련-주요-사례">📌 AI 편향성 관련 주요 사례</h3>
+<ul>
+<li><p>의료 AI 시스템 : 환자 사망률 예측 AI가 아프리카계 미국인 환자에게 더 높은 위험 점수를 부여하는 편향 발견.(출처: Obermeyer et al., 2019)</p>
+</li>
+<li><p>생성형 AI 편향
+텍스트-이미지 모델이 &#39;CEO&#39; 이미지 생성 시 주로 남성을, &#39;범죄자&#39; 이미지 생성 시 유색인종을 더 많이
+표현.(출처: Nicoletti &amp; Bass, 2023)</p>
+</li>
+</ul>
+<h2 id="💡-ai-공정성이란-무엇인가">💡 AI 공정성이란 무엇인가?</h2>
+<p><strong>공정성</strong>: AI 시스템에서 차별이나 편향이 없이 모든 개인과 집단을 공평하게 대우하는 특성</p>
+<ul>
+<li>AI 시스템이 사회적 가치와 윤리적 기준에 부합하는 결정은 내리도록 보장하는 것을 목표로 함</li>
+</ul>
+<h3 id="✅-ai-공정성의-유형">✅ AI 공정성의 유형</h3>
+<table>
+<thead>
+<tr>
+<th align="left">유형</th>
+<th align="left">정의</th>
+<th align="left">목표 및 주요 개념</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>그룹 공정성</strong> (Group Fairness)</td>
+<td align="left">서로 다른 인구통계학적 집단이 AI 시스템에서 동등하게 또는 비례적으로 대우받도록 보장</td>
+<td align="left"><strong>인구통계학적 동등성</strong>(Demographic Parity), <strong>기회 균등</strong>(Equal Opportunity) 등</td>
+</tr>
+<tr>
+<td align="left"><strong>개인 공정성</strong> (Individual Fairness)</td>
+<td align="left">집단 소속과 관계없이 유사한 개인들이 AI 시스템에서 유사한 대우를 받도록 보장</td>
+<td align="left"><strong>유사성 기반 측정</strong> (Similarity-based Measures)을 통해 측정</td>
+</tr>
+<tr>
+<td align="left"><strong>반사실적 공정성</strong> (Counterfactual Fairness)</td>
+<td align="left">개인의 민감 속성(예: 성별, 인종)이 달랐다고 하더라도 AI 시스템이 동일한 결정을 내렸을 것임을 보장</td>
+<td align="left">원인-결과 관계를 기반으로 편향을 식별</td>
+</tr>
+<tr>
+<td align="left"><strong>인과적 공정성</strong> (Causal Fairness)</td>
+<td align="left">역사적 편향과 불평등을 영속화하지 않도록, 의사결정 과정에서 인과 관계를 고려하여 공정성을 달성</td>
+<td align="left">장기적인 관점에서 사회적 정의를 실현.</td>
+</tr>
+</tbody></table>
+<h2 id="🛠️-공정한-ai를-만들기-위한-구체적인-노력과-방안">🛠️ 공정한 AI를 만들기 위한 구체적인 노력과 방안</h2>
+<h3 id="1-기술적-편향-완화-노력-efforts-to-reduce-ai-bias">1. 기술적 편향 완화 노력 (Efforts to Reduce AI Bias)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">개발 단계</th>
+<th align="left">주요 목표</th>
+<th align="left">구체적 기법 및 예시</th>
+<th align="left">출처</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>데이터 전처리</strong> (Pre-processing)</td>
+<td align="left">학습 데이터에서 편향을 식별하고 제거하여 대표성 있는 데이터셋 구성</td>
+<td align="left"><strong>오버샘플링</strong> (Over-sampling), <strong>언더샘플링</strong> (Under-sampling), <strong>합성 데이터 생성</strong></td>
+<td align="left">(Ferrara, 2023)</td>
+</tr>
+<tr>
+<td align="left"><strong>모델 학습</strong> (In-processing)</td>
+<td align="left">공정성을 우선시하는 알고리즘 설계 및 학습 과정에서 편향 완화</td>
+<td align="left"><strong>정규화</strong> (Regularization), <strong>앙상블 방법</strong> (Ensemble Methods) 등 공정성 제약 조건을 추가</td>
+<td align="left">(Ferrara, 2023)</td>
+</tr>
+<tr>
+<td align="left"><strong>후처리</strong> (Post-processing)</td>
+<td align="left">모델의 출력을 조정하여 편향을 제거하고 공정성 확보</td>
+<td align="left"><strong>임계값 조정</strong> (Threshold Adjustment), <strong>결과 재조정</strong></td>
+<td align="left">(Ferrara, 2023)</td>
+</tr>
+<tr>
+<td align="left"><strong>생성형 AI 완화</strong></td>
+<td align="left">다양한 데이터 소스 활용, 투명한 알고리즘, 지속적인 모니터링</td>
+<td align="left">(Ferrara, 2023)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="2-공정한-ai-구축을-위한-시스템적-접근">2. 공정한 AI 구축을 위한 시스템적 접근</h3>
+<ul>
+<li><strong>다양하고 대표성 있는 데이터셋 구축</strong>: 다양한 인구 집단과 현실 세계를 포괄하는 데이터셋을 구축하여 학습 데이터 편향을 최소화합니다. (Gebru et al., 2021)</li>
+<li><strong>공정성 메트릭 정의 및 측정</strong>: 그룹 공정성, 개인 공정성 등 상황에 맞는 다양한 공정성 지표를 정의하고, 개발 및 운영 단계에서 지속적으로 모니터링합니다. (Dwork et al., 2012; Hardt et al., 2016)</li>
+<li><strong>투명성과 설명 가능성(XAI) 확보</strong>: AI 시스템의 의사결정 과정을 이해하기 쉽고 투명하게 공개하고, 설명 가능한 모델(Explainable AI, XAI)을 개발합니다. (Ananny &amp; Crawford, 2018)</li>
+<li><strong>다양한 개발팀 구성</strong>: 다양한 배경과 관점을 가진 개발자들이 프로젝트에 참여하여, 시스템 설계 단계부터 다양한 시각을 반영하고 편향을 사전에 검토합니다. (Stathoulopoulos &amp; Mateos-Garcia, 2019)</li>
+</ul>
+<hr>
+<h2 id="🔮-공정한-ai를-향한-과제와-미래">🔮 공정한 AI를 향한 과제와 미래</h2>
+<ul>
+<li><strong>공정성 정의의 어려움</strong>: 다양한 공정성 정의(그룹 vs. 개인) 간의 **상충관계(Trade-offs)**가 존재하며, 특정 맥락에서 어떤 공정성 정의가 적절한지 선택하기 어렵습니다.</li>
+<li><strong>데이터 부족 및 대표성 문제</strong>: 소외된 집단에 대한 <strong>데이터 부족</strong> 문제와 역사적 불평등이 반영된 기존 데이터를 어떻게 정화하고 활용할 것인지에 대한 근본적인 문제가 있습니다.</li>
+<li><strong>기술적 한계</strong>: 공정성 확보가 종종 모델의 <strong>정확성(Accuracy)</strong> 하락을 초래하는 기술적 한계와, 복잡한 사회적 맥락과 미묘한 차이를 AI가 이해하기 어려움</li>
+</ul>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+</body>
+</html>
