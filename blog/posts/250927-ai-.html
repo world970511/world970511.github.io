@@ -128,12 +128,35 @@
 </tbody></table>
 <h2 id="🛠️-공정한-ai를-만들기-위한-구체적인-노력과-방안">🛠️ 공정한 AI를 만들기 위한 구체적인 노력과 방안</h2>
 <h3 id="1-기술적-편향-완화-노력-efforts-to-reduce-ai-bias">1. 기술적 편향 완화 노력 (Efforts to Reduce AI Bias)</h3>
-<p>| 개발 단계 | 주요 목표 | 구체적 기법 및 예시 |
-| :--- | :--- | :--- | :--- |
-| <strong>데이터 전처리</strong> (Pre-processing) | 학습 데이터에서 편향을 식별하고 제거하여 대표성 있는 데이터셋 구성 | <strong>오버샘플링</strong> (Over-sampling), <strong>언더샘플링</strong> (Under-sampling), <strong>합성 데이터 생성</strong> | 
-| <strong>모델 선택 및 학습</strong> (In-processing) | 공정성을 우선시하는 알고리즘 설계 및 학습 과정에서 편향 완화 | <strong>정규화</strong> (Regularization), <strong>앙상블 방법</strong> (Ensemble Methods) |
-| <strong>후처리</strong> (Post-processing) | 모델의 출력을 조정하여 편향을 제거하고 공정성 확보 | <strong>임계값 조정</strong> (Threshold Adjustment), <strong>결과 재조정</strong> | 
-| <strong>생성형 AI 완화</strong> | 다양한 데이터 소스 활용, 투명한 알고리즘, 지속적인 모니터링 | <strong>AI 가드레일</strong>(사용자의 입력(프롬프트)에 편향을 유발하는 요소가 있을 경우, 이를 완화하도록 모델의 내부 지침을 조정하는 기법) , <strong>공정성 제약 조건</strong>(Fairness Constraints) 등| </p>
+<table>
+<thead>
+<tr>
+<th align="left">개발 단계</th>
+<th align="left">주요 목표</th>
+<th align="left">구체적 기법 및 예시</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>데이터 전처리</strong> (Pre-processing)</td>
+<td align="left">학습 데이터에서 편향을 식별하고 제거하여 대표성 있는 데이터셋 구성</td>
+<td align="left"><strong>오버샘플링</strong> (Over-sampling), <strong>언더샘플링</strong> (Under-sampling), <strong>합성 데이터 생성</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>모델 선택 및 학습</strong> (In-processing)</td>
+<td align="left">공정성을 우선시하는 알고리즘 설계 및 학습 과정에서 편향 완화</td>
+<td align="left"><strong>정규화</strong> (Regularization), <strong>앙상블 방법</strong> (Ensemble Methods)</td>
+</tr>
+<tr>
+<td align="left"><strong>후처리</strong> (Post-processing)</td>
+<td align="left">모델의 출력을 조정하여 편향을 제거하고 공정성 확보</td>
+<td align="left"><strong>임계값 조정</strong> (Threshold Adjustment), <strong>결과 재조정</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>생성형 AI 완화</strong></td>
+<td align="left">다양한 데이터 소스 활용, 투명한 알고리즘, 지속적인 모니터링</td>
+<td align="left"><strong>AI 가드레일</strong>, <strong>공정성 제약 조건</strong> 등</td>
+</tr>
+</tbody></table>
 <h3 id="2-공정한-ai-구축을-위한-시스템적-접근">2. 공정한 AI 구축을 위한 시스템적 접근</h3>
 <ul>
 <li><strong>다양하고 대표성 있는 데이터셋 구축</strong>: 다양한 인구 집단과 현실 세계를 포괄하는 데이터셋을 구축하여 학습 데이터 편향을 최소화.</li>
