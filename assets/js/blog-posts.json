@@ -1,9 +1,22 @@
 {
   "posts": [
     {
-      "slug": "250927-1",
+      "slug": "2025-10-02-2-1",
+      "title": "Django에 Celery 사용하기(1)",
+      "date": "2025-10-02",
+      "category": "tech",
+      "tags": [
+        "python",
+        "Celery "
+      ],
+      "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
+      "readTime": 5,
+      "lastModified": "2025-10-14T05:00:22.915Z"
+    },
+    {
+      "slug": "2025-09-27-1",
       "title": "python 을 이용한 중복 이미지 제거",
-      "date": "2025-10-12",
+      "date": "2025-09-27",
       "category": "tech",
       "tags": [
         "python",
@@ -12,12 +25,12 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-10-12T11:48:12.356Z"
+      "lastModified": "2025-10-14T05:00:23.282Z"
     },
     {
-      "slug": "250927-ai-",
+      "slug": "2025-09-27-ai-",
       "title": "AI의 편향성과 공정성",
-      "date": "2025-10-12",
+      "date": "2025-09-27",
       "category": "tech",
       "tags": [
         "편향성",
@@ -25,12 +38,12 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-10-12T11:48:12.391Z"
+      "lastModified": "2025-10-14T05:00:23.284Z"
     },
     {
-      "slug": "250729",
+      "slug": "2025-07-29",
       "title": "250729 일상",
-      "date": "2025-10-12",
+      "date": "2025-07-29",
       "category": "life",
       "tags": [
         "대학원 준비",
@@ -39,34 +52,21 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-10-12T11:48:12.393Z"
+      "lastModified": "2025-10-14T05:00:23.287Z"
     },
     {
-      "slug": "250724",
+      "slug": "2025-07-24",
       "title": "250724 일상",
-      "date": "2025-10-12",
+      "date": "2025-07-24",
       "category": "life",
       "tags": [
         "일상"
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-10-12T11:48:12.395Z"
-    },
-    {
-      "slug": "20251002-2",
-      "title": "Django에 Celery 사용하기(1)",
-      "date": "2025-10-12",
-      "category": "tech",
-      "tags": [
-        "python",
-        "Celery "
-      ],
-      "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
-      "readTime": 5,
-      "lastModified": "2025-10-12T11:48:12.398Z"
+      "lastModified": "2025-10-14T05:00:23.288Z"
     }
   ],
-  "lastUpdated": "2025-10-12T11:48:12.400Z",
+  "lastUpdated": "2025-10-14T05:00:23.290Z",
   "totalPosts": 5
 }
