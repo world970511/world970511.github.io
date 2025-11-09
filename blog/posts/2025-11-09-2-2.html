@@ -48,18 +48,57 @@
 <p>저번에 쓴 <a href="https://world970511.github.io/blog/posts/2025-10-02-2-1.html">Celery 개념 정리</a>에 이어서<br>공식문서의 <a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html#django-first-steps">First steps with Django</a>를 참고하여 Django에 Celery를 적용하는 방법을 적는다.</p>
 <h2 id="❓-어떻게-적용하면-될까">❓ 어떻게 적용하면 될까?</h2>
 <h4 id="1-celery-및-메시지-브로커-설치">1. Celery 및 메시지 브로커 설치</h4>
-<p>Celery와 선택한 메시지 브로커에 필요한 Python 패키지를 먼저 설치한다.<br>Celery는 작업을 전달받을 메시지 브로커가 반드시 있어야 하기 때문에 Redis나 RabbitMQ를 주로 사용한다.<br>나는 캐싱 목적으로 Redis를 이미 사용하고 있었어서 Redis를 사용했지만 그게 아니라면 RabbitMQ를 사용해도 문제는 없다.<br> <details>
- <summary>Redis vs RabbitMQ </summary>
-    | 구분 | Redis | RabbitMQ |
-    |------|--------|-----------|
-    | <strong>근본적인 역할</strong> | 인메모리 NoSQL DB, 캐시, Pub/Sub | 전문 메시지 브로커 (MQ) |
-    | <strong>주요 프로토콜</strong> | Redis Protocol (자체) | AMQP (표준), MQTT, STOMP 등 |
-    | <strong>속도/처리량</strong> | 매우 빠름 (주로 메모리 기반), 고성능 | Redis보다는 느리지만 안정적, 충분한 성능 제공 |
-    | <strong>메시지 신뢰성</strong> | 낮음 (기본적으로 전송 보장X, 메시지 손실 가능성) | 높음 (메시지 전송 보장, 디스크 영속성 지원) |
-    | <strong>복잡한 라우팅</strong> | 제한적 (간단한 Pub/Sub 또는 List(Queue) 방식) | 매우 유연함 (Exchange, Binding을 통한 복잡한 라우팅) |
-    | <strong>메시지 우선순위</strong> | 지원하지 않음 | 지원함 (높은 우선순위 메시지 먼저 처리 가능) |
-    | <strong>적합한 사용 사례</strong> | 속도가 최우선, 지속성이 덜 중요한 짧은 작업 (단순 캐싱, 세션 저장) | 신뢰성과 복잡한 라우팅이 중요한 작업 (결제, 이메일 전송, 대규모 트랜잭션) |</p>
-</details> 
+<p>Celery와 선택한 메시지 브로커에 필요한 Python 패키지를 먼저 설치한다.<br>Celery는 작업을 전달받을 메시지 브로커가 반드시 있어야 하기 때문에 Redis나 RabbitMQ를 주로 사용한다.<br>나는 캐싱 목적으로 Redis를 이미 사용하고 있었어서 Redis를 사용했지만 그게 아니라면 RabbitMQ를 사용해도 문제는 없다.  </p>
+<details>
+<summary>Redis vs RabbitMQ</summary>
+    <table>
+    <thead>
+        <tr>
+        <th>구분</th>
+        <th>Redis</th>
+        <th>RabbitMQ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><b>근본적인 역할</b></td>
+        <td>인메모리 NoSQL DB, 캐시, Pub/Sub</td>
+        <td>전문 메시지 브로커 (MQ)</td>
+        </tr>
+        <tr>
+        <td><b>주요 프로토콜</b></td>
+        <td>Redis Protocol (자체)</td>
+        <td>AMQP (표준), MQTT, STOMP 등</td>
+        </tr>
+        <tr>
+        <td><b>속도/처리량</b></td>
+        <td>매우 빠름 (주로 메모리 기반), 고성능</td>
+        <td>Redis보다는 느리지만 안정적, 충분한 성능 제공</td>
+        </tr>
+        <tr>
+        <td><b>메시지 신뢰성</b></td>
+        <td>낮음 (기본적으로 전송 보장X, 메시지 손실 가능성)</td>
+        <td>높음 (메시지 전송 보장, 디스크 영속성 지원)</td>
+        </tr>
+        <tr>
+        <td><b>복잡한 라우팅</b></td>
+        <td>제한적 (간단한 Pub/Sub 또는 List(Queue) 방식)</td>
+        <td>매우 유연함 (Exchange, Binding을 통한 복잡한 라우팅)</td>
+        </tr>
+        <tr>
+        <td><b>메시지 우선순위</b></td>
+        <td>지원하지 않음</td>
+        <td>지원함 (높은 우선순위 메시지 먼저 처리 가능)</td>
+        </tr>
+        <tr>
+        <td><b>적합한 사용 사례</b></td>
+        <td>속도가 최우선, 지속성이 덜 중요한 짧은 작업 (단순 캐싱, 세션 저장)</td>
+        <td>신뢰성과 복잡한 라우팅이 중요한 작업 (결제, 이메일 전송, 대규모 트랜잭션)</td>
+        </tr>
+    </tbody>
+    </table>
+</details>
+
 
 <pre><code class="language-bash"># Celery 및 Redis 백엔드용 라이브러리 설치
 pip install &quot;celery[redis]&quot;
@@ -176,14 +215,21 @@ pip install &quot;celery[redis]&quot;
 </code></pre>
 <p>나는 CELERY_BROKER_URL/CELERY_RESULT_BACKEND를 직접 기입하지 않고 docker-compose.yml 파일에서 정의하는 식으로 진행했다.</p>
 <h4 id="5-task-정의-및-사용-taskspy">5. Task 정의 및 사용 (tasks.py)</h4>
-<p>이건 전의 내용과 동일하다. 시간이 오래 걸리는 작업 등을 task로 만들면 된다.<br>일반적으로 Django 앱 내에 tasks.py 파일을 생성하고 @shared_task 데코레이터를 사용한다.
- <details>
- <summary>@app.task vs @shared_task </summary>
-    | 구분 | @app.task | @shared_task|
-    |------|--------|-----------|
-    | <strong>인스턴스 의존성</strong> | 필수. Celery 앱 인스턴스(app)를 명시적으로 가져와야 함.| 없음. Celery 앱 인스턴스 없이 정의 가능. |
-    | <strong>사용 환경</strong> | 일반적인 Python 프로젝트 | Django 프로젝트, 재사용 가능한 앱 |
-    | <strong>Django 사용시 추천 여부</strong> | 비추천 | Django 통합 시 강력히 권장 |</p>
+<p>이건 전의 내용과 동일하다. 시간이 오래 걸리는 작업 등을 task로 만들면 된다.<br>일반적으로 Django 앱 내에 tasks.py 파일을 생성하고 @shared_task 데코레이터를 사용한다.</p>
+<details> 
+<summary>@app.task vs @shared_task</summary>
+    ** 인스턴스 의존성 **  
+    @app.task: Celery 앱 인스턴스(app)를 명시적으로 가져와야 함  
+    @shared_task: Celery 인스턴스 없이 정의 가능, 독립적으로 작동  
+
+<pre><code>** 사용 환경 **  
+@app.task: 일반적인 Python 프로젝트에서 사용  
+@shared_task: Django 프로젝트나 재사용 가능한 앱에서 사용 적합  
+
+** Django 사용 시 추천 여부 **  
+@app.task: Django 환경에서는 비추천  
+@shared_task: Django 통합 시 강력히 권장  
+</code></pre>
 </details>  
 
 <p>밑과 같이 작성하면 된다</p>
@@ -200,15 +246,22 @@ pip install &quot;celery[redis]&quot;
 <p>task 파일 구현 후에는 프로젝트 루트 디렉토리로 이동하여 밑과 같은 명령을 실행한다.    (celery_app는 실제 프로젝트 명으로 변경해야 한다.)</p>
 <pre><code class="language-bash">    celery -A celery_app worker --loglevel=info
 </code></pre>
-<p>실행시킨 후에는 일반적으로 delay() 또는 apply_async() 메서드를 사용하여 정의된 task를 Celery Worker가 처리하도록 큐에 넣어주면 된다.
- <details>
- <summary>@delay() vs apply_async() </summary>
-    | 구분 | @delay() | apply_async()|
-    |------|--------|-----------|
-    | <strong>사용목적</strong> | 빠르고 단순한 호출 | 고급 설정 및 제어 |
-    | <strong>인수 전달</strong> | 일반 함수 호출처럼 전달 | args=(), kwargs={} 키로 명시적 전달 |
-    | <strong>Celery 옵션</strong> | ❌ 사용 불가 | ✅ 사용 가능 (예: queue, countdown, eta) |</p>
-</details>  
+<p>실행시킨 후에는 일반적으로 delay() 또는 apply_async() 메서드를 사용하여 정의된 task를 Celery Worker가 처리하도록 큐에 넣어주면 된다.</p>
+<details> 
+<summary>@delay() vs apply_async()</summary>
+    ** 사용 목적 **  
+    @delay(): 빠르고 단순한 비동기 호출용  
+    apply_async(): 고급 설정 및 세밀한 제어가 필요한 경우에 사용  
+
+<pre><code>** 인수 전달 방식 **  
+@delay(): 일반 함수 호출처럼 인수를 직접 전달 (task.delay(a, b))  
+apply_async(): args=(), kwargs={} 형태로 명시적으로 전달  
+
+** Celery 옵션 사용 여부 **  
+@delay(): Celery의 추가 옵션(queue, countdown, eta 등) 사용 불가  
+apply_async(): 다양한 Celery 실행 옵션 사용 가능  
+</code></pre>
+</details>
 
 <pre><code class="language-python">    # Django 쉘이나 View 등에서
     from myapp.tasks import send_email_task
