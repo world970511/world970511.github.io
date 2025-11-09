@@ -217,19 +217,33 @@ pip install &quot;celery[redis]&quot;
 <h4 id="5-task-정의-및-사용-taskspy">5. Task 정의 및 사용 (tasks.py)</h4>
 <p>이건 전의 내용과 동일하다. 시간이 오래 걸리는 작업 등을 task로 만들면 된다.<br>일반적으로 Django 앱 내에 tasks.py 파일을 생성하고 @shared_task 데코레이터를 사용한다.</p>
 <details> 
-<summary>@app.task vs @shared_task</summary>
-    ** 인스턴스 의존성 **  
-    @app.task: Celery 앱 인스턴스(app)를 명시적으로 가져와야 함  
-    @shared_task: Celery 인스턴스 없이 정의 가능, 독립적으로 작동  
-
-<pre><code>** 사용 환경 **  
-@app.task: 일반적인 Python 프로젝트에서 사용  
-@shared_task: Django 프로젝트나 재사용 가능한 앱에서 사용 적합  
-
-** Django 사용 시 추천 여부 **  
-@app.task: Django 환경에서는 비추천  
-@shared_task: Django 통합 시 강력히 권장  
-</code></pre>
+<summary>@app.task 와 @shared_task 비교 </summary>
+    <table>
+    <thead>
+        <tr>
+        <th>구분</th>
+        <th>@app.task</th>
+        <th>@shared_task</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><b>인스턴스 의존성</b></td>
+        <td>Celery 앱 인스턴스(app)를 명시적으로 가져와야 함 </td>
+        <td>Celery 인스턴스 없이 정의 가능, 독립적으로 작동 </td>
+        </tr>
+        <tr>
+        <td><b>사용 환경</b></td>
+        <td>일반적인 Python 프로젝트에서 사용 </td>
+        <td>Django 프로젝트나 재사용 가능한 앱에서 사용 적합 </td>
+        </tr>
+        <tr>
+        <td><b>Django 사용 시 추천 여부 </b></td>
+        <td>Django 환경에서는 비추천</td>
+        <td>Django 통합 시 강력히 권장</td>
+        </tr>
+    </tbody>
+    </table>
 </details>  
 
 <p>밑과 같이 작성하면 된다</p>
@@ -248,19 +262,33 @@ pip install &quot;celery[redis]&quot;
 </code></pre>
 <p>실행시킨 후에는 일반적으로 delay() 또는 apply_async() 메서드를 사용하여 정의된 task를 Celery Worker가 처리하도록 큐에 넣어주면 된다.</p>
 <details> 
-<summary>@delay() vs apply_async()</summary>
-    ** 사용 목적 **  
-    @delay(): 빠르고 단순한 비동기 호출용  
-    apply_async(): 고급 설정 및 세밀한 제어가 필요한 경우에 사용  
-
-<pre><code>** 인수 전달 방식 **  
-@delay(): 일반 함수 호출처럼 인수를 직접 전달 (task.delay(a, b))  
-apply_async(): args=(), kwargs={} 형태로 명시적으로 전달  
-
-** Celery 옵션 사용 여부 **  
-@delay(): Celery의 추가 옵션(queue, countdown, eta 등) 사용 불가  
-apply_async(): 다양한 Celery 실행 옵션 사용 가능  
-</code></pre>
+<summary>@delay()와 apply_async() 비교</summary>
+    <table>
+    <thead>
+        <tr>
+        <th>구분</th>
+        <th>@delay()</th>
+        <th>apply_async()</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><b>사용 목적</b></td>
+        <td>빠르고 단순한 비동기 호출용 </td>
+        <td>고급 설정 및 세밀한 제어가 필요한 경우에 사용</td>
+        </tr>
+        <tr>
+        <td><b>인수 전달 방식</b></td>
+        <td>일반 함수 호출처럼 인수를 직접 전달 (task.delay(a, b))</td>
+        <td>args=(), kwargs={} 형태로 명시적으로 전달 </td>
+        </tr>
+        <tr>
+        <td><b>Celery 옵션 사용 여부</b></td>
+        <td>❌ 사용 불가</td>
+        <td>✅ 사용 가능 (예: queue, countdown, eta)</td>
+        </tr>
+    </tbody>
+    </table>
 </details>
 
 <pre><code class="language-python">    # Django 쉘이나 View 등에서
