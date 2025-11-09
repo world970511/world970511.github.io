@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django에 Celery 사용하기(2) - 박나은</title>
+    <meta name="description" content="회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기">
+    <meta property="og:title" content="Django에 Celery 사용하기(2)">
+    <meta property="og:description" content="회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">Django에 Celery 사용하기(2)</h1>
+                <div class="post-meta">
+                    <span>📅 2025년 11월 9일</span>
+                    <span>⏱️ 5분 읽기</span>
+                    <span>📁 Tech</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#python</span><span class="post-tag">#Celery </span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="회사에서-진행했던-일들-정리2">회사에서 진행했던 일들 정리(2)</h1>
+<p>저번에 쓴 <a href="https://world970511.github.io/blog/posts/2025-10-02-2-1.html">Celery 개념 정리</a>에 이어서<br>공식문서의 <a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html#django-first-steps">First steps with Django</a>를 참고하여 Django에 Celery를 적용하는 방법을 적는다.</p>
+<h2 id="❓-어떻게-적용하면-될까">❓ 어떻게 적용하면 될까?</h2>
+<h4 id="1-celery-및-메시지-브로커-설치">1. Celery 및 메시지 브로커 설치</h4>
+<p>Celery와 선택한 메시지 브로커에 필요한 Python 패키지를 먼저 설치한다.<br>Celery는 작업을 전달받을 메시지 브로커가 반드시 있어야 하기 때문에 Redis나 RabbitMQ를 주로 사용한다.<br>나는 캐싱 목적으로 Redis를 이미 사용하고 있었어서 Redis를 사용했지만 그게 아니라면 RabbitMQ를 사용해도 문제는 없다.<br> <details>
+ <summary>Redis vs RabbitMQ </summary>
+    | 구분 | Redis | RabbitMQ |
+    |------|--------|-----------|
+    | <strong>근본적인 역할</strong> | 인메모리 NoSQL DB, 캐시, Pub/Sub | 전문 메시지 브로커 (MQ) |
+    | <strong>주요 프로토콜</strong> | Redis Protocol (자체) | AMQP (표준), MQTT, STOMP 등 |
+    | <strong>속도/처리량</strong> | 매우 빠름 (주로 메모리 기반), 고성능 | Redis보다는 느리지만 안정적, 충분한 성능 제공 |
+    | <strong>메시지 신뢰성</strong> | 낮음 (기본적으로 전송 보장X, 메시지 손실 가능성) | 높음 (메시지 전송 보장, 디스크 영속성 지원) |
+    | <strong>복잡한 라우팅</strong> | 제한적 (간단한 Pub/Sub 또는 List(Queue) 방식) | 매우 유연함 (Exchange, Binding을 통한 복잡한 라우팅) |
+    | <strong>메시지 우선순위</strong> | 지원하지 않음 | 지원함 (높은 우선순위 메시지 먼저 처리 가능) |
+    | <strong>적합한 사용 사례</strong> | 속도가 최우선, 지속성이 덜 중요한 짧은 작업 (단순 캐싱, 세션 저장) | 신뢰성과 복잡한 라우팅이 중요한 작업 (결제, 이메일 전송, 대규모 트랜잭션) |</p>
+</details> 
+
+<pre><code class="language-bash"># Celery 및 Redis 백엔드용 라이브러리 설치
+pip install &quot;celery[redis]&quot;
+</code></pre>
+<h4 id="2-celery-인스턴스-설정-프로젝트-루트">2. Celery 인스턴스 설정 (프로젝트 루트)</h4>
+<p>Django 프로젝트의 메인 디렉토리에 celery.py 파일을 생성하고 다음 내용을 추가한다.<br>이때 메인 디렉토리는 settings.py가 위치한 곳이다. 공식 문서 내용을 보면</p>
+<pre><code class="language-bash">- proj/
+  - manage.py
+  - proj/
+    - __init__.py
+    - settings.py
+    - urls.py
+</code></pre>
+<p>로 되어 있는데 이때 celery 파일의 경로는 proj/proj/celery.py 여야 한다고 되어 있다.<br>나는 폴더 구조가 밑과 같아서 config 폴더 내에 위치하도록 했다  </p>
+<pre><code class="language-bash">- dashboard/
+  - back/
+    - app # view,task 파일 위치
+    - config/ #settings 등 설정 파일들 위치 
+        - __init__.py
+        - settings.py
+        - celery.py
+        - urls.py
+</code></pre>
+<p>celery 파일 등록 후 밑과 같은 내용을 추가한다  </p>
+<pre><code class="language-python">    import os
+    from celery import Celery
+
+    # &#39;celery&#39; 프로그램이 Django의 설정을 로드하도록 기본 Django 설정 모듈을 설정.
+    os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;myproject.settings&#39;)
+
+    app = Celery(&#39;myproject&#39;) # 프로젝트 이름으로 Celery 앱 인스턴스를 생성.
+
+    # Celery가 Django 설정 파일에서 설정을 로드. 
+    # &#39;CELERY&#39; 네임스페이스를 사용하면 모든 Celery 관련 설정 키에 &#39;CELERY_&#39; 접두사를 추가해야 함
+    app.config_from_object(&#39;django.conf:settings&#39;, namespace=&#39;CELERY&#39;)
+
+    # 등록된 모든 Django 앱 설정에서 task 모듈을 자동으로 검색.
+    app.autodiscover_tasks()
+
+    @app.task(bind=True)
+    def debug_task(self):
+        print(f&#39;Request: {self.request!r}&#39;)
+</code></pre>
+<p>밑의 건 내가 작성했던 코드 예시인데 env 파일을 따로 두었기에 env 파일을 확인하여 환경변수가 설정되어 있는지 아닌지부터 체크하고, 그 다음 개발 환경인지 배포 환경인지 확인하는 부분을 추가했다.<br>또한 여러 작업 추가 시 우선순위를 위해 큐를 설정하는 부분, 작업 실패 시 재시도하는 부분을 추가했다.  </p>
+<pre><code class="language-python">    from __future__ import absolute_import, unicode_literals
+    import os
+    import django
+    from celery import Celery
+
+    # DJANGO_SETTINGS_MODULE의 환경 변수가 설정되어 있지 않다면 기본값 사용
+    if not os.environ.get(&#39;DJANGO_SETTINGS_MODULE&#39;):
+        if os.environ.get(&#39;DEBUG&#39;) == &#39;True&#39;:
+            os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;config.settings.development&#39;)
+        else:
+            os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;config.settings.production&#39;)   
+
+    app = Celery(&#39;config&#39;)
+
+    # Django 설정 파일의 CELERY 관련 항목을 사용
+    #대문자 네임스페이스는 모든 Celery 구성 옵션을 소문자가 아닌 대문자로 지정해야 하며, 로 시작해야 함 
+    app.config_from_object(&#39;django.conf:settings&#39;, namespace=&#39;CELERY&#39;)
+
+    # 태스크 자동 탐색
+    app.autodiscover_tasks()
+
+    # 작업 큐 설정
+    app.conf.task_queues = {
+        &#39;default&#39;: {
+            &#39;exchange&#39;: &#39;default&#39;,
+            &#39;exchange_type&#39;: &#39;direct&#39;,
+            &#39;binding_key&#39;: &#39;default&#39;,
+        }
+    }
+    # 작업자(worker) 설정
+    app.conf.worker_prefetch_multiplier = 4
+    app.conf.task_acks_late = True
+    app.conf.worker_concurrency = 4 # 동시 실행 태스크 수를 4로 제한
+
+    # 풀 경로 기준 라우팅
+    # task_routes 설정을 사용하면 작업을 이름으로 라우팅하고 모든 것을 한곳에 중앙에서 관리할 수 있음
+    app.conf.task_routes = {
+        # config
+        &quot;config.celery.debug_task&quot;: {&quot;queue&quot;: &quot;default&quot;},
+    }
+    # 재시도 및 rate limit 설정
+    app.conf.task_default_retry_delay = 10 * 60  # 10분 후에 재시도
+    app.conf.task_annotations = {
+        &#39;app.tasks.*&#39;: {&#39;rate_limit&#39;: &#39;10/m&#39;},  # 분당 10개의 작업으로 제한
+    }
+
+    # 디버그 태스크 
+    @app.task(bind=True)
+    def debug_task(self):
+        print(f&#39;Request: {self.request!r}&#39;)
+</code></pre>
+<h4 id="3-celery-앱-로드-프로젝트-initpy">3. Celery 앱 로드 (프로젝트 <strong>init</strong>.py)</h4>
+<p>Celery 앱이 Django가 시작될 때 항상 로드되도록 메인 프로젝트 디렉토리의 <strong>init</strong>.py 파일에 다음을 추가한다.  </p>
+<pre><code class="language-python">    # myproject/__init__.py
+    from .celery import app as celery_app
+
+    __all__ = (&#39;celery_app&#39;,)
+</code></pre>
+<h4 id="4-celery-설정-추가">4. Celery 설정 추가</h4>
+<p>Django 프로젝트의 settings.py 파일에 메시지 브로커 URL 및 필요한 Celery 관련 설정을 추가한다.</p>
+<pre><code class="language-python">    # Celery 기본 설정
+    CELERY_TIMEZONE = &#39;Asia/Seoul&#39;
+    CELERY_IMPORTS = (&#39;app.tasks&#39;,)
+    CELERY_TASK_TIME_LIMIT = 30 * 60
+
+    # Redis를 브로커로 사용할 경우 
+    CELERY_BROKER_URL = &#39;redis://localhost:6379/0&#39; 
+    # 작업 결과를 저장할 백엔드를 설정 (선택 사항)
+    CELERY_RESULT_BACKEND = &#39;redis://localhost:6379/0&#39;
+</code></pre>
+<p>나는 CELERY_BROKER_URL/CELERY_RESULT_BACKEND를 직접 기입하지 않고 docker-compose.yml 파일에서 정의하는 식으로 진행했다.</p>
+<h4 id="5-task-정의-및-사용-taskspy">5. Task 정의 및 사용 (tasks.py)</h4>
+<p>이건 전의 내용과 동일하다. 시간이 오래 걸리는 작업 등을 task로 만들면 된다.<br>일반적으로 Django 앱 내에 tasks.py 파일을 생성하고 @shared_task 데코레이터를 사용한다.
+ <details>
+ <summary>@app.task vs @shared_task </summary>
+    | 구분 | @app.task | @shared_task|
+    |------|--------|-----------|
+    | <strong>인스턴스 의존성</strong> | 필수. Celery 앱 인스턴스(app)를 명시적으로 가져와야 함.| 없음. Celery 앱 인스턴스 없이 정의 가능. |
+    | <strong>사용 환경</strong> | 일반적인 Python 프로젝트 | Django 프로젝트, 재사용 가능한 앱 |
+    | <strong>Django 사용시 추천 여부</strong> | 비추천 | Django 통합 시 강력히 권장 |</p>
+</details>  
+
+<p>밑과 같이 작성하면 된다</p>
+<pre><code class="language-python">    # myapp/tasks.py
+    from celery import shared_task
+
+    @shared_task
+    def send_email_task(recipient_email, message_body):
+        # 이메일을 보내는 등 시간이 오래 걸리는 작업을 수행
+        print(f&quot;Sending email to {recipient_email} with message: {message_body}&quot;)
+        # 실제 이메일 전송 로직...
+        return True
+</code></pre>
+<p>task 파일 구현 후에는 프로젝트 루트 디렉토리로 이동하여 밑과 같은 명령을 실행한다.    (celery_app는 실제 프로젝트 명으로 변경해야 한다.)</p>
+<pre><code class="language-bash">    celery -A celery_app worker --loglevel=info
+</code></pre>
+<p>실행시킨 후에는 일반적으로 delay() 또는 apply_async() 메서드를 사용하여 정의된 task를 Celery Worker가 처리하도록 큐에 넣어주면 된다.
+ <details>
+ <summary>@delay() vs apply_async() </summary>
+    | 구분 | @delay() | apply_async()|
+    |------|--------|-----------|
+    | <strong>사용목적</strong> | 빠르고 단순한 호출 | 고급 설정 및 제어 |
+    | <strong>인수 전달</strong> | 일반 함수 호출처럼 전달 | args=(), kwargs={} 키로 명시적 전달 |
+    | <strong>Celery 옵션</strong> | ❌ 사용 불가 | ✅ 사용 가능 (예: queue, countdown, eta) |</p>
+</details>  
+
+<pre><code class="language-python">    # Django 쉘이나 View 등에서
+    from myapp.tasks import send_email_task
+
+    # 비동기적으로 작업 실행
+    send_email_task.delay(&#39;user@example.com&#39;, &#39;Welcome to our service!&#39;)
+</code></pre>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
