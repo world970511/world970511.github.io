@@ -1,6 +1,19 @@
 {
   "posts": [
     {
+      "slug": "2025-11-09-2-2",
+      "title": "Django에 Celery 사용하기(2)",
+      "date": "2025-11-09",
+      "category": "tech",
+      "tags": [
+        "python",
+        "Celery "
+      ],
+      "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
+      "readTime": 5,
+      "lastModified": "2025-11-09T12:56:31.225Z"
+    },
+    {
       "slug": "2025-10-02-2-1",
       "title": "Django에 Celery 사용하기(1)",
       "date": "2025-10-02",
@@ -11,7 +24,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-10-14T05:12:13.907Z"
+      "lastModified": "2025-11-09T12:56:31.244Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -25,7 +38,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-10-14T05:12:14.479Z"
+      "lastModified": "2025-11-09T12:56:31.248Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -38,7 +51,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-10-14T05:12:14.482Z"
+      "lastModified": "2025-11-09T12:56:31.250Z"
     },
     {
       "slug": "2025-07-29",
@@ -52,7 +65,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-10-14T05:12:14.484Z"
+      "lastModified": "2025-11-09T12:56:31.253Z"
     },
     {
       "slug": "2025-07-24",
@@ -64,9 +77,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-10-14T05:12:14.485Z"
+      "lastModified": "2025-11-09T12:56:31.254Z"
     }
   ],
-  "lastUpdated": "2025-10-14T05:12:14.487Z",
-  "totalPosts": 5
+  "lastUpdated": "2025-11-09T12:56:31.257Z",
+  "totalPosts": 6
 }
