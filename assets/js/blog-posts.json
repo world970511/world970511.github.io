@@ -4,14 +4,14 @@
       "slug": "2025-11-17-1",
       "title": "시스템 디자인(1): 확장성",
       "date": "2025-11-17",
-      "category": "System Design",
+      "category": "tech",
       "tags": [
         "System Design",
-        ""
+        "확장성"
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.091Z"
+      "lastModified": "2025-11-22T15:20:23.002Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -24,7 +24,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.108Z"
+      "lastModified": "2025-11-22T15:20:23.019Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -37,7 +37,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.112Z"
+      "lastModified": "2025-11-22T15:20:23.023Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -51,7 +51,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.115Z"
+      "lastModified": "2025-11-22T15:20:23.026Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -64,7 +64,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.118Z"
+      "lastModified": "2025-11-22T15:20:23.029Z"
     },
     {
       "slug": "2025-07-29",
@@ -78,7 +78,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.120Z"
+      "lastModified": "2025-11-22T15:20:23.031Z"
     },
     {
       "slug": "2025-07-24",
@@ -90,9 +90,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-11-22T14:55:47.121Z"
+      "lastModified": "2025-11-22T15:20:23.032Z"
     }
   ],
-  "lastUpdated": "2025-11-22T14:55:47.123Z",
+  "lastUpdated": "2025-11-22T15:20:23.034Z",
   "totalPosts": 7
 }
