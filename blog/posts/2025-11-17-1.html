@@ -171,12 +171,12 @@
             S3[(Shard 3)]
         end
         
-        Cache[⚡⚡⚡ 캐시\n(Cluster)]
+        Cache[&quot;⚡⚡⚡ 캐시\n(Cluster)&quot;]
         NoSQL[(② NoSQL)]
 
         %% 비동기 처리 계층 (우측)
-        MQ&gt;[📨📨📨 메시지 큐]
-        Worker[🛠️🛠️🛠️ 작업 서버\n(다중 인스턴스)]
+        MQ&gt;[&quot;📨📨📨 메시지 큐&quot;]
+        Worker[&quot;🛠️🛠️🛠️ 작업 서버\n(다중 인스턴스)&quot;]
 
         %% DC1 내부 연결 흐름
         LB --&gt; WebServer
@@ -194,10 +194,10 @@
 
     %% --- 하단 도구 영역 정의 ---
     subgraph Tools [&quot;도구&quot;]
-        Log[로그]
-        Metric[메트릭]
-        Monitor[모니터링]
-        Auto[자동화]
+        Log[&quot;로그&quot;]
+        Metric[&quot;메트릭&quot;]
+        Monitor[&quot;모니터링&quot;]
+        Auto[&quot;자동화&quot;]
     end
 
     %% 도구 -&gt; DC1 연결 (점선으로 표현)
