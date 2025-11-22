@@ -181,15 +181,21 @@
         %% DC1 내부 연결 흐름
         LB --&gt; WebServer
         
-        %% 웹 서버 -&gt; 데이터/캐시
-        WebServer --&gt; S1 &amp; S2 &amp; S3
+        %% 웹 서버 -&gt; 데이터/캐시 
+        WebServer --&gt; S1
+        WebServer --&gt; S2
+        WebServer --&gt; S3
         WebServer &lt;--&gt; Cache
         WebServer --&gt; NoSQL
 
         %% 웹 서버 -&gt; 비동기 처리
         WebServer --&gt; MQ
         MQ --&gt; Worker
-        Worker --&gt; S1 &amp; S2 &amp; S3 %% 그림상 작업 서버가 DB로 연결됨
+        
+        %% 작업 서버 -&gt; DB 
+        Worker --&gt; S1
+        Worker --&gt; S2
+        Worker --&gt; S3
     end
 
     %% --- 하단 도구 영역 정의 ---
