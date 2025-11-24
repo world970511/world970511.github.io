@@ -64,8 +64,14 @@
                     </header>
                     
                     <section class="summary">
-                        <p data-lang="ko"> 40만+ 규모의 이미지 데이터 파이프라인을 구축하고 자동화했습니다. Python 기반 데이터 처리 자동화로 업무 효율을 90% 향상시켰으며, React+Django 풀스택 개발 경험을 보유하고 있습니다. 대용량 데이터 처리와 ML 모델 학습 데이터 구축에 특화되어 있습니다.</p>
-                        <p data-lang="en" style="display: none;">Built and automated a Vision AI data pipeline processing 400K+ images, improving operational efficiency by 90% through Python scripting. Experienced in full-stack development (React + Django) with strong expertise in large-scale data processing and ML training data preparation.</p>
+                        <p data-lang="ko">
+                            <strong>대용량 데이터 처리와 ML 모델 서빙 최적화에 강점이 있는 소프트웨어 엔지니어입니다.</strong><br>
+                            40만 건 이상의 Vision AI 데이터 파이프라인을 구축하여 전처리 자동화율을 90%까지 끌어올렸으며, Django와 Celery를 활용한 비동기 시스템을 설계 및 구현하여 대규모 데이터 관리 플랫폼의 성능 병목을 해결했습니다. 비즈니스 문제를 기술적 설계로 풀어내는 데 집중하며, 데이터 엔지니어링과 백엔드 영역을 아우르는 확장성 있는 시스템을 지향합니다. 최근에는 RAG 등 LLM을 활용한 데이터 인프라 구축으로 전문성을 확장하고 있습니다.
+                        </p>
+                        <p data-lang="en" style="display: none;">
+                            <strong>Software Engineer specializing in Large-scale Data Processing and ML Model Serving Optimization.</strong><br>
+                            Built a Vision AI data pipeline processing over 400K images, increasing preprocessing automation to 90%. Designed and implemented an asynchronous system using Django and Celery to resolve performance bottlenecks in a large-scale data management platform. Focused on solving business problems through technical design, aiming for scalable systems that bridge data engineering and backend development. Currently expanding expertise into LLM-based data infrastructure such as RAG.
+                        </p>
                     </section>
                     
                     <section class="section">
@@ -86,16 +92,16 @@
                                 </span>
                             </div>
                             <div class="position">
-                                <span data-lang="ko">소프트웨어 엔지니어</span>
-                                <span data-lang="en" style="display: none;">Software Engineer</span>
+                                <span data-lang="ko">Software Engineer (Data Engineering Focus)</span>
+                                <span data-lang="en" style="display: none;">Software Engineer (Data Engineering Focus)</span>
                             </div>
                             
                             <!-- Vision AI 데이터 파이프라인 구축 -->
                             <div class="project-section">
                                 <div class="project-header-with-toggle">
                                     <h4>
-                                        <span data-lang="ko">데이터 파이프라인 구축</span>
-                                        <span data-lang="en" style="display: none;">AI Data Pipeline Construction</span>
+                                        <span data-lang="ko">Vision AI 학습 데이터 파이프라인 고도화</span>
+                                        <span data-lang="en" style="display: none;">Enhancement of Vision AI Training Data Pipeline</span>
                                     </h4>
                                     <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
                                         <span class="toggle-text-ko">상세 내용 보기 ▶</span>
@@ -104,31 +110,68 @@
                                 </div>
                                 <div class="project-details collapsed">
                                     <ul class="achievement-list">
-                                        <li data-lang="ko"><strong>데이터 처리 자동화 툴 구현</strong></li>
-                                        <li data-lang="ko">중복 제거: Hash 활용 15% 중복 제거</li>
-                                        <li data-lang="ko">자동 분류: ML 기반 신분증 분류로 수작업 90% 감소</li>
-                                        <li data-lang="ko">품질 검증: Annotation 검증 자동화로 오류율 5% → 0.5% 개선</li>
-                                        <li data-lang="ko">민감정보 처리: ML 기반 자동 마스킹 툴 구현</li>
-                                        <li data-lang="ko">GT Dataset 자동 생성: OCR 엔진을 사용한 베트남 신분증 GT 자동 생성 스크립트 구현</li>
-                                        <li data-lang="ko">그 외 기타 사내 라이브러리 구현, 스크립트 관리 및 문서화 진행</li>
-                                        
-                                        <li data-lang="en" style="display: none;"><strong>Implemented Data Processing Automation Tools</strong></li>
-                                        <li data-lang="en" style="display: none;">Deduplication: 15% duplicate removal using Hash</li>
-                                        <li data-lang="en" style="display: none;">Auto-classification: 90% reduction in manual work with ML-based ID classification</li>
-                                        <li data-lang="en" style="display: none;">Quality Verification: Error rate improved from 5% to 0.5% through annotation automation</li>
-                                        <li data-lang="en" style="display: none;">Sensitive Data Processing: Implemented ML-based automatic masking tools</li>
-                                        <li data-lang="en" style="display: none;">GT Dataset Auto-generation: Implemented Vietnamese ID GT auto-generation scripts using OCR engine</li>
-                                        <li data-lang="en" style="display: none;">Implemented internal libraries, managed scripts and documentation</li>
+                                        <li data-lang="ko">
+                                            <strong>데이터 중복 제거 최적화:</strong> 10만 건 규모 이미지의 완전 중복 제거를 위해 OpenCV 기반 비교 방식을 MD5 해싱 알고리즘으로 리팩토링. 충돌 확률 분석을 기반으로 처리 속도를 90% 단축하고 스토리지 효율 15% 개선.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Data Deduplication Optimization:</strong> Refactored exact duplicate detection for 100K images from OpenCV-based comparison to MD5 hashing. Achieved 90% faster processing speed and 15% storage efficiency improvement based on collision probability analysis.
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>데이터 부족(Data Scarcity) 문제 해결 및 콜드 스타트 극복:</strong>
+                                            <ul>
+                                                <li><strong>합성 데이터(Synthetic Data) 파이프라인:</strong> 실물 데이터 확보가 어려운 신형 신분증/카드 도입 초기, Python 기반 이미지 합성 파이프라인을 구축. 배경 이미지와 가상 데이터를 합성하여 모델 선행 학습(Pre-training)용 데이터를 신속하게 확보.</li>
+                                                <li><strong>해외 데이터셋 구축 자동화:</strong> 해외 신분증 데이터셋 구축 시, OCR 엔진을 활용한 GT(Ground Truth) 자동 생성 프로세스를 도입하여 초기 구축 비용과 시간을 획기적으로 단축.</li>
+                                            </ul>
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Overcoming Data Scarcity & Cold Start:</strong>
+                                            <ul>
+                                                <li><strong>Synthetic Data Pipeline:</strong> Built a Python-based image synthesis pipeline to generate training data for new ID cards lacking physical samples, enabling rapid model pre-training.</li>
+                                                <li><strong>Global Dataset Automation:</strong> Utilized OCR engines to automate Ground Truth (GT) generation for overseas ID datasets, significantly reducing initial construction costs and time.</li>
+                                            </ul>
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>분류 파이프라인 자동화:</strong> 기존 수작업 신분증 분류 프로세스에 ML 모델을 도입하여 정밀도를 확보하고, 반복되는 수작업 비율을 90% 절감.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Classification Pipeline Automation:</strong> Integrated ML models into the manual ID classification process, securing precision and reducing repetitive manual work by 90%.
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>검증 시스템 및 개발 생산성 향상:</strong>
+                                            <ul>
+                                                <li>파일 처리 로직의 중복을 제거하여 사내 공통 라이브러리(Internal Library)로 모듈화.</li>
+                                                <li>가이드라인 접근성 향상을 위해 문서 검색용 VS Code Extension을 직접 개발하여 배포.</li>
+                                                <li>JSON 정합성 검사 및 포인트 오류 탐지 스크립트 고도화로 데이터 오류율 5% → 0.5% 미만 달성.</li>
+                                            </ul>
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Quality Verification & Dev Productivity:</strong>
+                                            <ul>
+                                                <li>Modularized repetitive file processing logic into an Internal Library.</li>
+                                                <li>Developed and deployed a VS Code Extension for documentation search to improve guideline accessibility.</li>
+                                                <li>Enhanced JSON integrity checks and error detection scripts, reducing data error rate from 5% to under 0.5%.</li>
+                                            </ul>
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>보안 및 비식별화(De-identification):</strong> 개인정보보호 규제(Compliance) 준수를 위해 ML 기반 자동 마스킹 툴을 개발, 민감 정보(주민등록번호 등) 유출 리스크를 원천 차단하여 데이터 활용의 안전성 확보.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Security & De-identification:</strong> Developed an ML-based automatic masking tool to ensure compliance with privacy regulations, proactively eliminating the risk of sensitive information (PII) leakage.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            
-                            <!-- OCR 데이터 수집 및 관리 -->
+                                                        
+                            <!-- 대규모 Vision AI/OCR 데이터셋 구축 및 운영 -->
                             <div class="project-section">
                                 <div class="project-header-with-toggle">
                                     <h4>
-                                        <span data-lang="ko">OCR 데이터 수집 및 관리</span>
-                                        <span data-lang="en" style="display: none;">OCR Data Collection and Management</span>
+                                        <span data-lang="ko">대규모 Vision AI/OCR 데이터셋 구축 및 품질 관리</span>
+                                        <span data-lang="en" style="display: none;">Large-scale AI Dataset Construction & Quality Assurance</span>
                                     </h4>
                                     <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
                                         <span class="toggle-text-ko">상세 내용 보기 ▶</span>
@@ -137,48 +180,43 @@
                                 </div>
                                 <div class="project-details collapsed">
                                     <ul class="achievement-list">
-                                        <li data-lang="ko"><strong>문서 OCR</strong>: 의료문서, 지로용지 등 문서 수집, GT 작성 및 검수</li>
-                                        <li data-lang="ko"><strong>카드 OCR</strong>: 신용카드 데이터셋 구축, 이미지 합성 툴 구현, 라벨링 가이드 구축</li>
-                                        <li data-lang="ko"><strong>필기체 인식</strong>: 폰트 데이터 크롤링, 필기체 이미지 수집</li>
-                                        
-                                        <li data-lang="en" style="display: none;"><strong>Document OCR</strong>: Collected medical documents, giro forms, created GT and reviewed</li>
-                                        <li data-lang="en" style="display: none;"><strong>Card OCR</strong>: Built credit card dataset, implemented image synthesis tools, created labeling guides</li>
-                                        <li data-lang="en" style="display: none;"><strong>Handwriting Recognition</strong>: Font data crawling, handwritten image collection</li>
+                                        <li data-lang="ko">
+                                            <strong>대규모 데이터셋 구축 및 거버넌스:</strong> 40만 건 이상의 국내외 신분증 및 실사 기반 위변조 데이터셋을 구축. 수집·가공 가이드라인 제정 및 저장 체계 수립을 주도하여 데이터 자산화(Data Assetization) 달성.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Large-scale Dataset & Governance:</strong> Constructed a dataset of over 400K domestic/international IDs and real-case forgery data. Led the establishment of collection/processing guidelines and storage systems to achieve Data Assetization.
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>OCR 도메인 확장 및 다양성 확보:</strong>
+                                            <ul>
+                                                <li><strong>비정형 문서 데이터:</strong> 의료 문서, 지로 용지 등 서식 변동성이 큰 문서의 GT(Ground Truth) 표준 정의 및 데이터셋 구축.</li>
+                                                <li><strong>특수 목적 데이터:</strong> 신용카드 번호 인식을 위한 샘플 카드 생성 및 필기체 폰트 크롤링을 통해 다양한 모델 요구사항 충족.</li>
+                                            </ul>
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>OCR Domain Expansion & Diversity:</strong>
+                                            <ul>
+                                                <li><strong>Unstructured Documents:</strong> Defined GT standards and built datasets for high-variance documents like medical records and giro forms.</li>
+                                                <li><strong>Special Purpose Data:</strong> Met diverse model requirements by generating synthetic credit card samples and crawling handwritten fonts.</li>
+                                            </ul>
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>데이터 품질 관리(Data QA) 체계화:</strong> ML 개발팀 및 유관 부서와의 협업을 통해 검수-필터링-피드백 루프를 시스템화하여, 모델 학습에 최적화된 'Clean Data' 파이프라인을 지속적으로 유지.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Data QA Systematization:</strong> Systematized the inspection-filtering-feedback loop in collaboration with ML teams to maintain a 'Clean Data' pipeline optimized for model training.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            
-                            <!-- 신분증 위변조 판별 -->
-                            <div class="project-section">
-                                <div class="project-header-with-toggle">
-                                    <h4>
-                                        <span data-lang="ko">신분증 위변조 판별(Fake Detection)</span>
-                                        <span data-lang="en" style="display: none;">ID Forgery Detection</span>
-                                    </h4>
-                                    <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
-                                        <span class="toggle-text-ko">상세 내용 보기 ▶</span>
-                                        <span class="toggle-text-en" style="display: none;">Show Details ▶</span>
-                                    </button>
-                                </div>
-                                <div class="project-details collapsed">
-                                    <ul class="achievement-list">
-                                        <li data-lang="ko">40만+ 국내외 신분증 데이터셋 구축</li>
-                                        <li data-lang="ko">데이터 수집·가공을 위한 가이드라인 문서 작성</li>
-                                        <li data-lang="ko">데이터 저장·관리 체계 수립 및 운영</li>
-                                        <li data-lang="ko">Annotation 데이터의 검수, 관리, 필터링</li>
-                                        
-                                        <li data-lang="en" style="display: none;">Built 400K+ domestic and international ID dataset</li>
-                                        <li data-lang="en" style="display: none;">Data collection and classification, created labeling guides</li>
-                                        <li data-lang="en" style="display: none;">Annotation data review, management, and filtering</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
+                                                        
                             <!-- 데이터 관리 사이트 구현 -->
                             <div class="project-section">
                                 <div class="project-header-with-toggle">
                                     <h4>
-                                        <span data-lang="ko">사내 데이터 관리 플랫폼 개발</span>
+                                        <span data-lang="ko">사내 대용량 데이터 관리 플랫폼 개발</span>
                                         <span data-lang="en" style="display: none;">Internal Data Management Platform Development</span>
                                     </h4>
                                     <button class="toggle-details-inline" onclick="toggleProjectDetails(this)">
@@ -188,24 +226,44 @@
                                 </div>
                                 <div class="project-details collapsed">
                                     <ul class="achievement-list">
-                                        <li data-lang="ko"><strong>풀스택 개발</strong>: React 프론트엔드와 Django/DRF 백엔드를 활용한 파일 관리 시스템 구축</li>
-                                        <li data-lang="ko"><strong>비동기 처리 구현</strong>: Celery + Redis를 활용하여 파일 업로드/다운로드/삭제 작업 비동기화</li>
-                                        <li data-lang="ko"><strong>파일 관리 기능</strong>: 청크 업로드, 썸네일 생성, 중복 파일 감지(SHA-256), 휴지통 기능 구현</li>
-                                        <li data-lang="ko"><strong>검색 기능 개발</strong>: Meilisearch 연동으로 파일/폴더 검색 기능 구현</li>
-                                        <li data-lang="ko"><strong>인증 및 권한</strong>: JWT 기반 인증 시스템 및 팀별 접근 권한 관리</li>
-                                        <li data-lang="ko"><strong>컨테이너화 및 배포</strong>: Docker Compose로 개발 환경 구성, 온프레미스 테스트 서버 배포</li>
-                                        
-                                        <li data-lang="en" style="display: none;"><strong>Full-stack Development</strong>: Built file management system with React frontend and Django/DRF backend</li>
-                                        <li data-lang="en" style="display: none;"><strong>Async Processing</strong>: Implemented async file operations using Celery + Redis</li>
-                                        <li data-lang="en" style="display: none;"><strong>File Management Features</strong>: Chunk upload, thumbnail generation, duplicate detection (SHA-256), trash bin</li>
-                                        <li data-lang="en" style="display: none;"><strong>Search Development</strong>: Integrated Meilisearch for file/folder search functionality</li>
-                                        <li data-lang="en" style="display: none;"><strong>Auth & Permissions</strong>: JWT-based authentication and team-based access control</li>
-                                        <li data-lang="en" style="display: none;"><strong>Containerization</strong>: Development environment with Docker Compose, deployed to on-premise test server</li>
+                                        <li data-lang="ko">
+                                            <strong>비동기 처리 아키텍처 설계:</strong> 대용량 파일 처리 시 발생하는 브라우저 타임아웃 문제를 해결하기 위해 Celery + Redis 기반의 비동기 큐 시스템을 도입하여 안정적인 백그라운드 처리 환경 구축.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Async Architecture Design:</strong> Designed an asynchronous queue system using Celery + Redis to resolve browser timeout issues during large file processing, ensuring stable background operations.
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>대용량 파일 관리 및 검색 최적화:</strong>
+                                            <ul>
+                                                <li>파일/폴더 업로드·다운로드 시 청크 단위 배치 처리를 구현하여 메모리 효율성 최적화.</li>
+                                                <li>Meilisearch 엔진을 연동하여 대량의 파일/폴더 내에서 0.1초 이내의 즉각적인 검색 경험 제공.</li>
+                                            </ul>
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Large File Management & Search Optimization:</strong>
+                                            <ul>
+                                                <li>Implemented chunk-based batch processing for uploads/downloads to optimize memory efficiency.</li>
+                                                <li>Integrated Meilisearch engine to provide sub-0.1s instant search experience within massive file directories.</li>
+                                            </ul>
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>풀스택 개발 및 보안 구축:</strong> React(FE)와 Django/DRF(BE)를 활용한 End-to-End 개발 및 JWT + 세션 하이브리드 기반의 사용자 인증/권한 관리 시스템 구현.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Full-stack & Security:</strong> End-to-End development using React(FE) and Django/DRF(BE), implementing a Hybrid (JWT + Session) Authentication system for secure access control.
+                                        </li>
+
+                                        <li data-lang="ko">
+                                            <strong>배포 환경 표준화 및 안정성 확보:</strong> Docker Compose를 활용하여 개발/배포 환경을 컨테이너로 표준화하고, 온프레미스 테스트 서버 배포 및 기능 검증(UAT)을 완료하여 서비스 안정성 확보.
+                                        </li>
+                                        <li data-lang="en" style="display: none;">
+                                            <strong>Deployment Standardization & Stability:</strong> Standardized environments using Docker Compose and completed deployment to on-premise test servers and User Acceptance Testing (UAT), securing service stability.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </section>
                     
                     <section class="section">
                         <h2 class="section-title">
@@ -276,13 +334,10 @@
                                 <p data-lang="ko" style="margin-bottom: 5px;">자연어로 원하는 스토리를 설명하면 RAG(Retrieval-Augmented Generation) 기반으로 맞춤 웹소설을 추천하는 AI 시스템</p>
                                 <p data-lang="en" style="display: none; margin-bottom: 5px;">Personalized web novel recommendation system using RAG (Retrieval-Augmented Generation)</p>
                                 <ul class="achievement-list">
-                                    <li data-lang="ko">streamlit으로 웹 대시보드 구현</li>
-                                    <li data-lang="ko">FastAPI로 RESTful API 구현</li>
-                                    <li data-lang="ko">PGVector를 사용하여 벡터 DB 구축</li>
-
-                                    <li data-lang="en" style="display: none;">Built web dashboard with streamlit</li>
-                                    <li data-lang="en" style="display: none;">Implemented RESTful API with FastAPI</li>
-                                    <li data-lang="en" style="display: none;">Built vector DB with PGVector</li>
+                                    <li data-lang="ko">단순 키워드 매칭의 한계를 극복하기 위해 PGVector를 활용한 벡터 유사도 검색 도입.</li>
+                                    <li data-lang="ko">Streamlit과 FastAPI를 연동하여 모델 서빙부터 프론트엔드까지 End-to-End 파이프라인 직접 구현.</li>
+                                    <li data-lang="en" style="display: none;"></li>
+                                    <li data-lang="en" style="display: none;"></li>
                                 </ul>
                                 <div class="project-tech">
                                     <span class="tech-tag">FastAPI</span>
@@ -305,15 +360,13 @@
                                 <p data-lang="ko" style="margin-bottom: 5px;">행렬 분해(Matrix Factorization) 모델을 활용한 개인화 웹툰 추천 서비스</p>
                                 <p data-lang="en" style="display: none; margin-bottom: 5px;">Personalized webtoon recommendation service using Matrix Factorization model</p>
                                 <ul class="achievement-list">
-                                    <li data-lang="ko">행렬 분해(Matrix Factorization)로 사용자 맞춤 웹툰 10개 추천</li>
+                                    <li data-lang="ko">사용자 선호도 행렬이 희소(Sparse)한 문제 해결을 위해 행렬 분해 기법 적용.</li>
                                     <li data-lang="ko">React로 추천/결과 뷰, 무한 스크롤, WordCloud2.js 키워드 시각화 구현</li>
-                                    <li data-lang="ko">추천 알고리즘 연동, 사용자 선호도 분석</li>
-                                    <li data-lang="ko">Heroku 배포</li>
+                                    <li data-lang="ko">Heroku 배포 및 Django 백엔드 최적화를 통해 실제 서비스 가능한 수준의 프로토타입 완성.</li>
                                     
-                                    <li data-lang="en" style="display: none;">Implemented personalized 10 webtoon recommendations using Matrix Factorization</li>
+                                    <li data-lang="en" style="display: none;"></li>
                                     <li data-lang="en" style="display: none;">Built recommendation/result views, infinite scroll, WordCloud2.js visualization with React</li>
-                                    <li data-lang="en" style="display: none;">Integrated recommendation algorithm, user preference analysis</li>
-                                    <li data-lang="en" style="display: none;">Deployed on Heroku</li>
+                                    <li data-lang="en" style="display: none;"></li>
                                 </ul>
                                 <div class="project-tech">
                                     <span class="tech-tag">Django</span>
@@ -395,24 +448,24 @@
                         
                         <ul class="achievement-list">
                             <li>
-                                <span data-lang="ko"><strong>서울 우먼잇츠 × 구글 스터디잼</strong> - 'Gemini × GCP: 생성형 AI 기반 웹서비스 만들기' 스터디 참여(2025.08)</span>
-                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Google Study Jams</strong> - 'Developing a Generative AI-Based Web Service using Gemini and GCP' Study (2025)</span>
+                                <span data-lang="ko"><strong>서울 우먼잇츠 × 구글 스터디잼</strong> - 'Gemini × GCP: 생성형 AI 기반 웹서비스 만들기' 스터디 참여 (2025.08 ~ 2025.10)</span>
+                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Google Study Jams</strong> - 'Developing a Generative AI-Based Web Service using Gemini and GCP' Study (2025.08 ~ 2025.10)</span>
                             </li>
                             <li>
-                                <span data-lang="ko"><strong>서울 우먼잇츠 × 우아한스터디</strong> - '오픈소스 기여 걸음마 떼기' 스터디 참여, Airflow 관련 스터디 진행 (2024.06)</span>
-                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Woowahan Study</strong> - 'First Steps in Open Source Contribution' Study, Airflow Study Group (2024)</span>
+                                <span data-lang="ko"><strong>서울 우먼잇츠 × 우아한스터디</strong> - '오픈소스 기여 걸음마 떼기' 스터디 참여, Airflow 관련 스터디 진행 (2024.06 ~ 2024.07)</span>
+                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Woowahan Study</strong> - 'First Steps in Open Source Contribution' Study, Airflow Study Group (2024.06 ~ 2024.07)</span>
                             </li>
                             <li>
-                                <span data-lang="ko"><strong>실리콘밸리에서 날아온 데이터 엔지니어링 스타터 키트 with Python</strong> - ETL, SQL 및 Airflow 학습 (2023.01)</span>
-                                <span data-lang="en" style="display: none;"><strong>Data Engineering Starter Kit from Silicon Valley with Python</strong> - ETL, SQL and Airflow Training (2023.01)</span>
+                                <span data-lang="ko"><strong>실리콘밸리에서 날아온 데이터 엔지니어링 스타터 키트 with Python</strong> - ETL, SQL 및 Airflow 학습 (2023.01 ~ 2023.02)</span>
+                                <span data-lang="en" style="display: none;"><strong>Data Engineering Starter Kit from Silicon Valley with Python</strong> - ETL, SQL and Airflow Training (2023.01 ~ 2023.02)</span>
                             </li>
                             <li>
-                                <span data-lang="ko"><strong>앨리스 AI 트랙 3기</strong> - AI 서비스 기획 및 풀스택 개발(flask,react) 교육 과정 수료 (2022.03)</span>
-                                <span data-lang="en" style="display: none;"><strong>Elice AI Track 3rd</strong> - AI Service Planning and Development Course Completion (2022.03)</span>
+                                <span data-lang="ko"><strong>앨리스 AI 트랙 3기</strong> - AI 서비스 기획 및 풀스택 개발(flask,react) 교육 과정 수료 (2021.09 ~ 2022.03)</span>
+                                <span data-lang="en" style="display: none;"><strong>Elice AI Track 3rd</strong> - AI Service Planning and Development Course Completion (2021.09 ~ 2022.03)</span>
                             </li>
                             <li>
-                                <span data-lang="ko"><strong>데이터 청년 캠퍼스</strong> - 빅리더 아카데미 과정 수료, 머신러닝 및 딥러닝 이론 학습, 국립공원공단 협업 프로젝트 진행 (2021.08)</span>
-                                <span data-lang="en" style="display: none;"><strong>Data Youth Campus</strong> - Big Leader Academy Course, ML/DL Theory, Korea National Park Service Collaboration Project (2021.08)</span>
+                                <span data-lang="ko"><strong>데이터 청년 캠퍼스</strong> - 빅리더 아카데미 과정 수료, 머신러닝 및 딥러닝 이론 학습, 국립공원공단 협업 프로젝트 진행 (2021.06 ~ 2021.09)</span>
+                                <span data-lang="en" style="display: none;"><strong>Data Youth Campus</strong> - Big Leader Academy Course, ML/DL Theory, Korea National Park Service Collaboration Project (2021.06 ~ 2021.09)</span>
                             </li>
                         </ul>
                     </section>
@@ -435,6 +488,10 @@
                             <li>
                                 <span data-lang="ko"><strong>정보처리기사</strong> (2022.06)</span>
                                 <span data-lang="en" style="display: none;"><strong>Engineer Information Processing</strong> (Human Resources Development Service of Korea, 2022.06)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>OPIc IM2</strong> (2024.10) - 영문 기술 문서 독해 및 업무 소통 가능</span>
+                                <span data-lang="en" style="display: none;"><strong>OPIc IM2</strong> (2024.10) - Capable of reading technical documents and business communication</span>
                             </li>
                         </ul>
                     </section>

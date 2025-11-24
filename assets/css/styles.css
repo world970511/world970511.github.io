@@ -336,6 +336,17 @@ body {
     color: #3498db;
 }
 
+.achievement-list li ul {
+    margin-top: 5px;
+    padding-left: 20px; /* 내부 리스트가 안쪽으로 들어가 보이도록 여백 추가 */
+    list-style: none;   /* 기본 스타일 제거 */
+}
+
+.achievement-list li li {
+    padding-left: 15px; /* 마커와 텍스트 사이 간격 조정 */
+    margin-bottom: 5px; /* 아이템 간 간격 조정 */
+}
+
 /* Skills Styles */
 .skills-grid {
     display: grid;
@@ -604,17 +615,32 @@ body {
     .main-container {
         padding: 0;
     }
-    
-    /* Show all details in print */
-    .project-details {
-        display: block !important;
+
+    * {
+        -webkit-print-color-adjust: exact !important;   /* Chrome, Safari */
+        print-color-adjust: exact !important;           /* Firefox */
     }
     
-    .toggle-details-inline {
-        display: none !important;
+    .tech-tag {
+        background-color: #fff3cd !important;  /* 기술 스택 태그 배경색 강제 */
+        color: #856404 !important;            /* 글자색 강제 */
+        border: 1px solid #ffeeba;            /* 인쇄 시 가독성을 위해 테두리 추가 권장 */
+    }
+
+    .project-item {
+        background-color: #f8f9fa !important; /* 프로젝트 박스 배경색 강제 */
+        border: 1px solid #ddd;               /* 테두리 추가 */
     }
     
-    .project-header-with-toggle h4 {
-        margin-bottom: 10px;
+    .skill-category {
+        background-color: #f8f9fa !important; /* 스킬 카테고리 배경색 강제 */
+        border: 1px solid #ddd;
     }
+    
+    .skill-tag {
+        background-color: #e3f2fd !important;
+        color: #1976d2 !important;
+        border: 1px solid #bbdefb;
+    }
+}
 }
