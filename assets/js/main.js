@@ -61,89 +61,49 @@ function toggleProjectDetails(button) {
 // ===================================
 // PDF Generation (Browser Print)
 // ===================================
+const PAGE_TYPE = document.body.dataset.pageType || 'resume';
 function downloadPDF() {
-    // 모든 프로젝트 상세 내용 펼치기
-    const allDetails = document.querySelectorAll('.project-details');
-    const allButtons = document.querySelectorAll('.toggle-details-inline');
-    
-    // 상세 내용 모두 표시
-    allDetails.forEach(detail => {
-        detail.classList.remove('collapsed');
-    });
-    
-    // 토글 버튼 숨기기
-    allButtons.forEach(btn => {
-        btn.style.visibility = 'hidden';
-    });
-    
-    // 인쇄 전 클래스 추가 (스타일 최적화)
+    // 커리어 페이지에서는 상세 내용 전부 펼치기
+    let allDetails = [];
+    let allButtons = [];
+
+    if (PAGE_TYPE === 'career') {
+        allDetails = document.querySelectorAll('.project-details');
+        allButtons = document.querySelectorAll('.toggle-details-inline');
+
+        // 상세 내용 모두 표시
+        allDetails.forEach(detail => {
+            detail.classList.remove('collapsed');
+        });
+
+        // 토글 버튼 숨기기
+        allButtons.forEach(btn => {
+            btn.style.visibility = 'hidden';
+        });
+    }
+
+    // 인쇄 전 클래스 추가 (스타일 최적화용)
     document.body.classList.add('printing');
-    
+
     // 약간의 지연 후 인쇄 (렌더링 완료 대기)
     setTimeout(() => {
         window.print();
-        
+
         // 인쇄 다이얼로그가 닫힌 후 원래 상태로 복구
         setTimeout(() => {
-            // 원래 상태로 복구
-            allDetails.forEach(detail => {
-                detail.classList.add('collapsed');
-            });
-            
-            allButtons.forEach(btn => {
-                btn.style.visibility = 'visible';
-            });
-            
+            if (PAGE_TYPE === 'career') {
+                allDetails.forEach(detail => {
+                    detail.classList.add('collapsed');
+                });
+                
+                allButtons.forEach(btn => {
+                    btn.style.visibility = 'visible';
+                });
+            }
+
             document.body.classList.remove('printing');
         }, 100);
     }, 100);
-}
-
-// 대안: 기존 html2pdf 방식도 유지하고 싶다면
-function downloadPDFClassic() {
-    // 기존 html2pdf 코드...
-    const element = document.getElementById('resume-content');
-    const opt = {
-        margin: [5, 5, 5, 5],
-        filename: '박나은_이력서.pdf',
-        image: { 
-            type: 'jpeg', 
-            quality: 0.98 
-        },
-        html2canvas: { 
-            scale: 2,
-            useCORS: true,
-            letterRendering: true,
-            scrollY: -window.scrollY,
-            windowHeight: element.offsetHeight
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait',
-            compress: true
-        },
-        pagebreak: { 
-            mode: ['avoid-all', 'css', 'legacy'],
-            before: '.page-break',
-            avoid: ['tr', '.avoid-break']
-        }
-    };
-    
-    const btn = document.querySelector('.download-btn');
-    const originalText = btn.textContent;
-    btn.textContent = '⏳ PDF 생성 중...';
-    btn.disabled = true;
-    
-    html2pdf().set(opt).from(element).save().then(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }).catch(err => {
-        console.error('PDF 생성 오류:', err);
-        btn.textContent = originalText;
-        btn.disabled = false;
-        alert('PDF 생성 중 오류가 발생했습니다.');
-    });
 }
 
 // ===================================
