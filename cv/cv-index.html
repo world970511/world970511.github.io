@@ -22,7 +22,7 @@
         <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
-            <a class="nav-brand" href="#" onclick="showTab('resume'); return false;">
+            <a class="nav-brand" href="../index.html" onclick="showTab('resume'); return false;">
                 <span data-lang="ko">박나은</span>
                 <span data-lang="en" style="display: none;">Naeun Park</span>
             </a>
@@ -137,7 +137,7 @@
                                             <strong>데이터 부족(Data Scarcity) 및 콜드 스타트 문제 해결:</strong>
                                             <ul>
                                                 <li><strong>합성 데이터(Synthetic Data) 파이프라인:</strong> 실제 신형 신분증/카드 이미지를 충분히 확보하기 어려운 초기 단계에서,
-                                                    배경 이미지와 텍스트·UI 컴포넌트를 합성하는 Python 기반 이미지 생성 파이프라인을 구축하여
+                                                    배경 이미지와 텍스트를 합성하는 Python 기반 이미지 생성 파이프라인을 구축하여
                                                     Pre-training에 활용 가능한 학습 데이터를 선제적으로 확보했습니다.</li>
                                                 <li><strong>해외 데이터셋 구축 자동화:</strong> 국가별 포맷이 다른 해외 신분증 데이터셋의 GT(Ground Truth)를 수작업으로 만들기에는 리소스가 과도하게 소요되는 상황에서,
                                                     OCR 엔진과 후처리 로직을 결합한 GT 자동 생성 프로세스를 설계해 구축 초기 비용과 시간을 대폭 절감했습니다.</li>
@@ -146,7 +146,7 @@
                                         <li data-lang="en" style="display: none;">
                                             <strong>Addressing data scarcity & cold start:</strong>
                                             <ul>
-                                                <li><strong>Synthetic data pipeline:</strong> Built a Python-based image synthesis pipeline that combines background images with textual/UI components to generate training data for newly released ID formats, enabling early-stage pre-training without sufficient real samples.</li>
+                                                <li><strong>Synthetic data pipeline:</strong> Built a Python-based image synthesis pipeline that combines background images with textual     components to generate training data for newly released ID formats, enabling early-stage pre-training without sufficient real samples.</li>
                                                 <li><strong>Automated global dataset construction:</strong> Designed an OCR-engine-based GT generation process with post-processing logic to replace costly manual labeling for overseas ID formats, significantly reducing the time and cost required to bootstrap new datasets.</li>
                                             </ul>
                                         </li>
