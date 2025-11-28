@@ -1,9 +1,9 @@
 {
   "posts": [
     {
-      "slug": "2025-11-25-korea-webnovel-recommender-2",
+      "slug": "2027-11-25-korea-webnovel-recommender-2",
       "title": "RAG를 활용한 웹소설 추천 시스템 구현하기(2)",
-      "date": "2025-11-25",
+      "date": "2027-11-25",
       "category": "project",
       "tags": [
         "Crawler",
@@ -11,13 +11,13 @@
         "data process"
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
-      "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.900Z"
+      "readTime": 7,
+      "lastModified": "2025-11-28T13:20:25.674Z"
     },
     {
-      "slug": "2025-11-25-korea-webnovel-recommender-1",
+      "slug": "2025-11-27-korea-webnovel-recommender-1",
       "title": "RAG를 활용한 웹소설 추천 시스템 구현하기(1)",
-      "date": "2025-11-25",
+      "date": "2025-11-27",
       "category": "project",
       "tags": [
         "Recommendations",
@@ -26,7 +26,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.915Z"
+      "lastModified": "2025-11-28T13:20:25.691Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -39,7 +39,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.919Z"
+      "lastModified": "2025-11-28T13:20:25.693Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -52,7 +52,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.922Z"
+      "lastModified": "2025-11-28T13:20:25.696Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -65,7 +65,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.924Z"
+      "lastModified": "2025-11-28T13:20:25.698Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -79,7 +79,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.927Z"
+      "lastModified": "2025-11-28T13:20:25.702Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -92,7 +92,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.930Z"
+      "lastModified": "2025-11-28T13:20:25.704Z"
     },
     {
       "slug": "2025-07-29",
@@ -106,7 +106,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.932Z"
+      "lastModified": "2025-11-28T13:20:25.706Z"
     },
     {
       "slug": "2025-07-24",
@@ -118,9 +118,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-11-27T07:38:34.933Z"
+      "lastModified": "2025-11-28T13:20:25.707Z"
     }
   ],
-  "lastUpdated": "2025-11-27T07:38:34.936Z",
+  "lastUpdated": "2025-11-28T13:20:25.710Z",
   "totalPosts": 9
 }
