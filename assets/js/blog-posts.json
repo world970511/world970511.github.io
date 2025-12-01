@@ -12,7 +12,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
       "readTime": 7,
-      "lastModified": "2025-11-28T13:32:58.009Z"
+      "lastModified": "2025-12-01T04:24:37.437Z"
     },
     {
       "slug": "2025-11-27-korea-webnovel-recommender-1",
@@ -26,7 +26,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.026Z"
+      "lastModified": "2025-12-01T04:24:37.454Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -39,7 +39,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.029Z"
+      "lastModified": "2025-12-01T04:24:37.456Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -52,7 +52,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.031Z"
+      "lastModified": "2025-12-01T04:24:37.459Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -65,7 +65,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.034Z"
+      "lastModified": "2025-12-01T04:24:37.462Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -79,7 +79,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.037Z"
+      "lastModified": "2025-12-01T04:24:37.465Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -92,7 +92,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.040Z"
+      "lastModified": "2025-12-01T04:24:37.467Z"
     },
     {
       "slug": "2025-07-29",
@@ -106,7 +106,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.041Z"
+      "lastModified": "2025-12-01T04:24:37.469Z"
     },
     {
       "slug": "2025-07-24",
@@ -118,9 +118,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-11-28T13:32:58.043Z"
+      "lastModified": "2025-12-01T04:24:37.470Z"
     }
   ],
-  "lastUpdated": "2025-11-28T13:32:58.045Z",
+  "lastUpdated": "2025-12-01T04:24:37.473Z",
   "totalPosts": 9
 }
