@@ -50,9 +50,9 @@ readTime: 5
 작성한 api명세서는 밑과 같다
  <details>
  <summary>웹소설 추천 시스템 API 문서</summary>
-    Base URL: https://api.webnovel-recommend.com/v1
-    인증: 현재 버전은 인증 없음
-    응답 형식: JSON
+    Base URL: https://api.webnovel-recommend.com/v1  
+    인증: 현재 버전은 인증 없음  
+    응답 형식: JSON  
 
     API 엔드포인트
     1. 소설 검색 (자연어 기반)
@@ -60,73 +60,82 @@ readTime: 5
     사용자가 입력한 자연어 설명을 기반으로 유사한 소설을 추천합니다.
 
     요청
-    {
-    "query": "string (최대 140자)",
-    "limit": "integer (기본값: 10, 최대: 50)"
-    }
+    ```json
+        {
+        "query": "string (최대 140자)",
+        "limit": "integer (기본값: 10, 최대: 50)"
+        }
+    ```
 
     응답
-    {
-    "status": "success",
-    "data": {
-        "query": "주인공이 회귀해서 복수하는 스토리",
-        "results": [
+    ```json
         {
-            "id": 1,
-            "title": "회귀자의 복수극",
-            "author": "작가명",
-            "description": "10년 전으로 돌아간 주인공이...",
-            "platform": "카카오페이지",
-            "url": "https://...",
-            "similarity_score": 0.92,
-            "keywords": ["회귀", "복수", "판타지"]
+        "status": "success",
+        "data": {
+            "query": "주인공이 회귀해서 복수하는 스토리",
+            "results": [
+            {
+                "id": 1,
+                "title": "회귀자의 복수극",
+                "author": "작가명",
+                "description": "10년 전으로 돌아간 주인공이...",
+                "platform": "카카오페이지",
+                "url": "https://...",
+                "similarity_score": 0.92,
+                "keywords": ["회귀", "복수", "판타지"]
+            }
+            ],
+            "total_results": 10,
+            "search_id": "uuid"
+            }
         }
-        ],
-        "total_results": 10,
-        "search_id": "uuid"
-    }
-    }
+    ```
 
     2. 소설 상세 정보 조회
     GET /novels/{novel_id}
     특정 소설의 상세 정보를 조회합니다.
 
     응답
-    {
-    "status": "success",
-    "data": {
-        "id": 1,
-        "title": "회귀자의 복수극",
-        "author": "작가명",
-        "description": "전체 줄거리...",
-        "platform": "카카오페이지",
-        "url": "https://...",
-        "keywords": ["회귀", "복수", "판타지"],
-        "created_at": "2024-01-01T00:00:00Z",
-        "updated_at": "2024-01-01T00:00:00Z"
-    }
-    }
+    ```json
+        {
+        "status": "success",
+        "data": {
+            "id": 1,
+            "title": "회귀자의 복수극",
+            "author": "작가명",
+            "description": "전체 줄거리...",
+            "platform": "카카오페이지",
+            "url": "https://...",
+            "keywords": ["회귀", "복수", "판타지"],
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+            }
+        }
+    ```
 
     3 검색 기록 저장
     POST /search-logs
     검색 기록을 저장합니다 (내부적으로 자동 호출).
 
     요청
-
-    {
-    "query": "string",
-    "results_count": "integer"
-    }
+    ```json
+        {
+        "query": "string",
+        "results_count": "integer"
+        }
+    ```
 
     에러 응답 형식
-    {
-    "status": "error",
-    "error": {
-        "code": "ERROR_CODE",
-        "message": "에러 메시지",
-        "details": {}
-    }
-    }
+    ```json
+        {
+        "status": "error",
+        "error": {
+            "code": "ERROR_CODE",
+            "message": "에러 메시지",
+            "details": {}
+            }
+        }
+    ```
 
     에러 코드
     INVALID_QUERY: 쿼리가 비어있거나 140자를 초과
@@ -138,6 +147,7 @@ readTime: 5
     임베딩 처리: 검색 쿼리는 서버에서 임베딩으로 변환 후 PGVector에서 유사도 검색
  </details>
 
+이를 claude 코드를 사용해서 프로젝트 구조를 밑과 같이 잡았다.  
  ```
     korea_webnovel_recommender/
     ├── backend/                # FastAPI 백엔드

@@ -72,82 +72,89 @@
 작성한 api명세서는 밑과 같다
  <details>
  <summary>웹소설 추천 시스템 API 문서</summary>
-    Base URL: <a href="https://api.webnovel-recommend.com/v1">https://api.webnovel-recommend.com/v1</a>
-    인증: 현재 버전은 인증 없음
-    응답 형식: JSON</p>
+    Base URL: <a href="https://api.webnovel-recommend.com/v1">https://api.webnovel-recommend.com/v1</a><br>    인증: 현재 버전은 인증 없음<br>    응답 형식: JSON  </p>
 <pre><code>API 엔드포인트
 1. 소설 검색 (자연어 기반)
 POST /novels/search
 사용자가 입력한 자연어 설명을 기반으로 유사한 소설을 추천합니다.
 
 요청
-{
-&quot;query&quot;: &quot;string (최대 140자)&quot;,
-&quot;limit&quot;: &quot;integer (기본값: 10, 최대: 50)&quot;
-}
+```json
+    {
+    &quot;query&quot;: &quot;string (최대 140자)&quot;,
+    &quot;limit&quot;: &quot;integer (기본값: 10, 최대: 50)&quot;
+    }
+```
 
 응답
-{
-&quot;status&quot;: &quot;success&quot;,
-&quot;data&quot;: {
-    &quot;query&quot;: &quot;주인공이 회귀해서 복수하는 스토리&quot;,
-    &quot;results&quot;: [
+```json
     {
-        &quot;id&quot;: 1,
-        &quot;title&quot;: &quot;회귀자의 복수극&quot;,
-        &quot;author&quot;: &quot;작가명&quot;,
-        &quot;description&quot;: &quot;10년 전으로 돌아간 주인공이...&quot;,
-        &quot;platform&quot;: &quot;카카오페이지&quot;,
-        &quot;url&quot;: &quot;https://...&quot;,
-        &quot;similarity_score&quot;: 0.92,
-        &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;]
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;query&quot;: &quot;주인공이 회귀해서 복수하는 스토리&quot;,
+        &quot;results&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;회귀자의 복수극&quot;,
+            &quot;author&quot;: &quot;작가명&quot;,
+            &quot;description&quot;: &quot;10년 전으로 돌아간 주인공이...&quot;,
+            &quot;platform&quot;: &quot;카카오페이지&quot;,
+            &quot;url&quot;: &quot;https://...&quot;,
+            &quot;similarity_score&quot;: 0.92,
+            &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;]
+        }
+        ],
+        &quot;total_results&quot;: 10,
+        &quot;search_id&quot;: &quot;uuid&quot;
+        }
     }
-    ],
-    &quot;total_results&quot;: 10,
-    &quot;search_id&quot;: &quot;uuid&quot;
-}
-}
+```
 
 2. 소설 상세 정보 조회
 GET /novels/{novel_id}
 특정 소설의 상세 정보를 조회합니다.
 
 응답
-{
-&quot;status&quot;: &quot;success&quot;,
-&quot;data&quot;: {
-    &quot;id&quot;: 1,
-    &quot;title&quot;: &quot;회귀자의 복수극&quot;,
-    &quot;author&quot;: &quot;작가명&quot;,
-    &quot;description&quot;: &quot;전체 줄거리...&quot;,
-    &quot;platform&quot;: &quot;카카오페이지&quot;,
-    &quot;url&quot;: &quot;https://...&quot;,
-    &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;],
-    &quot;created_at&quot;: &quot;2024-01-01T00:00:00Z&quot;,
-    &quot;updated_at&quot;: &quot;2024-01-01T00:00:00Z&quot;
-}
-}
+```json
+    {
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;회귀자의 복수극&quot;,
+        &quot;author&quot;: &quot;작가명&quot;,
+        &quot;description&quot;: &quot;전체 줄거리...&quot;,
+        &quot;platform&quot;: &quot;카카오페이지&quot;,
+        &quot;url&quot;: &quot;https://...&quot;,
+        &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;],
+        &quot;created_at&quot;: &quot;2024-01-01T00:00:00Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-01T00:00:00Z&quot;
+        }
+    }
+```
 
 3 검색 기록 저장
 POST /search-logs
 검색 기록을 저장합니다 (내부적으로 자동 호출).
 
 요청
-
-{
-&quot;query&quot;: &quot;string&quot;,
-&quot;results_count&quot;: &quot;integer&quot;
-}
+```json
+    {
+    &quot;query&quot;: &quot;string&quot;,
+    &quot;results_count&quot;: &quot;integer&quot;
+    }
+```
 
 에러 응답 형식
-{
-&quot;status&quot;: &quot;error&quot;,
-&quot;error&quot;: {
-    &quot;code&quot;: &quot;ERROR_CODE&quot;,
-    &quot;message&quot;: &quot;에러 메시지&quot;,
-    &quot;details&quot;: {}
-}
-}
+```json
+    {
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;ERROR_CODE&quot;,
+        &quot;message&quot;: &quot;에러 메시지&quot;,
+        &quot;details&quot;: {}
+        }
+    }
+```
 
 에러 코드
 INVALID_QUERY: 쿼리가 비어있거나 140자를 초과
@@ -160,6 +167,7 @@ RATE_LIMIT: API 요청 한도 초과
 </code></pre>
  </details>
 
+<p>이를 claude 코드를 사용해서 프로젝트 구조를 밑과 같이 잡았다.  </p>
 <pre><code>   korea_webnovel_recommender/
    ├── backend/                # FastAPI 백엔드
    │   ├── app/
