@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naeun Park</title>
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../images/favicon/site.webmanifest" />
+
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body data-page-type="resume">
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../index.html" onclick="showTab('resume'); return false;">
+                <span data-lang="ko">박나은</span>
+                <span data-lang="en" style="display: none;">Naeun Park</span>
+            </a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog/blog-index.html">Blog</a>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="changeLanguage('ko')">KOR</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+                </div>
+                <button class="download-btn" onclick="downloadPDF()" id="downloadBtn">
+                    <span data-lang="ko">📄 PDF 다운로드</span>
+                    <span data-lang="en" style="display: none;">📄 Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Resume Section -->
+        <div id="resume-section" class="content-section active">
+            <div class="resume-container">
+                <div id="resume-content">
+                    <header class="header">
+                        <h1 class="name">
+                            <span data-lang="ko">박나은</span>
+                            <span data-lang="en" style="display: none;">Naeun Park</span>
+                        </h1>
+                        <div class="contact-info">
+                            <span data-lang="ko">📧 helloworld970511@naver.com</span>
+                            <span data-lang="en" style="display: none;">📧 otlmylife970511@gmail.com</span>
+                            <span>🔗<a href="https://www.linkedin.com/in/nepark97/"
+                                    target="_blank">linkedin.com/in/nepark97</a></span>
+                            <span>💻 <a href="https://github.com/world970511"
+                                    target="_blank">github.com/world970511</a></span>
+                        </div>
+                    </header>
+
+                    <section class="summary">
+                        <p data-lang="ko">
+                            <strong>대용량 데이터 처리와 ML 모델 서빙 최적화에 강점이 있는 소프트웨어 엔지니어입니다.</strong><br>
+                            40만 건 이상의 Vision AI 데이터 파이프라인을 구축하여 전처리 자동화율을 90%까지 끌어올렸으며, Django와 Celery를 활용한 비동기 시스템을 설계
+                            및 구현하여 대규모 데이터 관리 플랫폼의 성능 병목을 해결했습니다. 비즈니스 문제를 기술적 설계로 풀어내는 데 집중하며, 데이터 엔지니어링과 백엔드 영역을 아우르는
+                            확장성 있는 시스템을 지향합니다. 최근에는 RAG 등 LLM을 활용한 데이터 인프라 구축으로 전문성을 확장하고 있습니다.
+                        </p>
+                        <p data-lang="en" style="display: none;">
+                            <strong>Software Engineer specializing in Large-scale Data Processing and ML Model Serving
+                                Optimization.</strong><br>
+                            Built a Vision AI data pipeline processing over 400K images, increasing preprocessing
+                            automation to 90%. Designed and implemented an asynchronous system using Django and Celery
+                            to resolve performance bottlenecks in a large-scale data management platform. Focused on
+                            solving business problems through technical design, aiming for scalable systems that bridge
+                            data engineering and backend development. Currently expanding expertise into LLM-based data
+                            infrastructure such as RAG.
+                        </p>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">💼 경력사항</span>
+                            <span data-lang="en" style="display: none;">💼 Experience</span>
+                        </h2>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">포지큐브</span>
+                                    <span data-lang="en" style="display: none;">POSICUBE</span>
+                                </h3>
+                                <span class="period">
+                                    <span data-lang="ko">2022.08 - 2025.08</span>
+                                    <span data-lang="en" style="display: none;">2022.08 - 2025.08</span>
+                                </span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">Software Engineer (Data Engineering Focus)</span>
+                                <span data-lang="en" style="display: none;">Software Engineer (Data Engineering
+                                    Focus)</span>
+                            </div>
+                            <!-- 이력서용: 아주 짧은 요약 -->
+                            <ul class="achievement-list">
+                                <li data-lang="ko">
+                                    Vision AI 학습 데이터 파이프라인 고도화 및 합성 데이터/자동 GT 생성 도입으로
+                                    전처리 자동화율 90% 달성, 데이터 오류율 0.5% 미만 유지.
+                                </li>
+                                <li data-lang="en" style="display: none;">
+                                    Enhanced Vision AI training data pipelines with synthetic data and automated GT
+                                    generation,
+                                    achieving 90% preprocessing automation and keeping data error rates below 0.5%.
+                                </li>
+
+                                <li data-lang="ko">
+                                    국내외 신분증·비정형 문서 등 40만 건 이상 AI 학습 데이터셋 구축 및
+                                    수집·가공 가이드라인 수립으로 데이터 자산화 기반 마련.
+                                </li>
+                                <li data-lang="en" style="display: none;">
+                                    Built and governed a dataset of 400K+ images (IDs, unstructured documents, etc.),
+                                    defining collection and processing guidelines to establish data asset management.
+                                </li>
+
+                                <li data-lang="ko">
+                                    Django/DRF + React + Celery + Meilisearch 기반 사내 대용량 데이터 관리 플랫폼 설계·구현에 참여,
+                                    대규모 파일 작업 비동기 처리 및 자동화 프로세스 기획 및 구현.
+                                </li>
+                                <li data-lang="en" style="display: none;">
+                                    Participated in the design and implementation of an internal large-scale data
+                                    management platform
+                                    using Django/DRF, React, Celery, and Meilisearch, enabling async large file handling
+                                    and automation processes.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🛠 기술 스택</span>
+                            <span data-lang="en" style="display: none;">🛠 Technical Skills</span>
+                        </h2>
+
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h4>Backend</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Django/DRF</span>
+                                    <span class="skill-tag">FastAPI</span>
+                                    <span class="skill-tag">Celery</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4>Frontend</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Redux</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">HTML/CSS</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4>Data & AI</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Pandas/Numpy</span>
+                                    <span class="skill-tag">TensorFlow</span>
+                                    <span class="skill-tag">Keras</span>
+                                    <span class="skill-tag" data-lang="ko">데이터 파이프라인</span>
+                                    <span class="skill-tag" data-lang="en" style="display: none;">Data Pipeline</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4>Infrastructure & Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Redis</span>
+                                    <span class="skill-tag">Git/GitHub</span>
+                                    <span class="skill-tag">Airflow</span>
+                                    <span class="skill-tag">GCP</span>
+                                    <span class="skill-tag">AWS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🎓 학력</span>
+                            <span data-lang="en" style="display: none;">🎓 Education</span>
+                        </h2>
+
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">한국방송통신대학교</span>
+                                    <span data-lang="en" style="display: none;">Korea National Open University</span>
+                                </h3>
+                                <span class="period">
+                                    <span data-lang="ko">2025.03 - 2027.01 (예정)</span>
+                                    <span data-lang="en" style="display: none;">2025.03 - 2027.01 (Expected)</span>
+                                </span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">컴퓨터과학과 학사</span>
+                                <span data-lang="en" style="display: none;">Bachelor of Computer Science</span>
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3 class="company-name">
+                                    <span data-lang="ko">성공회대학교</span>
+                                    <span data-lang="en" style="display: none;">Sungkonghoe University</span>
+                                </h3>
+                                <span class="period">2017.03 - 2022.08</span>
+                            </div>
+                            <div class="position">
+                                <span data-lang="ko">글로컬IT 전공, 소프트웨어학과 부전공 학사</span>
+                                <span data-lang="en" style="display: none;">Bachelor in Glocal IT, Minor in
+                                    Software</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">👨‍💻 교육 & 활동</span>
+                            <span data-lang="en" style="display: none;">👨‍💻 Training & Activities</span>
+                        </h2>
+
+                        <ul class="achievement-list">
+                            <li>
+                                <span data-lang="ko"><strong>서울 우먼잇츠 × 구글 스터디잼</strong> - 'Gemini × GCP: 생성형 AI 기반 웹서비스
+                                    만들기' 스터디 참여 (2025.08 ~ 2025.10)</span>
+                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Google Study
+                                        Jams</strong> - 'Developing a Generative AI-Based Web Service using Gemini and
+                                    GCP' Study (2025.08 ~ 2025.10)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>서울 우먼잇츠 × 우아한스터디</strong> - '오픈소스 기여 걸음마 떼기' 스터디 참여,
+                                    Airflow 관련 스터디 진행 (2024.06 ~ 2024.07)</span>
+                                <span data-lang="en" style="display: none;"><strong>Seoul Women IT's × Woowahan
+                                        Study</strong> - 'First Steps in Open Source Contribution' Study, Airflow Study
+                                    Group (2024.06 ~ 2024.07)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>실리콘밸리에서 날아온 데이터 엔지니어링 스타터 키트 with Python</strong> - ETL,
+                                    SQL 및 Airflow 학습 (2023.01 ~ 2023.02)</span>
+                                <span data-lang="en" style="display: none;"><strong>Data Engineering Starter Kit from
+                                        Silicon Valley with Python</strong> - ETL, SQL and Airflow Training (2023.01 ~
+                                    2023.02)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>앨리스 AI 트랙 3기</strong> - AI 서비스 기획 및 풀스택 개발(flask,react) 교육
+                                    과정 수료 (2021.09 ~ 2022.03)</span>
+                                <span data-lang="en" style="display: none;"><strong>Elice AI Track 3rd</strong> - AI
+                                    Service Planning and Development Course Completion (2021.09 ~ 2022.03)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>데이터 청년 캠퍼스</strong> - 빅리더 아카데미 과정 수료, 머신러닝 및 딥러닝 이론 학습,
+                                    국립공원공단 협업 프로젝트 진행 (2021.06 ~ 2021.09)</span>
+                                <span data-lang="en" style="display: none;"><strong>Data Youth Campus</strong> - Big
+                                    Leader Academy Course, ML/DL Theory, Korea National Park Service Collaboration
+                                    Project (2021.06 ~ 2021.09)</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">
+                            <span data-lang="ko">🏆 수상 및 자격증</span>
+                            <span data-lang="en" style="display: none;">🏆 Awards & Certifications</span>
+                        </h2>
+
+                        <ul class="achievement-list">
+                            <li>
+                                <span data-lang="ko"><strong>최우수상</strong> - 창원시, AI와 디지털트윈 기술을 활용한 맞춤형 등산 코스 추천 및 SNS
+                                    서비스 (2021.08)</span>
+                                <span data-lang="en" style="display: none;"><strong>Excellence Prize</strong> - Hiking
+                                    Course Recommendation Service using AI and Digital Twin Technology (Changwon
+                                    City,2021.08)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>공로상</strong> - 국립공원공단, AI와 디지털트윈 기술을 활용한 맞춤형 등산 코스 추천 및 SNS
+                                    서비스 (2021.09)</span>
+                                <span data-lang="en" style="display: none;"><strong>Achievement Award</strong> - Hiking
+                                    Course Recommendation Service using AI and Digital Twin Technology (Korea National
+                                    Park Service, 2021.09)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>정보처리기사</strong> (2022.06)</span>
+                                <span data-lang="en" style="display: none;"><strong>Engineer Information
+                                        Processing</strong> (Human Resources Development Service of Korea,
+                                    2022.06)</span>
+                            </li>
+                            <li>
+                                <span data-lang="ko"><strong>OPIc IM2</strong> (2024.10) - 영문 기술 문서 독해 및 업무 소통 가능</span>
+                                <span data-lang="en" style="display: none;"><strong>OPIc IM2</strong> (2024.10) -
+                                    Capable of reading technical documents and business communication</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- External JavaScript -->
+    <script src="../assets/js/multilingual.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
