@@ -23,20 +23,6 @@ tech:
 ## ✨ Features
 
 **[ko]**
-- 2만+ 콘텐츠 데이터 크롤링
-- 데이터 전처리 및 정제
-- 콘텐츠별 장르/국가/관람가 등의 데이터 시각화
-- 콘텐츠 기반 추천(CBF) 모델 구축
-
-**[en]**
-- Crawled review data
-- Data preprocessing and cleaning
-- Data visualization of genre, country, and rating for each content
-- Content-based filtering (CBF) model construction
-
-## 📊 Results
-
-**[ko]**
 - 사용자의 콘텐츠 성향 검사 후 사용자에게 알맞은 OTT 서비스 추천
 - 각 OTT서비스 분석을 통한 콘텐츠 통계 자료를 제공
 - 본인의 OTT 사용 빈도와 시간을 통해 OTT서비스 이용도 파악을 돕는 기능
@@ -45,5 +31,18 @@ tech:
 - Recommended OTT service based on user preferences
 - Provided content statistics for each OTT service
 - Helped users understand their OTT usage patterns
+
+## 📊 Results
+
+**[ko]**
+- Plotly를 사용한 시각화 대시보드 구현 경험
+- 데이터 크롤링 및 전처리 경험
+- 데이터 EDA 및 분석 경험
+
+**[en]**
+- Implemented visualization dashboard using Plotly
+- Data crawling and preprocessing experience
+- Data EDA and analysis experience
+
 
 
