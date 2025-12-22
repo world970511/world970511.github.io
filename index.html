@@ -227,146 +227,364 @@
             </div>
         </section>
 
-        <!-- Projects Section (개인/사이드 프로젝트만) -->
+        <!-- Projects Section (개인/사이드 프로젝트/회사 외 프로젝트 기입) -->
         <section id="projects" class="section">
             <h2 class="section-title-with-icon">
                 <span data-lang="ko">PROJECTS</span>
                 <span data-lang="en" style="display: none;">PROJECTS</span>
                 <a href="#projects" class="section-anchor">🔗</a>
             </h2>
+                <div class="projects-timeline">
+                   <!-- Project 8-->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">DayFlow</span>
+                                <span data-lang="en" style="display: none;">DayFlow</span>
+                            </h3>
 
-            <div class="projects-timeline">
-                <!-- Project 1 -->
-                <article class="project-timeline-item">
-                    <div class="project-content">
-                        <h3 class="project-title">
-                            <span data-lang="ko">AI 웹소설 추천 시스템</span>
-                            <span data-lang="en" style="display: none;">AI Web Novel Recommendation System</span>
-                        </h3>
+                            <div class="project-date">2025</div>
 
-                        <div class="project-date">2025</div>
+                            <p class="project-description" data-lang="ko">
+                                간단하고 직관적인 일정 관리 앱. 지정된 시간에 오늘 무엇을 할 지를 정리하고, 무엇을 했는지 확인할 수 있습니다. 뽀모도로 타이머와 일반 타이머를 지원합니다.
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                A simple and intuitive schedule management app. You can plan what you want to do today and check what you did. It supports Pomodoro timer and general timer.
+                            </p>
 
-                        <p class="project-description" data-lang="ko">
-                            자연어로 원하는 스토리를 설명하면 RAG 기반으로 맞춤 웹소설을 추천하는 시스템
-                        </p>
-                        <p class="project-description" data-lang="en" style="display: none;">
-                            Personalized web novel recommendation system using RAG based on natural language story
-                            descriptions
-                        </p>
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/world970511/DayFlow" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                            <div class="project-tech">
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">PGVector</span>
+                                <span class="tech-tag">Podman</span>
+                            </div>
 
-                        <div class="project-links" style="margin-bottom: 20px;">
-                            <a href="https://github.com/world970511/korea_webnovel_recommender" target="_blank"
-                                class="project-detail-link">
-                                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                                    <path
-                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                                </svg>
-                                GitHub
-                            </a>
+                            <button class="readme-btn" onclick="openReadme('project7')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
+                    <!-- Project 7-->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">RAG 웹소설 추천 시스템</span>
+                                <span data-lang="en" style="display: none;">RAG Web Novel Recommendation System</span>
+                            </h3>
 
-                        <div class="project-tech">
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Streamlit</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">PGVector</span>
-                            <span class="tech-tag">RAG</span>
+                            <div class="project-date">2025</div>
+
+                            <p class="project-description" data-lang="ko">
+                                해외 블로그의 [RAG를 활용한 도서 추천 시스템] 글을 참고하여 웹소설 데이터를 활용해 실제 웹 서비스로 구현하였습니다.
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                I implemented a web novel recommendation system using RAG based on the blog post [RAG to Book Recommendation System].
+                            </p>
+
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/world970511/korea_webnovel_recommender" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                            <div class="project-tech">
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">PGVector</span>
+                                <span class="tech-tag">Podman</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project7')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
+                    <!-- Project 6 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">world970511.github.io</span>
+                                <span data-lang="en" style="display: none;">world970511.github.io</span>
+                            </h3>
 
-                        <button class="readme-btn" onclick="openReadme('project1')">
-                            <span data-lang="ko">📖 README 보기</span>
-                            <span data-lang="en" style="display: none;">📖 View README</span>
-                        </button>
-                    </div>
-                </article>
+                            <div class="project-date">2025</div>
 
-                <!-- Project 2 -->
-                <article class="project-timeline-item">
-                    <div class="project-content">
-                        <h3 class="project-title">
-                            <span data-lang="ko">카카오 웹툰 추천 서비스</span>
-                            <span data-lang="en" style="display: none;">Kakao Webtoon Recommendation Service</span>
-                        </h3>
+                            <p class="project-description" data-lang="ko">
+                                개인 포트폴리오 사이트와 블로그를 통합하였습니다.
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                Personal portfolio website and blog
+                            </p>
 
-                        <div class="project-date">2022</div>
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://world970511.github.io/" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                            <div class="project-tech">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Github Actions</span>
+                            </div>
 
-                        <p class="project-description" data-lang="ko">
-                            행렬 분해(Matrix Factorization) 모델을 활용한 개인화 웹툰 추천 서비스
-                        </p>
-                        <p class="project-description" data-lang="en" style="display: none;">
-                            Personalized webtoon recommendation service using Matrix Factorization model
-                        </p>
-
-                        <div class="project-links" style="margin-bottom: 20px;">
-                            <a href="https://github.com/world970511/kakao_webtoon_reco" target="_blank"
-                                class="project-detail-link">
-                                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                                    <path
-                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                                </svg>
-                                GitHub
-                            </a>
+                            <button class="readme-btn" onclick="openReadme('project6')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
 
-                        <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Matrix Factorization</span>
-                            <span class="tech-tag">Heroku</span>
+                    <!-- Project 5 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">KAKAO RECO</span>
+                                <span data-lang="en" style="display: none;">KAKAO RECO</span>
+                            </h3>
+
+                            <div class="project-date">2022</div>
+
+                            <p class="project-description" data-lang="ko">
+                                행렬 분해(Matrix Factorization) 기법을 사용한 웹툰 추천 시스템.<br/>
+                                사용자의 선호 웹툰을 기반으로 행렬 분해 모델을 사용하여 10개의 웹툰을 추천하고, 사용자의 선호 웹툰 키워드를 워드클라우드로 제공합니다.
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                Personal portfolio website
+                            </p>
+
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/world970511/kakao_webtoon_reco" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-tech">
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">jQuery</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Matrix Factorization</span>
+                                <span class="tech-tag">Heroku</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project5')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
 
-                        <button class="readme-btn" onclick="openReadme('project2')">
-                            <span data-lang="ko">📖 README 보기</span>
-                            <span data-lang="en" style="display: none;">📖 View README</span>
-                        </button>
-                    </div>
-                </article>
+                <!-- Project 4 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">Ssum-Up</span>
+                                <span data-lang="en" style="display: none;">Ssum-Up</span>
+                            </h3>
 
-                <!-- Project 3 -->
-                <article class="project-timeline-item">
-                    <div class="project-content">
-                        <h3 class="project-title">
-                            <span data-lang="ko">리디북스 로맨스 리뷰 감성분석</span>
-                            <span data-lang="en" style="display: none;">Ridibooks Romance Review Sentiment
-                                Analysis</span>
-                        </h3>
+                            <div class="project-date">2022</div>
 
-                        <div class="project-date">2021</div>
+                            <p class="project-description" data-lang="ko">
+                                엘리스 ai 서비스트랙 3기에서 진행한 두번째 팀 프로젝트로, 유튜브를 더 효율적으로 이용할 수 있도록 영어로 된 영상의 자막에서 핵심만 간추린 요약문을 제공하는 서비스입니다.
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                It is the second team project conducted in the 3rd Elice AI Service Track. It is a service that provides a summary of the core content from English video subtitles to help users use YouTube more efficiently.
+                            </p>
 
-                        <p class="project-description" data-lang="ko">
-                            50만+ 리뷰 데이터 수집 및 딥러닝 기반 감성분석 모델 개발
-                        </p>
-                        <p class="project-description" data-lang="en" style="display: none;">
-                            Collected 500K+ review data and developed deep learning-based sentiment analysis model
-                        </p>
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/Ssum-Up-project/Ssum-Up" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
 
-                        <div class="project-links" style="margin-bottom: 20px;">
-                            <a href="https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis"
-                                target="_blank" class="project-detail-link">
-                                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                                    <path
-                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                                </svg>
-                                GitHub
-                            </a>
+                            <div class="project-tech">
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">MariaDB</span>
+                                <span class="tech-tag">DRF</span>
+                                <span class="tech-tag">Docker/Docker-Compose</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project4')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
 
-                        <div class="project-tech">
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">Keras</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">BeautifulSoup</span>
-                            <span class="tech-tag">NLP</span>
+                    <!-- Project 3 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">Wich OTT</span>
+                                <span data-lang="en" style="display: none;">Wich OTT</span>
+                            </h3>
+
+                            <div class="project-date">2021</div>
+
+                            <p class="project-description" data-lang="ko">
+                                엘리스 ai 서비스트랙 3기에서 진행한 사용자가 선호하는 컨텐츠의 장르/국가/관람가 등의 데이터를 기반으로 OTT를 추천하는 팀 프로젝트 
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                OTT recommendation team project conducted during the 3rd Elice AI Service Track.
+                            </p>
+
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/world970511/elice_OTT" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">MariaDB</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Numpy</span>
+                                <span class="tech-tag">Plotly</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project3')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
                         </div>
+                    </article>
 
-                        <button class="readme-btn" onclick="openReadme('project3')">
-                            <span data-lang="ko">📖 README 보기</span>
-                            <span data-lang="en" style="display: none;">📖 View README</span>
-                        </button>
-                    </div>
-                </article>
+                    <!-- Project 2 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">AI 분석 기반 사용자 맞춤형 국립공원 탐방 서비스</span>
+                                <span data-lang="en" style="display: none;">AI Analysis Based User-Centric National Park Tour Service</span>
+                            </h3>
+
+                            <div class="project-date">2021</div>
+
+                            <p class="project-description" data-lang="ko">
+                                외부 교육과정에서 진행한 6인 팀 프로젝트. 행렬 분해(Matrix Factorization) 기반의 잠재 요인 협업 필터링 활용
+                                
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                Personalized hiking course recommendation service using Matrix Factorization model
+                            </p>
+
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/MIB0831national" target="_blank"
+                                    class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-tech">
+                                <span class="tech-tag">QGIS</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Turicreate</span>
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">JS</span>
+                                <span class="tech-tag">Bootstrap</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project2')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Project 1 -->
+                    <article class="project-timeline-item">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <span data-lang="ko">리디북스 로맨스 리뷰 감성분석</span>
+                                <span data-lang="en" style="display: none;">Ridibooks Romance Review Sentiment
+                                    Analysis</span>
+                            </h3>
+
+                            <div class="project-date">2021</div>
+
+                            <p class="project-description" data-lang="ko">
+                                50만+ 리뷰 데이터 수집 및 딥러닝 기반 감성분석 모델 개발
+                            </p>
+                            <p class="project-description" data-lang="en" style="display: none;">
+                                Collected 500K+ review data and developed deep learning-based sentiment analysis model
+                            </p>
+
+                            <div class="project-links" style="margin-bottom: 20px;">
+                                <a href="https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis"
+                                    target="_blank" class="project-detail-link">
+                                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                        <path
+                                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+
+                            <div class="project-tech">
+                                <span class="tech-tag">TensorFlow</span>
+                                <span class="tech-tag">Keras</span>
+                                <span class="tech-tag">Selenium</span>
+                                <span class="tech-tag">BeautifulSoup</span>
+                                <span class="tech-tag">NLP</span>
+                            </div>
+
+                            <button class="readme-btn" onclick="openReadme('project1')">
+                                <span data-lang="ko">📖 README 보기</span>
+                                <span data-lang="en" style="display: none;">📖 View README</span>
+                            </button>
+                        </div>
+                    </article>
             </div>
         </section>
 
