@@ -2,8 +2,8 @@
 id: project8
 github: https://github.com/world970511/DayFlow
 title:
-  ko: AI 웹소설 추천 시스템
-  en: AI Web Novel Recommendation System
+  ko: DayFlow
+  en: DayFlow
 tech:
   ko: Java, TypeScript, Android studio, Google AI Studio
   en: Java, TypeScript, Android studio, Google AI Studio
