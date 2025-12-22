@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm init -y
-        npm install gray-matter glob
+        npm install marked gray-matter glob
 
     - name: Build project readmes
       run: node assets/js/build-projects.js

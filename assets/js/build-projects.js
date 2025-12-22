@@ -1,6 +1,7 @@
 // assets/js/build-projects.js
 const fs = require('fs').promises;
 const path = require('path');
+const { marked } = require('marked');
 const matter = require('gray-matter');
 const glob = require('glob').sync;
 
@@ -120,8 +121,8 @@ class ProjectBuilder {
         const enMatch = content.match(/\*\*\[en\]\*\*\s*\n([\s\S]*?)$/);
 
         return {
-            ko: koMatch ? koMatch[1].trim() : '',
-            en: enMatch ? enMatch[1].trim() : ''
+            ko: koMatch ? this.markdownToHtml(koMatch[1].trim()) : '',
+            en: enMatch ? this.markdownToHtml(enMatch[1].trim()) : ''
         };
     }
 
@@ -134,7 +135,10 @@ class ProjectBuilder {
             return text
                 .split('\n')
                 .filter(line => line.trim().startsWith('-'))
-                .map(line => line.replace(/^-\s*/, '').trim())
+                .map(line => {
+                    const content = line.replace(/^-\s*/, '').trim();
+                    return this.markdownToHtml(content);
+                })
                 .filter(line => line.length > 0);
         };
 
@@ -142,6 +146,12 @@ class ProjectBuilder {
             ko: parseList(koMatch ? koMatch[1] : ''),
             en: parseList(enMatch ? enMatch[1] : '')
         };
+    }
+
+    markdownToHtml(text) {
+        // Remove wrapping <p> tags for inline content
+        const html = marked(text);
+        return html.replace(/^<p>|<\/p>\n?$/g, '').trim();
     }
 
     async saveProjectData(projects) {
