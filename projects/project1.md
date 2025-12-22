@@ -1,44 +1,45 @@
 ---
 id: project1
-github: https://github.com/world970511/korea_webnovel_recommender
+github: https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis
 title:
-  ko: AI 웹소설 추천 시스템
-  en: AI Web Novel Recommendation System
+  ko: 리디북스 로맨스 리뷰 감성분석
+  en: Ridibooks Romance Review Sentiment Analysis
 tech:
-  ko: FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG
-  en: FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG
+  ko: TensorFlow, Keras, Selenium, BeautifulSoup, NLP, Python
+  en: TensorFlow, Keras, Selenium, BeautifulSoup, NLP, Python
 ---
 
 ## 💡 Motivation
 
 **[ko]**
-기존 키워드 기반 검색의 한계를 극복하고, 사용자가 자연어로 원하는 스토리를 설명하면 그에 맞는 웹소설을 추천받을 수 있는 시스템을 만들고 싶었습니다.
+학교 인공지능 수업 기말 과제로 리뷰를 사용한 추천 시스템에 관심이 있어 시작하게 되었습니다.
+혼자서 진행하였고, 실제 리뷰들을 크롤링으로 수집 후 이를 활용하여 긍부정 분류 모델을 구축하였습니다.
 
 **[en]**
-Wanted to overcome limitations of keyword-based search and create a system where users can describe desired stories in natural language.
+I started this project as a final assignment for a university AI course, motivated by my interest in recommendation systems that utilize reviews. I conducted the project independently, collecting actual review data through web crawling and using it to build a sentiment analysis model for positive/negative classification.
 
 ## ✨ Features
 
 **[ko]**
-- RAG (Retrieval-Augmented Generation) 기반 추천
-- PGVector를 활용한 벡터 유사도 검색
-- FastAPI 백엔드 + Streamlit 프론트엔드
-- PostgreSQL 데이터베이스 연동
+- 579,867건 리뷰 데이터 크롤링
+- Selenium을 활용한 자동화 수집
+- TensorFlow/Keras 기반 딥러닝 모델
+- 텍스트 전처리 및 정제
 
 **[en]**
-- RAG-based recommendation
-- Vector similarity search using PGVector
-- FastAPI backend + Streamlit frontend
-- PostgreSQL database integration
+- Crawled 579,867 review data
+- Automated collection using Selenium
+- Deep learning model with TensorFlow/Keras
+- Text preprocessing and cleaning
 
 ## 📊 Results
 
 **[ko]**
-- 단순 키워드 매칭 대비 추천 정확도 향상
-- End-to-End 파이프라인 구현
-- 실시간 자연어 쿼리 처리
+- 긍부정 분류 정확도 90% 달성
+- 대규모 데이터 처리 경험
+- 전체 ML 파이프라인 구축 경험
 
 **[en]**
-- Improved recommendation accuracy vs keyword matching
-- Implemented End-to-End pipeline
-- Real-time natural language query processing
+- Achieved 90% accuracy in sentiment classification
+- Large-scale data processing experience
+- Built complete ML pipeline
