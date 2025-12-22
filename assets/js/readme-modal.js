@@ -1,116 +1,7 @@
 // readme-modal.js - README 상세보기 모달
 
-// 프로젝트별 README 데이터
-const projectReadmes = {
-    project1: {
-        ko: {
-            title: 'AI 웹소설 추천 시스템',
-            motivation: '기존 키워드 기반 검색의 한계를 극복하고, 사용자가 자연어로 원하는 스토리를 설명하면 그에 맞는 웹소설을 추천받을 수 있는 시스템을 만들고 싶었습니다.',
-            features: [
-                'RAG (Retrieval-Augmented Generation) 기반 추천',
-                'PGVector를 활용한 벡터 유사도 검색',
-                'FastAPI 백엔드 + Streamlit 프론트엔드',
-                'PostgreSQL 데이터베이스 연동'
-            ],
-            tech: 'FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG',
-            results: [
-                '단순 키워드 매칭 대비 추천 정확도 향상',
-                'End-to-End 파이프라인 구현',
-                '실시간 자연어 쿼리 처리'
-            ],
-            github: 'https://github.com/world970511/korea_webnovel_recommender'
-        },
-        en: {
-            title: 'AI Web Novel Recommendation System',
-            motivation: 'Wanted to overcome limitations of keyword-based search and create a system where users can describe desired stories in natural language.',
-            features: [
-                'RAG-based recommendation',
-                'Vector similarity search using PGVector',
-                'FastAPI backend + Streamlit frontend',
-                'PostgreSQL database integration'
-            ],
-            tech: 'FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG',
-            results: [
-                'Improved recommendation accuracy vs keyword matching',
-                'Implemented End-to-End pipeline',
-                'Real-time natural language query processing'
-            ],
-            github: 'https://github.com/world970511/korea_webnovel_recommender'
-        }
-    },
-    project2: {
-        ko: {
-            title: '카카오 웹툰 추천 서비스',
-            motivation: '추천 시스템 알고리즘을 실제 서비스에 적용해보고 싶어서 시작했습니다. 행렬 분해(Matrix Factorization) 기법을 통해 희소한 사용자-작품 행렬 문제를 해결하고자 했습니다.',
-            features: [
-                'Matrix Factorization 기반 개인화 추천',
-                'React 무한 스크롤 구현',
-                'WordCloud2.js 키워드 시각화',
-                'Django 백엔드 최적화'
-            ],
-            tech: 'Django, React, Python, Matrix Factorization, Heroku',
-            results: [
-                '희소 행렬 문제 해결',
-                'Heroku 배포 및 실제 서비스 운영',
-                '사용자 선호도 기반 추천 정확도 향상'
-            ],
-            github: 'https://github.com/world970511/kakao_webtoon_reco'
-        },
-        en: {
-            title: 'Kakao Webtoon Recommendation Service',
-            motivation: 'Started to apply recommendation algorithms in real service. Aimed to solve sparse user-item matrix problem using Matrix Factorization.',
-            features: [
-                'Personalized recommendation using Matrix Factorization',
-                'Infinite scroll with React',
-                'Keyword visualization with WordCloud2.js',
-                'Optimized Django backend'
-            ],
-            tech: 'Django, React, Python, Matrix Factorization, Heroku',
-            results: [
-                'Solved sparse matrix problem',
-                'Deployed on Heroku for production',
-                'Improved recommendation accuracy based on user preferences'
-            ],
-            github: 'https://github.com/world970511/kakao_webtoon_reco'
-        }
-    },
-    project3: {
-        ko: {
-            title: '리디북스 로맨스 리뷰 감성분석',
-            motivation: '대규모 텍스트 데이터 수집부터 딥러닝 모델 학습까지 전체 머신러닝 파이프라인을 경험해보고 싶어서 시작했습니다.',
-            features: [
-                '579,867건 리뷰 데이터 크롤링',
-                'Selenium을 활용한 자동화 수집',
-                'TensorFlow/Keras 기반 딥러닝 모델',
-                '텍스트 전처리 및 정제'
-            ],
-            tech: 'TensorFlow, Keras, Selenium, BeautifulSoup, NLP',
-            results: [
-                '긍부정 분류 정확도 90% 달성',
-                '대규모 데이터 처리 경험',
-                '전체 ML 파이프라인 구축 경험'
-            ],
-            github: 'https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis'
-        },
-        en: {
-            title: 'Ridibooks Romance Review Sentiment Analysis',
-            motivation: 'Started to experience entire ML pipeline from large-scale text data collection to deep learning model training.',
-            features: [
-                'Crawled 579,867 review data',
-                'Automated collection using Selenium',
-                'Deep learning model with TensorFlow/Keras',
-                'Text preprocessing and cleaning'
-            ],
-            tech: 'TensorFlow, Keras, Selenium, BeautifulSoup, NLP',
-            results: [
-                'Achieved 90% accuracy in sentiment classification',
-                'Large-scale data processing experience',
-                'Built complete ML pipeline'
-            ],
-            github: 'https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis'
-        }
-    }
-};
+// 프로젝트별 README 데이터 (JSON에서 로드)
+let projectReadmes = {};
 
 // 모달 열기
 function openReadme(projectId) {
@@ -190,3 +81,23 @@ document.addEventListener('keydown', function(e) {
         closeReadme();
     }
 });
+
+// JSON 데이터 로드
+async function loadProjectReadmes() {
+    try {
+        const response = await fetch('./assets/js/project-readmes.json');
+        if (!response.ok) {
+            console.warn('Failed to load project-readmes.json, using fallback data');
+            return;
+        }
+        projectReadmes = await response.json();
+        console.log('Project readmes loaded successfully');
+    } catch (error) {
+        console.error('Error loading project readmes:', error);
+    }
+}
+
+// 페이지 로드 시 데이터 로드
+if (typeof window !== 'undefined') {
+    loadProjectReadmes();
+}
