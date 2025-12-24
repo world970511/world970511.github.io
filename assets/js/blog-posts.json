@@ -10,7 +10,7 @@
       ],
       "excerpt": "다사다난 2025년 회고하고 2026 준비하기",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.079Z"
+      "lastModified": "2025-12-24T06:35:25.394Z"
     },
     {
       "slug": "2025-12-23-mlops",
@@ -24,7 +24,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 7,
-      "lastModified": "2025-12-24T06:20:08.097Z"
+      "lastModified": "2025-12-24T06:35:25.412Z"
     },
     {
       "slug": "2025-11-27-korea-webnovel-recommender-2",
@@ -38,7 +38,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
       "readTime": 7,
-      "lastModified": "2025-12-24T06:20:08.101Z"
+      "lastModified": "2025-12-24T06:35:25.416Z"
     },
     {
       "slug": "2025-11-27-korea-webnovel-recommender-1",
@@ -52,7 +52,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.104Z"
+      "lastModified": "2025-12-24T06:35:25.418Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -65,7 +65,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.106Z"
+      "lastModified": "2025-12-24T06:35:25.421Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -78,7 +78,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.109Z"
+      "lastModified": "2025-12-24T06:35:25.423Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -91,7 +91,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.111Z"
+      "lastModified": "2025-12-24T06:35:25.426Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -105,7 +105,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.114Z"
+      "lastModified": "2025-12-24T06:35:25.428Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -118,7 +118,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.116Z"
+      "lastModified": "2025-12-24T06:35:25.430Z"
     },
     {
       "slug": "2025-07-29",
@@ -132,7 +132,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.117Z"
+      "lastModified": "2025-12-24T06:35:25.432Z"
     },
     {
       "slug": "2025-07-24",
@@ -144,9 +144,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-12-24T06:20:08.119Z"
+      "lastModified": "2025-12-24T06:35:25.433Z"
     }
   ],
-  "lastUpdated": "2025-12-24T06:20:08.122Z",
+  "lastUpdated": "2025-12-24T06:35:25.435Z",
   "totalPosts": 11
 }
