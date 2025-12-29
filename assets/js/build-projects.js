@@ -157,9 +157,28 @@ class ProjectBuilder {
 
     async saveProjectData(projects) {
         await fs.mkdir(path.dirname(this.outputFile), { recursive: true });
+
+        // Write JSON file
         await fs.writeFile(this.outputFile, JSON.stringify(projects, null, 2));
-        console.log(`✓ Saved ${this.outputFile}`);
-        console.log(`✓ Generated ${Object.keys(projects).length} projects`);
+        console.log(`✓ Saved JSON: ${this.outputFile}`);
+
+        // Write JS module file
+        const jsOutputPath = this.outputFile.replace('.json', '-data.js');
+        const jsContent = `// project-readmes-data.js - Project README data as JavaScript module
+// Auto-generated from build-projects.js
+
+const projectReadmesData = ${JSON.stringify(projects, null, 2)};
+
+// Initialize projectReadmes globally on page load
+if (typeof window !== 'undefined') {
+    window.projectReadmes = projectReadmesData;
+    console.log('Project readmes data loaded from JS module:', Object.keys(projectReadmesData).length, 'projects');
+}
+`;
+        await fs.writeFile(jsOutputPath, jsContent);
+        console.log(`✓ Saved JS module: ${jsOutputPath}`);
+
+        console.log(`✓ Total: ${Object.keys(projects).length} projects`);
     }
 }
 

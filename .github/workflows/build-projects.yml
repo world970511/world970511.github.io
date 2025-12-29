@@ -41,7 +41,7 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add assets/js/project-readmes.json
+        git add assets/js/project-readmes.json assets/js/project-readmes-data.js
         git diff --cached --quiet || git commit -m "🤖 Build: Update project readmes from markdown"
         git push
 
