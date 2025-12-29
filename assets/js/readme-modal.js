@@ -1,12 +1,7 @@
 // readme-modal.js - README 상세보기 모달 및 패널
 
-// 프로젝트별 README 데이터 (JSON에서 로드)
+// 프로젝트별 README 데이터 (project-readmes-data.js에서 로드됨)
 let projectReadmes = {};
-
-// Expose globally for project-detail.js
-if (typeof window !== 'undefined') {
-    window.projectReadmes = projectReadmes;
-}
 
 // 모달 열기
 function openReadme(projectId) {
