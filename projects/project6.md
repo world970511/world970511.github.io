@@ -1,5 +1,6 @@
 ---
 id: project6
+year: 2025
 github: https://world970511.github.io/
 title:
   ko: 개인 포트폴리오 사이트 겸 블로그

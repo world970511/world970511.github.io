@@ -1,5 +1,6 @@
 ---
 id: project1
+year: 2021
 github: https://github.com/world970511/RIDIBOOKS_romance_webnovel_review_Sentiment_Analysis
 title:
   ko: 리디북스 로맨스 리뷰 감성분석

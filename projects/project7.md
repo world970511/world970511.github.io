@@ -1,5 +1,6 @@
 ---
 id: project7
+year: 2025
 github: https://github.com/world970511/korea_webnovel_recommender
 title:
   ko: AI 웹소설 추천 시스템

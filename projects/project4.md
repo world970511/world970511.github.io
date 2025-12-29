@@ -1,5 +1,6 @@
 ---
 id: project4
+year: 2022
 github: https://github.com/Ssum-Up-project/Ssum-Up
 title:
   ko: Ssum-Up

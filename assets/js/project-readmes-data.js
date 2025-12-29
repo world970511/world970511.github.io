@@ -1,4 +1,7 @@
-{
+// project-readmes-data.js - Project README data as JavaScript module
+// Auto-generated from build-projects.js
+
+const projectReadmesData = {
   "project9": {
     "year": 2024,
     "company": "Posicube",
@@ -349,4 +352,10 @@
       "blog": ""
     }
   }
+};
+
+// Initialize projectReadmes globally on page load
+if (typeof window !== 'undefined') {
+    window.projectReadmes = projectReadmesData;
+    console.log('Project readmes data loaded from JS module:', Object.keys(projectReadmesData).length, 'projects');
 }

@@ -32,6 +32,10 @@ function changeLanguage(lang) {
     
     // localStorage에 언어 설정 저장
     localStorage.setItem('preferredLanguage', lang);
+
+    // 커스텀 이벤트 발생 (다른 모듈에서 언어 변경 감지)
+    const event = new CustomEvent('languageChanged', { detail: { lang } });
+    document.dispatchEvent(event);
 }
 
 // 토글 버튼 텍스트 업데이트
