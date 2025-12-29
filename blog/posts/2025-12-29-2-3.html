@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django에 Celery 사용하기(3) - 박나은</title>
+    <meta name="description" content="회사에서 진행했던 일들 정리(2): Celery에서의 작업 호출">
+    <meta property="og:title" content="Django에 Celery 사용하기(3)">
+    <meta property="og:description" content="회사에서 진행했던 일들 정리(2): Celery에서의 작업 호출">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">Django에 Celery 사용하기(3)</h1>
+                <div class="post-meta">
+                    <span>📅 2025년 12월 29일</span>
+                    <span>⏱️ 5분 읽기</span>
+                    <span>📁 Tech</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#python</span><span class="post-tag">#Celery</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="회사에서-진행했던-일들-정리2">회사에서 진행했던 일들 정리(2)</h1>
+<p>저번에 쓴 <a href="https://world970511.github.io/blog/posts/2025-11-09-2-2.html">Celery를 Django에 적용하기</a>에 이어
+Celery에서 작업 호출 방법을 공식문서의<a href="https://docs.celeryq.dev/en/stable/userguide/calling.html">Calling Tasks</a>와 개인 경험으로 정리해보았다.
+원래는  전 편에서 간단히 소개한 만큼 바로 워크플로우 작성법을 정리하려고 했는데.... 호출 방법부터 정리하고 시작하는 게 더 좋을 것 같아서 호출부분을 세세하게 작성해보았다.<br>Celery-beat 사용(+Periodic Tasks)까지는 정리해볼 것 같다.<br>Celery 5.6 기반으로 설명할 생각이라 버전에 맞춰서 참고.  </p>
+<h4 id="📝-왜-사용했지">📝 왜 사용했지?</h4>
+<p>일단 Celery를 사용한 이유는 사용자 편의성을 위해서였다.<br>회사에서 기본 200kb ~ 10mb 정도의 이미지 파일을 100<del>1000개씩 처리해야 하는 경우가 많다보니 당연히 시간이 많이 걸렸고, 사용자 편의성을 생각해보면 무조건 비동기 처리를 해야 했어서....<br>원래는 Celery를 안 쓰고 해결 가능하지 않을까...? 라고 생각했지만 결론은 업로드/임시삭제/영구삭제/변경/복사/이동 등등 대부분의 작업을 Celery로 처리해야 했다.케이스 가정해보니까 1000</del>100000개 이상의 이미지 파일이 왔다갔다 하는 경우도 많은데 어쩔 수 없겠더라고.<br>나중에 비동기 처리에 큐를 추가하고, 청크로 데이터 분할 후 배치 처리하는 것까지 추가해야 했는데 실제로 테스트 돌릴 때 10mb 이상 데이터를 100개 이상 한번에 업로드한다든가 대용량 파일 업로드와 대량 파일 업로드가 충돌날 경우 등 이런 상황에서 오류가 나서....</p>
+<h2 id="🆚-apply_async-vs-delay">🆚 apply_async VS delay</h2>
+<p>공식 문서에서는 호출 방법을 크게 3가지로 소개한다.</p>
+<ul>
+<li><p>apply_async(args[, kwargs[, …]])</p>
+</li>
+<li><p>delay(*args, **kwargs)</p>
+</li>
+<li><p>calling (<strong>call</strong>)</p>
+</li>
+</ul>
+<p>근데 사실 마지막 건 거의 사용을 안한 것 같다. 기껏해야 테스트 코드 작성해야 할때?<br>그래서 가장 많이 사용한 건 <code>apply_async</code>와 <code>delay</code>인데 둘이 기능 자체는 비슷비슷 하다 보니 처음에 둘의 차이점을 몰라 &quot;...????&quot; 이 상태로 있었던 것 같다.<br>간단히 둘의 차이점을 정리해보면 밑과 같다.</p>
+<ul>
+<li><p><strong>apply_async(args[, kwargs[, ...]])</strong> : 비동기 실행 시 <strong>상세 제어</strong>가 필요할 때 사용. 실행 타이밍(countdown), 작업 만료 시간, 특정 큐(Queue) 지정, 우선순위(Priority) 등을 설정해 브로커에 전달한다. 작업 간 간섭을 방지하거나 리소스 분배가 필요한 복잡한 시스템에서 주로 활용한다.</p>
+</li>
+<li><p><strong>delay(args, kwargs)</strong> : <strong>apply_async의 단축형(Shortcut)</strong>. 별도의 옵션 없이 인자값만 넘겨 즉시 비동기로 실행한다. 단순하고 반복적인 작업을 빠르게 던질 때 유리하다.</p>
+</li>
+</ul>
+<p>단순 실행보다 작업의 우선순위 제어나 전용 큐를 통한 워커 분리가 중요한 환경에서는(폴더 구조대로 폴더 업로드 등) delay보다 apply_async를 사용하는 것이 확장성과 안정성 면에서 유리하다. </p>
+<h4 id="1️⃣-apply_async">1️⃣ apply_async</h4>
+<p>사실 둘 다 사용법이 비슷한데, 이전에 작업한 코드를 수정해서 예시로 보면서 설명하겠다.<br>일단 호출 방법은 둘다 비슷하다. task를 view 혹은 다른 task에서 호출하여 사용하면 된다. 
+apply_async부터 설명해보겠다. 예시 코드를 보자.  </p>
+<pre><code class="language-python">    from ..tasks import test
+
+    @action(detail=True, methods=[&#39;post&#39;])
+    def test(self, request, pk=None):
+        # 삭제된 상태이거나, 객체가 없을 경우 404 에러를 반환하고 아닐 경우 객체를 가져온다.
+        file = get_object_or_404(File.objects.filter(is_deleted=True), pk=pk)
+
+        # uploader가 없는 경우 현재 요청 사용자 ID 사용
+        user_id = file.uploader.id if file.uploader else request.user.id
+
+        #test task 호출
+        test.apply_async(
+            kwargs={
+                &#39;file_id&#39;: file.id, # 파일id
+                &#39;user_id&#39;: user_id, # 사용자id
+            },
+            queue=&#39;test&#39;# test 큐에 전달
+        )
+        serializer = FileSerializer(file)
+        return Response(serializer.data)
+</code></pre>
+<p>이렇게 하면 파일 업로드 후 바로 test task가 실행된다. 이때 apply_async만 살펴보면 밑과 같다.</p>
+<pre><code class="language-python">    #test task 호출
+    test.apply_async(
+        #kwargs를 통해 인자 전달.
+        kwargs={
+            &#39;file_id&#39;: file.id, # 파일id
+            &#39;user_id&#39;: user_id, # 사용자id
+        },
+        #queue를 통해 특정 큐에 전달.
+        queue=&#39;test&#39;
+    )
+</code></pre>
+<p>여기서는 kwargs를 통해 인자를 전달하고 queue를 통해 특정 큐에 전달한다. 여기서는 queue 옵션만 사용했는데, 이 외의 다른 옵션은 밑과 같다.</p>
+<details>
+<summary>apply_async 옵션</summary>
+    1. 시간 제어 옵션 (Scheduling)
+    작업을 즉시 실행하지 않고 특정 시점에 실행하도록 제어.
+
+<pre><code>- countdown: 현재 시점부터 몇 초 후에 실행할지 설정.
+```python
+    add.apply_async(args=[1, 2], countdown=60) # 1분 뒤 실행
+```
+
+- eta (Estimated Time of Arrival): 특정 시각(datetime)에 실행되도록 예약.
+```python
+    add.apply_async(args=[1, 2], eta=now + timedelta(hours=1)) # 1시간 뒤 정각 실행
+```
+
+- expires: 작업의 유효 기간을 설정. 설정된 시간이 지나도록 워커가 작업을 시작하지 못했다면 해당 작업은 취소(Revoke)됩니다.
+```python
+    add.apply_async(args=[1, 2], expires=now + timedelta(hours=1)) # 1시간 후에만 실행
+```
+
+2. 라우팅 및 우선순위 (Routing &amp; Priority)
+작업이 전달될 경로와 중요도를 결정.
+
+- queue: 작업을 보낼 전용 큐의 이름을 지정.
+```python
+    upload_task.apply_async(args=[file], queue=&#39;heavy_tasks&#39;)
+```
+
+- priority: 큐 내에서의 우선순위를 지정. (일반적으로 0~9 사이의 정수 사용)
+```python
+    upload_task.apply_async(args=[file], priority=5)
+```
++ 숫자가 높을수록 먼저 처리
++ 사용하는 브로커(Redis, RabbitMQ)의 설정에 따라 동작 방식이 다를 수 있음
+
+- routing_key: AMQP(RabbitMQ 등) 환경에서 메시지를 더 세밀하게 라우팅할 때 사용
+```python
+    upload_task.apply_async(args=[file], routing_key=&#39;heavy_tasks&#39;)
+```
+
+3. 재시도 및 오류 관리 (Retries &amp; Reliability)
+네트워크 불안정이나 외부 API 장애에 대비하는 옵션.
+
+- retry: 작업 실패 시 자동 재시도 여부를 설정
+```python
+    upload_task.apply_async(args=[file], retry=True)
+```
++ True/False
+
+retry_policy: 재시도 횟수, 지연 시간 등을 딕셔너리 형태로 상세 설정
+```python
+    retry_policy={
+        &#39;max_retries&#39;: 3,         # 최대 3번 시도
+        &#39;interval_start&#39;: 0,      # 첫 재시도 대기 시간
+        &#39;interval_step&#39;: 0.2,     # 재시도마다 늘어날 시간
+        &#39;interval_max&#39;: 0.5,      # 최대 대기 시간
+    }
+```
+
+4. 작업 연결 및 콜백 (Workflow/Chaining)
+작업 완료 후의 후속 조치를 설정.
+
+link (Success Callback): 작업이 성공했을 때 실행할 다음 작업을 지정
+```python
+    upload_tas  k.apply_async(args=[file], link=process_file.s())
+```
++ 아마 워크플로우 설명할때 가장 많이 나올 것 같다. 
+
+link_error (Error Callback): 작업이 실패했을 때 실행할 오류 처리 작업을 지정
+```python
+    upload_task.apply_async(args=[file], link_error=send_alert.s())
+```
+</code></pre>
+</details>
+
+<h4 id="2️⃣-delay-사용법">2️⃣ delay 사용법</h4>
+<p>이번에는 delay를 사용해보겠다.<br>delay는 apply_async와 비슷하지만, 세부적인 옵션을 다룰 수 없다.<br>공식문서에서는 밑과 같이 나와 있다.</p>
+<pre><code class="language-python">    task.delay(arg1, arg2, kwarg1=&#39;x&#39;, kwarg2=&#39;y&#39;)
+</code></pre>
+<p>나는 밑과 같이 활용했다.</p>
+<pre><code class="language-python">    def post(self, request):
+        &quot;&quot;&quot;일괄 작업 요청&quot;&quot;&quot;
+        try:
+            file_ids = request.data.get(&#39;file_ids&#39;, [])
+            
+            if not file_ids:
+                return Response(
+                    {&quot;error&quot;: &quot;file_ids가 필요합니다&quot;},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # 유효한 파일만 필터링 -- 이미지인 파일만 필터링
+            valid_files = File.objects.filter(
+                id__in=file_ids,
+                file_type=&#39;img&#39;
+            ).values_list(&#39;id&#39;, flat=True)
+            
+            valid_file_ids = [str(fid) for fid in valid_files]
+            
+            if not valid_file_ids:
+                return Response(
+                    {&quot;error&quot;: &quot;유효한 파일이 없습니다&quot;},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # 비동기 작업 실행
+            from app.tasks.maintenance.test_tasks import generate_test_batch
+            task = generate_test_batch.delay(valid_file_ids)
+            
+            return Response({
+                &#39;task_id&#39;: task.id,
+                &#39;message&#39;: &#39;test가 시작되었습니다.&#39;,
+                &#39;file_count&#39;: len(valid_file_ids)
+            }, status=status.HTTP_202_ACCEPTED)
+            
+        except Exception as e:
+            logger.error(f&quot;test 오류: {str(e)}&quot;)
+            return Response(
+                {&quot;error&quot;: &quot;서버 오류가 발생했습니다&quot;},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+</code></pre>
+<p>일괄적으로 썸네일 이미지 생성/이름 변경 등의 작업을 처리할 때 사용한 방법이다.<br>apply_async와 달리 설정보다 실행이 우선인 작업을 처리할 때 사용했다.</p>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
