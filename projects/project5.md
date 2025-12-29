@@ -1,5 +1,6 @@
 ---
 id: project5
+year: 2022
 github: https://github.com/world970511/kakao_webtoon_reco
 title:
   ko: KAKAO RECO

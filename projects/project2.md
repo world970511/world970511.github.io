@@ -1,5 +1,6 @@
 ---
 id: project2
+year: 2021
 github: https://github.com/MIB0831national
 title:
   ko: 빅리더 아카데미 팀 MIB - AI 분석 기반 사용자 맞춤형 국립공원 탐방 서비스

@@ -57,6 +57,7 @@ class ProjectBuilder {
             const project = {
                 id: frontmatter.id,
                 data: {
+                    year: frontmatter.year || '',
                     ko: {
                         title: frontmatter.title.ko,
                         motivation: sections.ko.motivation || '',
