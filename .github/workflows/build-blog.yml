@@ -45,7 +45,11 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add blog/*.html blog/posts/*.html assets/js/blog-posts.json sitemap.xml
         git diff --cached --quiet || git commit -m "🤖 Build: Update blog posts and sitemap"
+        
+        # Clean up any unstaged changes (modified package.json, etc.) and untracked files
         git reset --hard
+        git clean -fd
+        
         git pull --rebase origin main
         git push
       
