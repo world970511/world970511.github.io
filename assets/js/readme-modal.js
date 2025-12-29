@@ -83,7 +83,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 // 프로젝트 상세 정보를 우측 패널에 표시 (모달 대신)
-function showProjectInPanel(projectId, year) {
+function showProjectInPanel(projectId, year, company) {
     const lang = document.querySelector('.lang-btn.active')?.textContent.toLowerCase() === 'kor' ? 'ko' : 'en';
     const project = projectReadmes[projectId];
 
@@ -114,17 +114,32 @@ function showProjectInPanel(projectId, year) {
     // Render detail view
     const techTags = readme.tech.split(',').map(t => t.trim());
 
+    // Determine link (blog takes priority over github)
+    const linkUrl = readme.blog || readme.github;
+    const linkText = readme.blog ? (lang === 'ko' ? '블로그' : 'Blog') : 'GitHub';
+    const linkIcon = readme.blog
+        ? `<span style="font-size: 18px;">ℹ️</span>`
+        : `<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>`;
+
+    // Company badge (if exists)
+    const companyBadge = company
+        ? `<span class="project-detail-company">${company}</span>`
+        : '';
+
     detailContent.innerHTML = `
         <div class="project-detail-header">
             <div>
-                <h2 class="project-detail-title">${readme.title}</h2>
-                <span class="project-detail-year">${year || 'N/A'}</span>
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <h2 class="project-detail-title">${readme.title}</h2>
+                    <span class="project-detail-year">${year || 'N/A'}</span>
+                    ${companyBadge}
+                </div>
             </div>
-            <a href="${readme.github}" target="_blank" class="project-detail-github">
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                GitHub
+            <a href="${linkUrl}" target="_blank" class="project-detail-github">
+                ${linkIcon}
+                ${linkText}
             </a>
         </div>
 

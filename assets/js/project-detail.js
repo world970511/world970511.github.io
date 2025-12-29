@@ -184,7 +184,7 @@ class ProjectManager {
 
         // Use the global showProjectInPanel function from readme-modal.js
         if (typeof window.showProjectInPanel === 'function') {
-            window.showProjectInPanel(projectId, project.year);
+            window.showProjectInPanel(projectId, project.year, project.company);
         } else {
             console.error('showProjectInPanel function not available');
         }
