@@ -542,13 +542,15 @@ html {
 }
 
 .project-detail-link {
-    background: #1f2937;
-    color: white;
+    background: white;
+    color: #1f2937;
+    border: 2px solid #e5e7eb;
     cursor: pointer;
 }
 
 .project-detail-link:hover {
-    background: #374151;
+    background: #f9fafb;
+    border-color: #d1d5db;
     transform: translateY(-2px);
 }
 
