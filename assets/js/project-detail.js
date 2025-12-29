@@ -78,10 +78,7 @@ class ProjectManager {
         const years = this.getAvailableYears();
 
         let html = `
-            <button class="filter-btn active" data-year="all">
-                <span data-lang="ko">전체</span>
-                <span data-lang="en" style="display: none;">All</span>
-            </button>
+            <button class="filter-btn active" data-year="all">All</button>
         `;
 
         years.forEach(year => {
@@ -112,6 +109,7 @@ class ProjectManager {
         const projectsList = Object.entries(this.projects).map(([id, data]) => ({
             id,
             year: data.year,
+            company: data.company,
             ko: data.ko,
             en: data.en
         }));
@@ -144,10 +142,12 @@ class ProjectManager {
         const html = filteredProjects.map(project => {
             const data = project[this.currentLang];
             const techTags = data.tech.split(',').slice(0, 3).map(t => t.trim());
+            const companyBadge = project.company ? `<div class="project-card-year">${project.company}</div>` : '';
 
             return `
                 <div class="project-card" data-project-id="${project.id}">
                     <div class="project-card-year">${project.year || 'N/A'}</div>
+                    ${companyBadge}
                     <h3 class="project-card-title">${data.title}</h3>
                     <div class="project-card-tech">
                         ${techTags.map(tag => `<span class="project-card-tech-tag">${tag}</span>`).join('')}
