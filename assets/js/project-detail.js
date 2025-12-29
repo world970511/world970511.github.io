@@ -94,7 +94,9 @@ class ProjectManager {
     getFilteredProjects() {
         const projectsList = Object.entries(this.projects).map(([id, data]) => ({
             id,
-            ...data
+            year: data.year,
+            ko: data.ko,
+            en: data.en
         }));
 
         if (this.currentFilter === 'all') {
