@@ -15,13 +15,13 @@ class BlogBuilder {
 
     async build() {
         console.log('🚀 Starting blog build...');
-        
+
         // 1. Find all markdown files
         const mdFiles = glob(`${this.postsDir}/*.md`);
         console.log(`Found ${mdFiles.length} markdown files`);
-        
+
         const posts = [];
-        
+
         // 2. Process each markdown file
         for (const mdFile of mdFiles) {
             const post = await this.processMarkdown(mdFile);
@@ -29,42 +29,42 @@ class BlogBuilder {
                 posts.push(post);
             }
         }
-        
+
         // 3. Sort posts by date (newest first)
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        
+
         // 4. Generate blog list HTML
         await this.updateBlogList(posts);
-        
+
         // 5. Save blog data JSON
         await this.saveBlogData(posts);
-        
+
         console.log('✅ Blog build completed!');
     }
 
     async processMarkdown(filePath) {
         try {
             console.log(`📝 Processing: ${path.basename(filePath)}`);
-            
+
             // Read markdown file
             const content = await fs.readFile(filePath, 'utf8');
-            
+
             // Parse frontmatter and content
             const { data: frontmatter, content: markdown } = matter(content);
-            
+
             // Validate required fields
             if (!frontmatter.title) {
                 console.warn(`⚠️  Skipping ${filePath}: Missing title`);
                 return null;
             }
-            
+
             // Generate slug from filename
             const filename = path.basename(filePath, '.md');
             const slug = filename.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            
+
             // 날짜 처리: frontmatter에 날짜가 없으면 파일명 또는 현재 날짜 사용
             let postDate = frontmatter.date;
-            
+
             if (!postDate) {
                 // 파일명에서 날짜 추출 시도 (예: 2024-07-25-post-title.md)
                 const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
@@ -76,10 +76,10 @@ class BlogBuilder {
                     postDate = stats.mtime.toISOString().split('T')[0];
                 }
             }
-            
+
             // Convert markdown to HTML
             const htmlContent = marked(markdown);
-            
+
             // Create post object
             const post = {
                 slug,
@@ -91,12 +91,12 @@ class BlogBuilder {
                 readTime: frontmatter.readTime || this.calculateReadTime(markdown),
                 lastModified: new Date().toISOString()
             };
-            
+
             // Generate HTML file
             await this.generateHTMLFile(post, htmlContent);
-            
+
             return post;
-            
+
         } catch (error) {
             console.error(`❌ Error processing ${filePath}:`, error);
             return null;
@@ -111,6 +111,7 @@ class BlogBuilder {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${post.title} - 박나은</title>
     <meta name="description" content="${post.excerpt}">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
     <meta property="og:title" content="${post.title}">
     <meta property="og:description" content="${post.excerpt}">
 
@@ -204,7 +205,7 @@ class BlogBuilder {
 
     async updateBlogList(posts) {
         const blogListHTML = await fs.readFile(this.blogListFile, 'utf8');
-        
+
         // Generate posts HTML
         const postsHTML = posts.map(post => `
                 <article class="blog-post" data-category="${post.category}">
@@ -219,17 +220,17 @@ class BlogBuilder {
                         ${post.tags.map(tag => `<span class="post-tag">#${tag}</span>`).join('')}
                     </div>
                 </article>`).join('\n');
-        
+
         // Update category counts
         const categoryCounts = this.getCategoryCounts(posts);
         let updatedHTML = blogListHTML;
-        
+
         // Replace blog posts section
         updatedHTML = updatedHTML.replace(
             /<main class="blog-posts">[\s\S]*?<\/main>/,
             `<main class="blog-posts">${postsHTML}\n            </main>`
         );
-        
+
         // Update category counts
         for (const [category, count] of Object.entries(categoryCounts)) {
             const regex = new RegExp(
@@ -238,7 +239,7 @@ class BlogBuilder {
             );
             updatedHTML = updatedHTML.replace(regex, `$1${count}$2`);
         }
-        
+
         await fs.writeFile(this.blogListFile, updatedHTML);
         console.log('✓ Updated blog-index.html');
     }
@@ -249,7 +250,7 @@ class BlogBuilder {
             lastUpdated: new Date().toISOString(),
             totalPosts: posts.length
         };
-        
+
         await fs.mkdir(path.dirname(this.blogDataFile), { recursive: true });
         await fs.writeFile(this.blogDataFile, JSON.stringify(blogData, null, 2));
         console.log('✓ Saved blog-posts.json');
@@ -265,7 +266,7 @@ class BlogBuilder {
             .replace(/```[\s\S]*?```/g, '')
             .replace(/`(.+?)`/g, '$1')
             .trim();
-        
+
         return text.substring(0, 150) + (text.length > 150 ? '...' : '');
     }
 
@@ -277,13 +278,13 @@ class BlogBuilder {
 
     formatDate(dateString) {
         const date = new Date(dateString);
-        return date.toLocaleDateString('ko-KR', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
     }
-    
+
     // 카테고리명 추가
     getCategoryName(category) {
         const categoryNames = {
@@ -307,7 +308,7 @@ class BlogBuilder {
             frontend: 0,
             devops: 0
         };
-        
+
         posts.forEach(post => {
             // 모든 카테고리를 동적으로 카운트
             if (counts[post.category] !== undefined) {
@@ -317,7 +318,7 @@ class BlogBuilder {
                 counts[post.category] = 1;
             }
         });
-        
+
         return counts;
     }
 }
