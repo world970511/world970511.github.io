@@ -11,11 +11,11 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery에서의 작업 호출",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.416Z"
+      "lastModified": "2025-12-29T15:51:50.699Z"
     },
     {
-      "slug": "2025-12-29-",
-      "title": "회사에서 진행했던 프로젝트: 데이터 관리 웹 구축",
+      "slug": "2025-12-29-c1",
+      "title": "회사에서 진행했던 프로젝트: 데이터 관리 플랫폼 구축",
       "date": "2025-12-29",
       "category": "project",
       "tags": [
@@ -23,9 +23,9 @@
         "Celery",
         "project"
       ],
-      "excerpt": "회사에서 진행했던 프로젝트: Django + Celery + Redis + Django Rest Framework + React 등 를 활용한 데이터 관리 웹 구축",
+      "excerpt": "회사에서 진행했던 프로젝트: Django + Celery + Redis + Django Rest Framework + React 등 를 활용한 데이터 관리 플랫폼 구축",
       "readTime": 7,
-      "lastModified": "2025-12-29T07:57:33.434Z"
+      "lastModified": "2025-12-29T15:51:50.718Z"
     },
     {
       "slug": "2025-12-24-2025-2026",
@@ -37,7 +37,7 @@
       ],
       "excerpt": "다사다난 2025년 회고하고 2026 준비하기",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.437Z"
+      "lastModified": "2025-12-29T15:51:50.720Z"
     },
     {
       "slug": "2025-12-23-mlops",
@@ -51,7 +51,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 7,
-      "lastModified": "2025-12-29T07:57:33.439Z"
+      "lastModified": "2025-12-29T15:51:50.723Z"
     },
     {
       "slug": "2025-11-27-korea-webnovel-recommender-2",
@@ -65,7 +65,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
       "readTime": 7,
-      "lastModified": "2025-12-29T07:57:33.443Z"
+      "lastModified": "2025-12-29T15:51:50.727Z"
     },
     {
       "slug": "2025-11-27-korea-webnovel-recommender-1",
@@ -79,7 +79,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.445Z"
+      "lastModified": "2025-12-29T15:51:50.729Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -92,7 +92,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.447Z"
+      "lastModified": "2025-12-29T15:51:50.731Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -105,7 +105,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.449Z"
+      "lastModified": "2025-12-29T15:51:50.733Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -118,7 +118,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.451Z"
+      "lastModified": "2025-12-29T15:51:50.735Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -132,7 +132,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.453Z"
+      "lastModified": "2025-12-29T15:51:50.737Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -145,7 +145,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.455Z"
+      "lastModified": "2025-12-29T15:51:50.739Z"
     },
     {
       "slug": "2025-07-29",
@@ -159,7 +159,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.456Z"
+      "lastModified": "2025-12-29T15:51:50.741Z"
     },
     {
       "slug": "2025-07-24",
@@ -171,9 +171,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2025-12-29T07:57:33.458Z"
+      "lastModified": "2025-12-29T15:51:50.742Z"
     }
   ],
-  "lastUpdated": "2025-12-29T07:57:33.461Z",
+  "lastUpdated": "2025-12-29T15:51:50.745Z",
   "totalPosts": 13
 }

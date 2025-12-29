@@ -2,7 +2,7 @@
 id: project9
 year: 2024
 company: Posicube 
-blog: https://world970511.github.io/blog/posts/2025-12-29-.html
+blog: https://world970511.github.io/blog/posts/2025-12-29-c1.html
 title:
   ko: 데이터 관리 플랫폼 구축
   en: Data Management Platform Construction
