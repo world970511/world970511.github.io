@@ -36,9 +36,7 @@ I started this project to address the frustration of finding the desired content
 ## 📊 Results
 
 **[ko]**
-- End-to-End 파이프라인 구현
-- 실시간 자연어 쿼리 처리
+- 현재 데이터 수집 중
 
 **[en]**
-- Implemented End-to-End pipeline
-- Real-time natural language query processing
+- Currently collecting data

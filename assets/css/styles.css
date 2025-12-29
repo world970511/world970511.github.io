@@ -454,6 +454,29 @@ body {
     gap: 30px;
 }
 
+
+.blog-search-container {
+    margin-bottom: 20px;
+}
+
+.blog-search-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.95em;
+    transition: all 0.3s;
+    background: #f8f9fa;
+}
+
+.blog-search-input:focus {
+    border-color: #3498db;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
 .blog-sidebar {
     background: white;
     padding: 25px;

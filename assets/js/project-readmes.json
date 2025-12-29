@@ -45,8 +45,7 @@
       ],
       "tech": "FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG, Podman",
       "results": [
-        "End-to-End 파이프라인 구현",
-        "실시간 자연어 쿼리 처리"
+        "현재 데이터 수집 중"
       ],
       "github": "https://github.com/world970511/korea_webnovel_recommender"
     },
@@ -61,8 +60,7 @@
       ],
       "tech": "FastAPI, Python, Streamlit, PostgreSQL, PGVector, RAG, Podman",
       "results": [
-        "Implemented End-to-End pipeline",
-        "Real-time natural language query processing"
+        "Currently collecting data"
       ],
       "github": "https://github.com/world970511/korea_webnovel_recommender"
     }
