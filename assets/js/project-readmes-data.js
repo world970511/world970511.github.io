@@ -22,7 +22,7 @@ const projectReadmesData = {
         "팀 내 테스트 환경 구축 및 테스트 진행"
       ],
       "github": "",
-      "blog": "https://world970511.github.io/blog/posts/2025-12-29-.html"
+      "blog": "https://world970511.github.io/blog/posts/2025-12-29-c1.html"
     },
     "en": {
       "title": "Data Management Platform Construction",
@@ -41,7 +41,7 @@ const projectReadmesData = {
         "Construction and testing of team internal test environment"
       ],
       "github": "",
-      "blog": "https://world970511.github.io/blog/posts/2025-12-29-.html"
+      "blog": "https://world970511.github.io/blog/posts/2025-12-29-c1.html"
     }
   },
   "project8": {
