@@ -58,13 +58,15 @@ class ProjectBuilder {
                 id: frontmatter.id,
                 data: {
                     year: frontmatter.year || '',
+                    company: frontmatter.company || '',
                     ko: {
                         title: frontmatter.title.ko,
                         motivation: sections.ko.motivation || '',
                         features: sections.ko.features || [],
                         tech: frontmatter.tech.ko || '',
                         results: sections.ko.results || [],
-                        github: frontmatter.github || ''
+                        github: frontmatter.github || '',
+                        blog: frontmatter.blog || ''
                     },
                     en: {
                         title: frontmatter.title.en,
@@ -72,7 +74,8 @@ class ProjectBuilder {
                         features: sections.en.features || [],
                         tech: frontmatter.tech.en || '',
                         results: sections.en.results || [],
-                        github: frontmatter.github || ''
+                        github: frontmatter.github || '',
+                        blog: frontmatter.blog || ''
                     }
                 }
             };
