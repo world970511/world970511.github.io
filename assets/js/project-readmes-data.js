@@ -290,5 +290,6 @@ const projectReadmesData = {
 // Initialize projectReadmes globally on page load
 if (typeof window !== 'undefined') {
     window.projectReadmes = projectReadmesData;
-    console.log('Project readmes data loaded from JS module');
+    console.log('Project readmes data loaded from JS module:', Object.keys(projectReadmesData).length, 'projects');
+    console.log('Sample project:', projectReadmesData.project8);
 }

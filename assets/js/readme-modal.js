@@ -177,15 +177,13 @@ function showProjectInPanel(projectId, year) {
 
 // 페이지 로드 시 초기화
 if (typeof window !== 'undefined') {
-    // projectReadmes는 project-readmes-data.js에서 로드됨
-    // 데이터가 로드될 때까지 대기
-    const waitForData = setInterval(() => {
-        if (window.projectReadmes && Object.keys(window.projectReadmes).length > 0) {
-            clearInterval(waitForData);
-            projectReadmes = window.projectReadmes;
-            console.log('Project readmes loaded successfully from JS module');
-        }
-    }, 50);
+    // projectReadmes는 project-readmes-data.js에서 이미 로드되어야 함
+    if (window.projectReadmes && Object.keys(window.projectReadmes).length > 0) {
+        projectReadmes = window.projectReadmes;
+        console.log('readme-modal.js: Project readmes loaded successfully from JS module');
+    } else {
+        console.error('readme-modal.js: window.projectReadmes not found or empty');
+    }
 
     // Expose function globally
     window.showProjectInPanel = showProjectInPanel;

@@ -14,7 +14,14 @@ class ProjectManager {
     }
 
     waitForProjectReadmes() {
+        let attempts = 0;
         const checkInterval = setInterval(() => {
+            attempts++;
+            console.log(`project-detail.js: Checking for projectReadmes (attempt ${attempts})`, {
+                exists: !!window.projectReadmes,
+                keys: window.projectReadmes ? Object.keys(window.projectReadmes).length : 0
+            });
+
             if (window.projectReadmes && Object.keys(window.projectReadmes).length > 0) {
                 clearInterval(checkInterval);
                 this.projects = window.projectReadmes;
@@ -31,6 +38,7 @@ class ProjectManager {
             clearInterval(checkInterval);
             if (!this.projects) {
                 console.error('Failed to load projectReadmes after 5 seconds');
+                console.error('window.projectReadmes:', window.projectReadmes);
             }
         }, 5000);
     }
