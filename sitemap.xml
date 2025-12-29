@@ -48,6 +48,16 @@
 
    <!-- 5. 블로그 포스트 상세 페이지 -->
    <url>
+      <loc>https://world970511.github.io/blog/posts/2025-12-29-2-3.html</loc>
+      <lastmod>2025-12-29</lastmod>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://world970511.github.io/blog/posts/2025-12-29-.html</loc>
+      <lastmod>2025-12-29</lastmod>
+      <priority>0.6</priority>
+   </url>
+   <url>
       <loc>https://world970511.github.io/blog/posts/2025-12-24-2025-2026.html</loc>
       <lastmod>2025-12-24</lastmod>
       <priority>0.6</priority>
