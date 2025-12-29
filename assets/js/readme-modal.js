@@ -125,22 +125,20 @@ function showProjectInPanel(projectId, year, company) {
 
     // Company badge (if exists)
     const companyBadge = company
-        ? `<span class="project-detail-company">${company}</span>`
+        ? `<span class="project-detail-badge project-detail-company">${company}</span>`
         : '';
 
     detailContent.innerHTML = `
         <div class="project-detail-header">
-            <div>
-                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <h2 class="project-detail-title">${readme.title}</h2>
-                    <span class="project-detail-year">${year || 'N/A'}</span>
-                    ${companyBadge}
-                </div>
+            <h2 class="project-detail-title">${readme.title}</h2>
+            <div class="project-detail-badges">
+                <span class="project-detail-badge project-detail-year">${year || 'N/A'}</span>
+                ${companyBadge}
+                <a href="${linkUrl}" target="_blank" class="project-detail-badge project-detail-link">
+                    ${linkIcon}
+                    ${linkText}
+                </a>
             </div>
-            <a href="${linkUrl}" target="_blank" class="project-detail-github">
-                ${linkIcon}
-                ${linkText}
-            </a>
         </div>
 
         <div class="project-detail-section">
