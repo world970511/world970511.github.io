@@ -108,80 +108,60 @@ apply_async부터 설명해보겠다. 예시 코드를 보자.  </p>
 <p>여기서는 kwargs를 통해 인자를 전달하고 queue를 통해 특정 큐에 전달한다. 여기서는 queue 옵션만 사용했는데, 이 외의 다른 옵션은 밑과 같다.</p>
 <details>
 <summary>apply_async 옵션</summary>
-    1. 시간 제어 옵션 (Scheduling)
-    작업을 즉시 실행하지 않고 특정 시점에 실행하도록 제어.
 
-<pre><code>- countdown: 현재 시점부터 몇 초 후에 실행할지 설정.
-```python
-    add.apply_async(args=[1, 2], countdown=60) # 1분 뒤 실행
-```
+<pre><code>1.시간 제어 옵션 (Scheduling): 작업을 즉시 실행하지 않고 특정 시점에 실행하도록 제어.
 
-- eta (Estimated Time of Arrival): 특정 시각(datetime)에 실행되도록 예약.
-```python
-    add.apply_async(args=[1, 2], eta=now + timedelta(hours=1)) # 1시간 뒤 정각 실행
-```
+countdown: 현재 시점부터 몇 초 후에 실행할지 설정.
+(ex)add.apply_async(args=[1, 2], countdown=60) # 1분 뒤 실행
 
-- expires: 작업의 유효 기간을 설정. 설정된 시간이 지나도록 워커가 작업을 시작하지 못했다면 해당 작업은 취소(Revoke)됩니다.
-```python
-    add.apply_async(args=[1, 2], expires=now + timedelta(hours=1)) # 1시간 후에만 실행
-```
+eta (Estimated Time of Arrival): 특정 시각(datetime)에 실행되도록 예약.
+(ex)add.apply_async(args=[1, 2], eta=now + timedelta(hours=1)) # 1시간 뒤 정각 실행
 
-2. 라우팅 및 우선순위 (Routing &amp; Priority)
-작업이 전달될 경로와 중요도를 결정.
+expires: 작업의 유효 기간을 설정. 설정된 시간이 지나도록 워커가 작업을 시작하지 못했다면 해당 작업은 취소(Revoke)됩니다.
+(ex)add.apply_async(args=[1, 2], expires=now + timedelta(hours=1)) # 1시간 후에만 실행
 
-- queue: 작업을 보낼 전용 큐의 이름을 지정.
-```python
-    upload_task.apply_async(args=[file], queue=&#39;heavy_tasks&#39;)
-```
 
-- priority: 큐 내에서의 우선순위를 지정. (일반적으로 0~9 사이의 정수 사용)
-```python
-    upload_task.apply_async(args=[file], priority=5)
-```
+2.라우팅 및 우선순위 (Routing &amp; Priority): 작업이 전달될 경로와 중요도를 결정.
+
+queue: 작업을 보낼 전용 큐의 이름을 지정.
+(ex)upload_task.apply_async(args=[file], queue=&#39;heavy_tasks&#39;)
+
+priority: 큐 내에서의 우선순위를 지정. (일반적으로 0~9 사이의 정수 사용)
+(ex)upload_task.apply_async(args=[file], priority=5)
 + 숫자가 높을수록 먼저 처리
 + 사용하는 브로커(Redis, RabbitMQ)의 설정에 따라 동작 방식이 다를 수 있음
 
-- routing_key: AMQP(RabbitMQ 등) 환경에서 메시지를 더 세밀하게 라우팅할 때 사용
-```python
-    upload_task.apply_async(args=[file], routing_key=&#39;heavy_tasks&#39;)
-```
+routing_key: AMQP(RabbitMQ 등) 환경에서 메시지를 더 세밀하게 라우팅할 때 사용
+(ex)upload_task.apply_async(args=[file], routing_key=&#39;heavy_tasks&#39;)
 
-3. 재시도 및 오류 관리 (Retries &amp; Reliability)
-네트워크 불안정이나 외부 API 장애에 대비하는 옵션.
 
-- retry: 작업 실패 시 자동 재시도 여부를 설정
-```python
-    upload_task.apply_async(args=[file], retry=True)
-```
+3.재시도 및 오류 관리 (Retries &amp; Reliability): 네트워크 불안정이나 외부 API 장애에 대비하는 옵션.
+
+retry: 작업 실패 시 자동 재시도 여부를 설정
+(ex)upload_task.apply_async(args=[file], retry=True)
 + True/False
 
 retry_policy: 재시도 횟수, 지연 시간 등을 딕셔너리 형태로 상세 설정
-```python
-    retry_policy={
+(ex)upload_task.apply_async(args=[file], retry_policy={
         &#39;max_retries&#39;: 3,         # 최대 3번 시도
         &#39;interval_start&#39;: 0,      # 첫 재시도 대기 시간
         &#39;interval_step&#39;: 0.2,     # 재시도마다 늘어날 시간
         &#39;interval_max&#39;: 0.5,      # 최대 대기 시간
-    }
-```
+    })
 
-4. 작업 연결 및 콜백 (Workflow/Chaining)
-작업 완료 후의 후속 조치를 설정.
+
+4. 작업 연결 및 콜백 (Workflow/Chaining): 작업 완료 후의 후속 조치를 설정.
 
 link (Success Callback): 작업이 성공했을 때 실행할 다음 작업을 지정
-```python
-    upload_tas  k.apply_async(args=[file], link=process_file.s())
-```
+(ex)upload_task.apply_async(args=[file], link=process_file.s())
 + 아마 워크플로우 설명할때 가장 많이 나올 것 같다. 
 
 link_error (Error Callback): 작업이 실패했을 때 실행할 오류 처리 작업을 지정
-```python
-    upload_task.apply_async(args=[file], link_error=send_alert.s())
-```
+(ex)upload_task.apply_async(args=[file], link_error=send_alert.s())
 </code></pre>
 </details>
 
-
+  
 <h4 id="2️⃣-delay-사용법">2️⃣ delay 사용법</h4>
 <p>이번에는 delay를 사용해보겠다.<br>delay는 apply_async와 비슷하지만, 세부적인 옵션을 다룰 수 없다.<br>공식문서에서는 밑과 같이 나와 있다.</p>
 <pre><code class="language-python">    task.delay(arg1, arg2, kwarg1=&#39;x&#39;, kwarg2=&#39;y&#39;)
