@@ -2,7 +2,7 @@
 id: project11
 year: 2023
 company: Posicube 
-blog: https://world970511.github.io/blog/posts/2025-12-29-c1.html
+blog: https://world970511.github.io/blog/posts/2025-12-30-ocr-c2.html
 title:
   ko: robi V 학습용 데이터 파이프라인 구축 및 관리
   en: robi V Training Data Pipeline Construction
