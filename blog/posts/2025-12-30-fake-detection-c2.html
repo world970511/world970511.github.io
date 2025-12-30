@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축 - 박나은</title>
+    <meta name="description" content="회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
+    <meta property="og:title" content="회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축">
+    <meta property="og:description" content="회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축</h1>
+                <div class="post-meta">
+                    <span>📅 2025년 12월 30일</span>
+                    <span>⏱️ 7분 읽기</span>
+                    <span>📁 Project</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#project</span><span class="post-tag">#python</span><span class="post-tag">#Data management</span><span class="post-tag">#Data pipeline</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="회사에서-진행했던-프로젝트-fake-detection">회사에서 진행했던 프로젝트: Fake Detection</h1>
+<h2 id="📝-프로젝트-개요">📝 프로젝트 개요</h2>
+<p>사본 판별 솔루션인 Fake Detection에 필요한 데이터 기획부터 수집·정제·검수·전달까지 전 과정을 담당하며, 모델 성능과 직접 연결되는 데이터 품질 관리를 주요 책임으로 수행했습니다.<br>나아가, 라벨링 인력 관리 및 라벨링 검수 및 수정, 팀내 문서 검색용 VS Code Extension 개발 등 기타 협업 작업을 진행하였습니다. 
+2022년부터 퇴사 전까지 담당하며 파이프라인 및 데이터를 지속적으로 개선하였습니다.</p>
+<h2 id="📍-주요-업무">📍 주요 업무</h2>
+<ul>
+<li>Fake Detection 학습용 데이터셋 구축 및 관리</li>
+<li>python을 사용한 대용량 데이터 처리 자동화</li>
+<li>모델 오류 케이스 및 취약점 분석을 통한 데이터 품질 관리</li>
+<li>Tool 및 라이브러리,스크립트 구현</li>
+<li>라벨링 가이드 작성 및 작업물 검수</li>
+</ul>
+<h2 id="📊-작업">📊 작업</h2>
+<ul>
+<li>해시 알고리즘을 활용한 데이터 중복 제거 최적화</li>
+<li>python openCV를 활용한 합성 데이터 자동 생성</li>
+<li>사내 setup 스크립트를 라이브러리로 변환 및 스크립트 개선. 라이브러리 활용을 위해 팀 내 마크다운 문서 검색을 지원하는 VS Code Extension을 직접 개발/배포</li>
+<li>모델 오류 케이스 및 취약점 분석을 통한 데이터 보강 및 품질 개선</li>
+<li>Fake Detection 모델 개발 팀과 합의 후 라벨링 가이드 작성, 라벨링 인력 관리 및 검수&amp;수정</li>
+</ul>
+<h2 id="✅-성과">✅ 성과</h2>
+<ul>
+<li>데이터 중복 제거 최적화: 수작업에서 자동화. 처리 속도를 약 90% 단축 및 스토리지 효율 약 15% 개선</li>
+<li>합성 데이터 자동 생성: Pre-training에 활용 가능한 학습 데이터를 선제적으로 확보</li>
+<li>사내 라이브러리 및 마크다운 문서 검색을 지원하는 VS Code Extension 개발 : 팀 개발 생산성 향상 및 효율화</li>
+<li>라벨링 가이드 작성 및 작업물 검수/수정. 라벨링 인력 관리: Fake Detection 성능 및 인식률 개선</li>
+</ul>
+<h2 id="📂-참고-자료">📂 참고 자료</h2>
+<ul>
+<li><a href="https://www.dailysecu.com/news/articleView.html?idxno=155279">Fake Detection 관련 기사 (1)</a></li>
+<li><a href="https://www.e2news.com/news/articleView.html?idxno=245675">Fake Detection 관련 기사 (2)</a></li>
+</ul>
+<h2 id="📗-개인-자료정리중">📗 개인 자료(정리중)</h2>
+<ul>
+<li><a href="https://world970511.github.io/blog/posts/2025-09-27-1.html">python 을 이용한 중복 이미지 제거</a></li>
+</ul>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>

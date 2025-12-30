@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG를 활용한 웹소설 추천 시스템 구현하기(1) - 박나은</title>
+    <meta name="description" content="개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
+    <meta property="og:title" content="RAG를 활용한 웹소설 추천 시스템 구현하기(1)">
+    <meta property="og:description" content="개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">RAG를 활용한 웹소설 추천 시스템 구현하기(1)</h1>
+                <div class="post-meta">
+                    <span>📅 2025년 12월 31일</span>
+                    <span>⏱️ 5분 읽기</span>
+                    <span>📁 Project</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#Recommendations</span><span class="post-tag">#LLM</span><span class="post-tag">#RAG</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="rag--agent를-활용한-웹소설-추천-시스템-구현하기1">RAG + Agent를 활용한 웹소설 추천 시스템 구현하기(1)</h1>
+<p>나는 웹 소설을 굉장히 좋아한다. 한달에 10만원 정도는 꾸준히 소설 사 보는데 쓰는 것 같다.<br>그러다보니 어떻게 하면 돈을 괜찮은(=돈 써도 아깝지 않은)소설에 쓰는것에 신경쓰게 되었고(아무래도 한번에 10000~50000원씩 쓰다보니), 입소문부터 플랫폼 추천까지 다 써보다가 추천시스템에 관심을 갖게 되었다.  </p>
+<p>현재 많이 알려진 추천 시스템은 2가지인데<br>하나는 <strong>협업 필터링 추천 시스템(Collaborative Filtering Recommender System (CF))</strong>,<br>다른 하나는 <strong>콘텐츠 기반 추천 시스템(Content-Based Recommender System (CB))</strong> 이다.<br>그런데 사실 둘다 단점이 있어서(CF: 콜드 스타트(신규 사용자나 신규 상품처럼 충분한 데이터가 없는 경우, 시스템이 적절한 추천을 하지 못하는 현상)/ CB: 다양성을 보장하지 못함)<br>요즘에는 이러한 단점들을 보완하기 위해 요즘에는 둘을 결합한 하이브리드 필터링을 사용한다.  </p>
+<p>하지만 솔직히 결과가 마음에 든 적이 별로 없다...<br>다른 사용자들이 읽었다고 해서 내가 그 소설을 즐겁게 읽을지 아닐지는 모를 일이고, 비슷한 장르라고 해서 내가 좋아할지 아닐지는 읽어보지 않고서야 알 수 없는 부분들이다.<br>그래서 매번 &#39;아 그냥 내가 뭐 보고 싶은지 치면 비슷한 내용들 있는 소설 추천해주면 좋겠다~&#39; 하고 바라고 있었는데 해외 블로그에 <a href="https://jchiang1225.medium.com/book-recommendation-with-retrieval-augmented-generation-part-i-d1b415aff558">RAG를 활용한 도서 추천 시스템</a> 을 보고 한번 구현해보기로 했다.</p>
+<p>++ 현재는 여기에 사용자 질의 재작성 및 최적화 부분을 에이전트로 넣음 좋겠다 싶어서 프로젝트를 엎고 다시 구현 중(25.12.31)</p>
+<h2 id="❓-추천-시스템-구조는">❓ 추천 시스템 구조는?</h2>
+<p>참고한 블로그에 따르면 전체 아키텍트는 밑과 같은 구조를 가지고 있다.</p>
+<pre><code>    [사용자 쿼리] → [임베딩 변환] → [벡터 스토어 검색] → [유사 도서 검색] → [LLM 추천 생성]
+</code></pre>
+<p>쉽게 설명해보자면, </p>
+<ol>
+<li>사용자가 좋아하는 책이나 원하는 내용을 입력</li>
+<li>해당 쿼리를 임베딩으로 변환 후 벡터 스토어에서 유사도 점수가 높은 도서들을 검색</li>
+<li>LLM을 활용하여 유사한 도서들을 추천</li>
+</ol>
+<p>이런 식으로 추천이 진행되고, 개인적인 이해로는 기존의 콘텐츠 기반 필터링에 백터 임베딩을 결합한 구조로 보고 있다. 
+뭔 차이냐 라고 한다면...  </p>
+<p>기존 방식</p>
+<pre><code>    &quot;마법사 소년의 모험&quot; → &quot;마법&quot;, &quot;소년&quot;, &quot;모험&quot; 키워드 매칭
+</code></pre>
+<p>벡터 방식</p>
+<pre><code>    &quot;마법사 소년의 모험&quot; → [0.23, -0.45, 0.12, ...] 벡터 변환
+                     → 벡터 공간에서 가까운 책 검색
+</code></pre>
+<p>그러니까 이전에는 키워드(=단어)간 유사도(코사인 유사도든 뭐든간에)  점수를 기반으로 추천을 해줬고, 지금 활용하려는 건 비슷하긴 하지만 텍스트를 벡터로 변환한 후 백터 공간에서의 거리를 기반으로 추천을 한다는 이야기다.  </p>
+<h2 id="💡-프로젝트-구조">💡 프로젝트 구조</h2>
+<p>일단 api 명세서와 사용할 기술 스택들을 정리한 후 claude 코드를 사용해서 프로젝트 구조를 잡았다.
+작성한 api명세서는 밑과 같다
+ <details>
+ <summary>웹소설 추천 시스템 API 문서</summary>
+    Base URL: <a href="https://api.webnovel-recommend.com/v1">https://api.webnovel-recommend.com/v1</a><br>    인증: 현재 버전은 인증 없음<br>    응답 형식: JSON  </p>
+<pre><code>API 엔드포인트
+1. 소설 검색 (자연어 기반)
+POST /novels/search
+사용자가 입력한 자연어 설명을 기반으로 유사한 소설을 추천합니다.
+
+요청
+```json
+    {
+    &quot;query&quot;: &quot;string (최대 140자)&quot;,
+    &quot;limit&quot;: &quot;integer (기본값: 10, 최대: 50)&quot;
+    }
+```
+
+응답
+```json
+    {
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;query&quot;: &quot;주인공이 회귀해서 복수하는 스토리&quot;,
+        &quot;results&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;회귀자의 복수극&quot;,
+            &quot;author&quot;: &quot;작가명&quot;,
+            &quot;description&quot;: &quot;10년 전으로 돌아간 주인공이...&quot;,
+            &quot;platform&quot;: &quot;카카오페이지&quot;,
+            &quot;url&quot;: &quot;https://...&quot;,
+            &quot;similarity_score&quot;: 0.92,
+            &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;]
+        }
+        ],
+        &quot;total_results&quot;: 10,
+        &quot;search_id&quot;: &quot;uuid&quot;
+        }
+    }
+```
+
+2. 소설 상세 정보 조회
+GET /novels/{novel_id}
+특정 소설의 상세 정보를 조회합니다.
+
+응답
+```json
+    {
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;회귀자의 복수극&quot;,
+        &quot;author&quot;: &quot;작가명&quot;,
+        &quot;description&quot;: &quot;전체 줄거리...&quot;,
+        &quot;platform&quot;: &quot;카카오페이지&quot;,
+        &quot;url&quot;: &quot;https://...&quot;,
+        &quot;keywords&quot;: [&quot;회귀&quot;, &quot;복수&quot;, &quot;판타지&quot;],
+        &quot;created_at&quot;: &quot;2024-01-01T00:00:00Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-01T00:00:00Z&quot;
+        }
+    }
+```
+
+3 검색 기록 저장
+POST /search-logs
+검색 기록을 저장합니다 (내부적으로 자동 호출).
+
+요청
+```json
+    {
+    &quot;query&quot;: &quot;string&quot;,
+    &quot;results_count&quot;: &quot;integer&quot;
+    }
+```
+
+에러 응답 형식
+```json
+    {
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;ERROR_CODE&quot;,
+        &quot;message&quot;: &quot;에러 메시지&quot;,
+        &quot;details&quot;: {}
+        }
+    }
+```
+
+에러 코드
+INVALID_QUERY: 쿼리가 비어있거나 140자를 초과
+NOT_FOUND: 요청한 리소스를 찾을 수 없음
+SERVER_ERROR: 서버 내부 오류
+RATE_LIMIT: API 요청 한도 초과
+
+구현 고려사항
+임베딩 처리: 검색 쿼리는 서버에서 임베딩으로 변환 후 PGVector에서 유사도 검색
+</code></pre>
+ </details>
+
+<p>이를 claude 코드를 사용해서 프로젝트 구조를 밑과 같이 잡았다.  </p>
+<pre><code>   korea_webnovel_recommender/
+   ├── backend/                # FastAPI 백엔드
+   │   ├── app/
+   │   │   ├── main.py        # FastAPI 앱 진입점
+   │   │   ├── config.py      # 설정 관리
+   │   │   ├── models.py      # Pydantic 모델
+   │   │   ├── api/
+   │   │   │   └── routes.py  # API 라우트
+   │   │   └── services/
+   │   │       ├── embedding.py   # 임베딩 서비스
+   │   │       └── vector_db.py   # PostgreSQL + PGVector 서비스
+   │   ├── init_db.py         # DB 초기화 스크립트
+   │   └── requirements.txt
+   ├── frontend/              # Streamlit 프론트엔드
+   │   ├── app.py            # Streamlit 앱
+   │   └── requirements.txt
+   ├── data/
+   │   └── sample_novels.json # 샘플 웹소설 데이터
+   ├── docker-compose.yml     # PostgreSQL + PGVector Docker 설정
+   ├── .env.example          # 환경 변수 템플릿
+   ├── .gitignore
+   ├── setup.sh              # 설치 스크립트
+   ├── run_backend.sh        # 백엔드 실행 스크립트
+   ├── run_frontend.sh       # 프론트엔드 실행 스크립트
+   └── readme.md
+</code></pre>
+<p>사용한 웹 기술 스택은 FastAPI + Streamlit 으로 평소 사용하던 django는 admin 페이지가 필요한 서비스가 아니다 + 너무 무겁다 라는 판단 하에 FastAPI + Streamlit 으로 구현하였다.<br>Streamlit은 이전부터 써 보고 싶었던 거기도 하고 굳이 react를 사용해야 할까 란 생각도 있어서 Streamlit을 선택했다.<br>현재는 웹 페이지 작동하는 것을 확인 후 데이터 수집/전처리 자동화 쪽을 건드리고 있는데 이게 더 골 아프다.....</p>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
