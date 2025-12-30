@@ -4,7 +4,7 @@
     "company": "Posicube",
     "ko": {
       "title": "데이터 관리 플랫폼 구축",
-      "motivation": "사내 여러 팀이 공통으로 사용하는 OCR 학습 데이터를 효율적으로 관리하기 위해 온프레미스 파일 서버의 파일 및 디렉토리를 데이터베이스화하여 검색, 관리, 동기화를 원활하게 수행하기 위한 웹 기반 파일 관리 시스템을 기획·설계·구현했습니다.<br>2024년 초부터 2025년 8월 퇴사 때까지 총 2인으로 진행되었고, 그 중 9개월은 1인 풀스택으로 진행하였습니다.",
+      "motivation": "사내 여러 팀이 공통으로 사용하는 OCR 학습 데이터를 효율적으로 관리하기 위해 온프레미스 파일 서버의 파일 및 디렉토리를 데이터베이스화하여 검색, 관리, 동기화를 원활하게 수행하기 위한 웹 기반 파일 관리 시스템을 기획·설계·구현했습니다.<br>2024년 초부터 2025년 8월 퇴사 때까지 총 2인으로 진행되었고, 그 중 9개월은 1인 풀스택으로 진행하였습니다.<br>상단 블로그 링크에서 아키텍쳐 및 자세한 내용 확인이 가능합니다.",
       "features": [
         "파일/폴더 관리",
         "검색 및 조회",
@@ -23,7 +23,7 @@
     },
     "en": {
       "title": "Data Management Platform Construction",
-      "motivation": "I participated in the planning, design, and implementation of a web-based file management system to efficiently manage OCR training data used by multiple teams within the company. The project spanned from the beginning of 2024 to my departure from the company in August 2025, with a total of two developers working on it, and 9 months were dedicated to full-stack development by one developer.",
+      "motivation": "I participated in the planning, design, and implementation of a web-based file management system to efficiently manage OCR training data used by multiple teams within the company. The project spanned from the beginning of 2024 to my departure from the company in August 2025, with a total of two developers working on it, and 9 months were dedicated to full-stack development by one developer.\nYou can check the architecture and details at the blog link above.",
       "features": [
         "File/folder management",
         "Search and retrieval",
@@ -307,6 +307,90 @@
       ],
       "github": "https://github.com/MIB0831national",
       "blog": ""
+    }
+  },
+  "project11": {
+    "year": 2023,
+    "company": "Posicube",
+    "ko": {
+      "title": "robi V 학습용 데이터 파이프라인 구축 및 관리",
+      "motivation": "2023년부터 2025년 8월까지 OCR 솔루션인 robi V의 데이터 기획부터 수집·정제·검수·전달까지 전 과정을 담당하며, 모델 성능과 직접 연결되는 데이터 품질 관리를 주요 책임으로 수행했습니다.<br>또한, 오류 케이스 분석을 통한 신규 데이터 추가 및 데이터 품질 개선을 통해 데이터 품질을 지속적으로 개선하였습니다.<br>2023년 초부터 퇴사 전까지 담당하며 파이프라인 및 데이터를 지속적으로 개선하였습니다.\n상단 블로그 링크에서 자세한 내용 확인이 가능합니다.",
+      "features": [
+        "python과 머신러닝, 비동기 처리를 사용한 대용량 데이터 처리 자동화",
+        "모델 오탐지 분석을 통한 취약 케이스 데이터 보강 및 품질 개선"
+      ],
+      "tech": "Python, Data management, Data pipeline",
+      "results": [
+        "분류 파이프라인 자동화: 수작업에서 자동화. ML 모델을 사용한 신분증 자동 분류 및 검수를 통해 반복 수작업 비율 90% 이상 감소",
+        "라벨링 데이터 검수 및 수정 자동화: 수작업에서 자동화. JSON 정합성 검사, 좌표 오류 탐지 스크립트 등을 고도화하여 데이터 오류율을 기존 약 5%에서 0.5% 미만으로 감소",
+        "ML 기반 자동 마스킹 툴 개발: 수작업에서 자동화. 외부 라벨링 인력 및 영업용 데이터 제공을 위해 개인정보를 포함한 이미지의 특정 영역을 자동으로 마스킹하도록 구현",
+        "OCR 엔진을 사용한 GT 자동 생성 스크립트 작성: 수작업에서 자동화. 라벨링하기 어려운 베트남어 등을 OCR 엔진을 사용하여 자동으로 GT를 생성하도록 구현",
+        "모델 오탐지 분석을 통한 취약 케이스 데이터 보강 및 품질 개선: 신분증 인식 정확도 개선"
+      ],
+      "github": "",
+      "blog": "https://world970511.github.io/blog/posts/2025-12-30-ocr-c2.html"
+    },
+    "en": {
+      "title": "robi V Training Data Pipeline Construction",
+      "motivation": "From 2023 to August 2025, I managed the entire data lifecycle for the OCR solution &#39;robi V&#39;, covering data planning, collection, refinement, inspection, and delivery. My primary responsibility was data quality management, which is directly linked to model performance.<br>I also continuously improved data quality by incorporating new data through error case analysis and refining existing datasets.<br>You can check the details at the blog link above.",
+      "features": [
+        "Python and machine learning, asynchronous processing to automate large-scale data processing",
+        "Data reinforcement and quality improvement through model error analysis"
+      ],
+      "tech": "Python, Data management, Data pipeline",
+      "results": [
+        "Classification Pipeline Automation: Transitioned from manual to automated. Reduced repetitive manual work by over 90% through automated ID classification and inspection using ML models.",
+        "Labeling Data Inspection and Correction Automation: Transitioned from manual to automated. Reduced data error rates from approximately 5% to less than 0.5% by enhancing JSON consistency checks and coordinate error detection scripts.",
+        "ML-based Auto-Masking Tool Development: Transitioned from manual to automated. Implemented automatic masking of specific areas in images containing personal information for external labeling work and sales data provision.",
+        "GT Auto-Generation Script using OCR Engine: Transitioned from manual to automated. Implemented automatic Ground Truth (GT) generation using OCR engines for languages difficult to label manually, such as Vietnamese.",
+        "Data Reinforcement and Quality Improvement through Model Error Analysis: Improved ID recognition accuracy."
+      ],
+      "github": "",
+      "blog": "https://world970511.github.io/blog/posts/2025-12-30-ocr-c2.html"
+    }
+  },
+  "project10": {
+    "year": 2022,
+    "company": "Posicube",
+    "ko": {
+      "title": "Fake Detection 학습용 데이터 파이프라인 구축",
+      "motivation": "사본 판별 솔루션인 Fake Detection에 필요한 데이터 기획부터 수집·정제·검수·전달까지 전 과정을 담당하며, 모델 성능과 직접 연결되는 데이터 품질 관리를 주요 책임으로 수행했습니다.<br>또한, 오류 케이스 분석을 통한 신규 데이터 추가 및 데이터 품질 개선을 통해 데이터 품질을 지속적으로 개선하였습니다.<br>2022년부터 퇴사 전까지 담당하며 파이프라인 및 데이터를 지속적으로 개선하였습니다.\n상단 블로그 링크에서 자세한 내용 확인이 가능합니다.",
+      "features": [
+        "Fake Detection 학습용 데이터셋 구축 및 관리",
+        "python을 사용한 대용량 데이터 처리 자동화",
+        "모델 오류 케이스 및 취약점 분석을 통한 데이터 품질 관리",
+        "Tool 및 라이브러리,스크립트 구현",
+        "라벨링 가이드 작성 및 작업물 검수"
+      ],
+      "tech": "Python, Data management, Data pipeline",
+      "results": [
+        "데이터 중복 제거 최적화: 수작업에서 자동화. 처리 속도를 약 90% 단축 및 스토리지 효율 약 15% 개선",
+        "합성 데이터 자동 생성: Pre-training에 활용 가능한 학습 데이터를 선제적으로 확보",
+        "사내 라이브러리 및 마크다운 문서 검색을 지원하는 VS Code Extension 개발 : 팀 개발 생산성 향상 및 효율화",
+        "라벨링 가이드 작성 및 작업물 검수/수정. 라벨링 인력 관리: Fake Detection 성능 및 인식률 개선"
+      ],
+      "github": "",
+      "blog": "https://world970511.github.io/blog/posts/2025-12-30-fake-detection-c2.html"
+    },
+    "en": {
+      "title": "Fake Detection Training Data Pipeline Construction",
+      "motivation": "I was responsible for the entire data lifecycle—from planning and collection to refinement, inspection, and delivery—for Fake Detection, a copy discrimination solution. My primary responsibility was managing data quality, which directly impacts model performance. I focused on automating large-scale data processing using Python and continuously improved data quality by incorporating new data based on error case analysis.<br>You can check the details at the blog link above.",
+      "features": [
+        "Fake Detection training data pipeline construction",
+        "Python-based large-scale data processing automation",
+        "Data quality management through model error case and vulnerability analysis",
+        "Tool and library, script implementation",
+        "Labeling guide creation and workpiece inspection"
+      ],
+      "tech": "Python, Data management, Data pipeline",
+      "results": [
+        "Data deduplication optimization: Automated manual processes, reducing processing time by ~90% and improving storage efficiency by ~15%.",
+        "Synthetic data generation: Proactively secured training data available for pre-training.",
+        "Labeling data inspection and correction automation: Automated manual processes, reducing repetitive manual work by over 90%.",
+        "Weak case data reinforcement and quality improvement through model error analysis."
+      ],
+      "github": "",
+      "blog": "https://world970511.github.io/blog/posts/2025-12-30-fake-detection-c2.html"
     }
   },
   "project1": {

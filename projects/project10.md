@@ -2,7 +2,7 @@
 id: project10
 year: 2022
 company: Posicube 
-blog: https://world970511.github.io/blog/posts/2025-12-29-c1.html
+blog: https://world970511.github.io/blog/posts/2025-12-30-fake-detection-c2.html
 title:
   ko: Fake Detection 학습용 데이터 파이프라인 구축
   en: Fake Detection Training Data Pipeline Construction
