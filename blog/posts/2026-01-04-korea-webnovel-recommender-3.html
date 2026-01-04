@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG를 활용한 웹소설 추천 시스템 구현하기(3) - 박나은</title>
+    <meta name="description" content="개인 프로젝트 기록: RAG와 Agent">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
+    <meta property="og:title" content="RAG를 활용한 웹소설 추천 시스템 구현하기(3)">
+    <meta property="og:description" content="개인 프로젝트 기록: RAG와 Agent">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">RAG를 활용한 웹소설 추천 시스템 구현하기(3)</h1>
+                <div class="post-meta">
+                    <span>📅 2026년 1월 4일</span>
+                    <span>⏱️ 3분 읽기</span>
+                    <span>📁 Project</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#Recommendations</span><span class="post-tag">#LLM</span><span class="post-tag">#RAG</span><span class="post-tag">#Agent</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="rag를-활용한-웹소설-추천-시스템-구현하기4">RAG를 활용한 웹소설 추천 시스템 구현하기(4)</h1>
+<p>프로젝트를 진행하면서 원래는 단순하게 RAG만 사용해볼란다~ 이러고 있었는데 교육 과정을 수강하면서 Agent를 활용해서 검색 쿼리 최적화(= 사용자가 질문을 모호하게 던졌을 때 에이전트는 검색 효율을 높이기 위해 질문을 스스로 재구성하는것)을 넣으면 더 좋을 것 같다는 생각이 들어서 하고 있던 거 잠시 멈추고(사실 요즘 교육과정/스터디 등등 하다보니 바쁘다고 프로젝트하는거 미룬 상태여서...) 관련 내용을 정리해보았다.</p>
+<h2 id="❓-rag와-agent란-무엇일까">❓ RAG와 Agent란 무엇일까?</h2>
+<p> 많은 기술 블로그, 유튜브에서 가장 자주 보이는 키워드다. 근데 보다 보면 당연히 이런 생각이 든다. 그래서 그게 뭔데요..... 어떻게 하는 건데요....... 솔직히 맞다. 언급이 많긴 한데 그래서 이게 뭐가 좋은 건지 왜 써야 하는 건지 감도 안 잡힌다. 그래서 일단 둘의 개념 정리를 진행해보았다. </p>
+<h3 id="📚-ragretrieval-augmented-generation">📚 RAG(Retrieval Augmented Generation)</h3>
+<p>RAG는 쉽게 말하자면 AI가 아는 범위 내에서만 대답하는 것이 아니라 외부에서 관련된 최신 정보를 찾아보고 그 내용을 참고해서 답변을 만드는 기술이다.<br>3가지 구성 요소로 구성된다.</p>
+<ol>
+<li><strong>Retrieval (검색)</strong>: 사용자의 질문과 관련된 정보를 신뢰할 수 있는 외부 소스(문서, DB, 웹 등)에서 탐색</li>
+<li><strong>Augmentation (증강)</strong>: 찾아온 정보를 사용자의 질문과 합쳐서 AI가 읽기 좋은 형태로 보강</li>
+<li><strong>Generation (생성)</strong>: 보강된 데이터를 바탕으로 LLM이 최종적인 답변을 생성</li>
+</ol>
+<p>핵심 파이프라인은 밑과 같은 구성을 띈다.</p>
+<p>Step 1. 데이터 수집 - PDF, 텍스트, DB 등의 데이터를 준비<br>Step 2. 임베딩(Embedding)- 컴퓨터가 이해할 수 있도록 텍스트를 숫자의 나열(벡터)로 변환<br>Step 3. 벡터 DB 저장: 변환된 데이터를 특수한 데이터베이스에 저장(ex:FAISS)<br>Step 4. 유사도 검색: 사용자가 질문하면 벡터 DB에서 가장 비슷한 내용의 문서 탐색.<br>Step 5. 답변 생성: 찾은 문서와 질문을 LLM에 전달해 최종 답변 생성.  </p>
+<p>이러한 방법을 쓰는 이유는 데이터 보안,최신성 유지 등의 이유 때문인데,
+나는 이를 추천에 활용하면 더 많은 변수의 활용이 가능한 만큼(리뷰/평점/줄거리 등등) 더 정확한 추천이 가능하지 않을까라는 생각으로 이번 프로젝트에 활용해보고자 했다.</p>
+<h3 id="📚-agent">📚 Agent</h3>
+<p>Agent는 쉽게 말하자면 AI가 스스로 일을 처리하는 기술이다. 정확하게 정의해보자면 &quot;목표(Goal)를 주면 스스로 계획을 세우고, 필요한 도구를 사용하여, 실행까지 완료하는 자율적 시스템&quot; 이다.<br>요즘에는 이 Agent를 여러 개 연결하여 활용하는 Multi-Agent, RAG를 일종의 활용할 수 있는 검색 도구처럼 보고 활용하는 Agentic RAG 등의 개념이 더 자주 이야기되고 있다.<br>이러한 Agent는 밑과 같은 요소로 구성된다.</p>
+<ol>
+<li><p><strong>LLM</strong>: 상황을 판단하고, 다음 행동을 결정하며, 복잡한 논리를 해결하기 위해 활용되는 추론 능력이 뛰어난 거대언어모델 (예: GPT-4o, Claude 3.5 Sonnet 등)</p>
+</li>
+<li><p><strong>계획 (Planning)</strong>: 복잡한 목표를 수행 가능한 작은 단계로 쪼개는 능력입니다.</p>
+<ul>
+<li>하위 작업 분할 (Task Decomposition): 요청을 여러 작업으로 세분화<br> (ex:&quot;유럽 여행 계획 짜줘&quot; ➡️ [항공권 검색], [숙소 예약], [동선 파악] 등으로 세분화)</li>
+<li>자기 성찰 (Self-Reflection): 자신의 계획이나 실행 결과에 오류가 없는지 스스로 비판하고 수정<br> (ex: &quot;이 경로보다는 저 경로가 더 효율적이겠네?&quot;)</li>
+</ul>
+</li>
+<li><p><strong>메모리 (Memory)</strong></p>
+<ul>
+<li>단기 메모리 (Short-term): 현재 나누고 있는 대화의 맥락이나 작업 진행 상태를 기억.</li>
+<li>장기 메모리 (Long-term): 이전 대화 내용이나 사용자의 고유한 취향을 저장. 여기서 RAG 기술이 에이전트의 거대한 도서관(외부 지식)이자 장기 기억 저장소 역할을 하게 됨.</li>
+</ul>
+</li>
+<li><p><strong>도구 활용 (Tool Use / Action)</strong>: 에이전트가 텍스트 생성을 넘어 **&#39;실제 행동&#39;**을 할 수 있도록 도구를 제공하는 것</p>
+<ul>
+<li>외부 API 호출: 날씨 확인, 이메일 발송, 캘린더 등록.  </li>
+<li>코드 실행: 데이터 분석을 위해 파이썬 코드를 직접 작성하고 실행.  </li>
+<li>검색: 구글 검색이나 사내 DB(RAG) 조회를 통해 최신 정보 획득.</li>
+</ul>
+</li>
+</ol>
+<p>그렇다면 이러한 에이전트는 어떻게 구현할 수 있을까?<br>일단 가장 잘 알려진 방법으로는 ReAct 프레임워크가 있다...react 아니고 Reason + Act 합쳐져서 ReAct이다...<br>일단 <a href="https://www.ibm.com/kr-ko/think/topics/react-agent">IBM 문서</a>를 보면 ReAct 프롬프트는 다음을 수행해야 한다고 정의되어 있다.</p>
+<p>STEP1. 모델이 사고 과정을 통해 작업을 수행하도록 유도: 모델에게 단계별로 사고하며 행동과 생각을 교차시키면서 작업을 해결하도록 유도합니다.<br>STEP2. 작업 정의: 모델에 사용할 수 있는 특정 작업을 설정합니다(EX:외부 툴 사용, API 호출 등)<br>STEP3. 모델에게 관찰을 하도록 지시: 모델에게 각 행동 단계 후에 자신의 맥락을 재평가하도록 유도하고, 그 업데이트된 맥락을 다음 추론 단계에 반영하도록 합니다.<br>STEP4. 루프: 필요한 경우 이전 단계를 반복하도록 모델에 지시합니다. 최대 루프 수와 같이 루프를 종료하기 위한 특정 조건을 제공하거나 에이전트가 올바른 최종 아웃풋에 도달했다고 느낄 때마다 추론 프로세스를 종료하도록 지시합니다.<br>STEP5. 최종 답변 출력: 종료 조건이 충족되면, 사용자의 초기 질문에 대한 최종 출력을 제공합니다.  </p>
+<p>근데 이렇게 보면 이게 뭔지 모르겠으니 &quot;작가의 신작 소설을 찾아서 내 이메일로 보내줘&quot; 라는 쿼리가 들어왔음을 가정하고 ReAct 패턴을 작성해보았다.</p>
+<pre><code class="language-python">#질문
+Question: &quot;A 작가의 신작 소설을 찾아서 내 이메일로 보내줘&quot;
+
+#추론
+Thought: &#39;먼저 A 작가의 신작이 무엇인지 검색해야겠다.&#39;
+#행동
+Action: Search(&quot;A 작가의 신작&quot;)
+#관찰
+Observation: &quot;신작 제목은 &#39;B&#39;입니다.&quot; 
+#추론
+Thought: &#39;이제 내 이메일 주소를 확인하고 이 내용을 발송해야지.&#39;
+#행동
+Action: Call(&quot;이메일 발송 api&quot;)
+#최종 답변
+Final Answer: &quot;이메일이 성공적으로 발송되었습니다.&quot;
+</code></pre>
+<p>즉 쿼리가 들어왔을때 추론&gt;행동&gt;관찰&gt;다음 생각의 루프를 LLM이 반복하여 최종 답변을 도출하는 것이다.<br>이걸 활용해서 사용자가 &quot;음...그냥 판타지 소설 중에 성장 캐릭터 나오는 재미있는 거 없나&quot; 와 같은 애매모호한 질문을 해도 이를 더 최적화하여 질문할 수 있도록 에이전트를 만들어놓으면 활용도가 높을 것 같아 시도해보고자 한다.  </p>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
