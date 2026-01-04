@@ -13,7 +13,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: RAG와 Agent",
       "readTime": 3,
-      "lastModified": "2026-01-04T14:49:15.701Z"
+      "lastModified": "2026-01-04T14:52:23.668Z"
     },
     {
       "slug": "2025-12-31-korea-webnovel-recommender-2",
@@ -27,7 +27,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
       "readTime": 7,
-      "lastModified": "2026-01-04T14:49:15.720Z"
+      "lastModified": "2026-01-04T14:52:23.687Z"
     },
     {
       "slug": "2025-12-31-korea-webnovel-recommender-1",
@@ -41,7 +41,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.723Z"
+      "lastModified": "2026-01-04T14:52:23.690Z"
     },
     {
       "slug": "2025-12-30-ocr-c2",
@@ -56,7 +56,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: robi V 학습용 데이터 파이프라인 구축 및 관리",
       "readTime": 7,
-      "lastModified": "2026-01-04T14:49:15.725Z"
+      "lastModified": "2026-01-04T14:52:23.692Z"
     },
     {
       "slug": "2025-12-30-fake-detection-c2",
@@ -71,7 +71,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축",
       "readTime": 7,
-      "lastModified": "2026-01-04T14:49:15.726Z"
+      "lastModified": "2026-01-04T14:52:23.693Z"
     },
     {
       "slug": "2025-12-29-2-3",
@@ -84,7 +84,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery에서의 작업 호출",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.730Z"
+      "lastModified": "2026-01-04T14:52:23.697Z"
     },
     {
       "slug": "2025-12-29-c1",
@@ -103,7 +103,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: Django + Celery + Redis + Django Rest Framework + React 등 를 활용한 데이터 관리 플랫폼 구축",
       "readTime": 7,
-      "lastModified": "2026-01-04T14:49:15.732Z"
+      "lastModified": "2026-01-04T14:52:23.699Z"
     },
     {
       "slug": "2025-12-24-2025-2026",
@@ -115,7 +115,7 @@
       ],
       "excerpt": "다사다난 2025년 회고하고 2026 준비하기",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.734Z"
+      "lastModified": "2026-01-04T14:52:23.701Z"
     },
     {
       "slug": "2025-12-23-mlops",
@@ -129,7 +129,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 7,
-      "lastModified": "2026-01-04T14:49:15.736Z"
+      "lastModified": "2026-01-04T14:52:23.703Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -142,7 +142,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.738Z"
+      "lastModified": "2026-01-04T14:52:23.705Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -155,7 +155,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.740Z"
+      "lastModified": "2026-01-04T14:52:23.707Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -168,7 +168,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.741Z"
+      "lastModified": "2026-01-04T14:52:23.708Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -182,7 +182,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.743Z"
+      "lastModified": "2026-01-04T14:52:23.710Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -195,7 +195,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.746Z"
+      "lastModified": "2026-01-04T14:52:23.713Z"
     },
     {
       "slug": "2025-07-29",
@@ -209,7 +209,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.747Z"
+      "lastModified": "2026-01-04T14:52:23.714Z"
     },
     {
       "slug": "2025-07-24",
@@ -221,9 +221,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2026-01-04T14:49:15.749Z"
+      "lastModified": "2026-01-04T14:52:23.715Z"
     }
   ],
-  "lastUpdated": "2026-01-04T14:49:15.752Z",
+  "lastUpdated": "2026-01-04T14:52:23.718Z",
   "totalPosts": 16
 }
