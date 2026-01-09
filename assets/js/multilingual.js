@@ -6,13 +6,17 @@ let currentLang = 'ko';
 // 언어 변경 함수
 function changeLanguage(lang) {
     currentLang = lang;
-    
+
     // 언어 버튼 활성화 상태 업데이트
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
+        if (lang === 'ko' && btn.textContent.trim() === 'KOR') {
+            btn.classList.add('active');
+        } else if (lang === 'en' && btn.textContent.trim() === 'EN') {
+            btn.classList.add('active');
+        }
     });
-    event.target.classList.add('active');
-    
+
     // 언어별 요소 표시/숨김
     document.querySelectorAll('[data-lang]').forEach(element => {
         if (element.getAttribute('data-lang') === lang) {
@@ -23,13 +27,13 @@ function changeLanguage(lang) {
             element.classList.remove('active-lang');
         }
     });
-    
+
     // 토글 버튼 텍스트 업데이트
     updateToggleButtons();
-    
+
     // HTML lang 속성 변경
     document.documentElement.lang = lang;
-    
+
     // localStorage에 언어 설정 저장
     localStorage.setItem('preferredLanguage', lang);
 
@@ -44,7 +48,7 @@ function updateToggleButtons() {
         const isExpanded = button.classList.contains('expanded');
         const koText = button.querySelector('.toggle-text-ko');
         const enText = button.querySelector('.toggle-text-en');
-        
+
         if (currentLang === 'ko') {
             if (koText) koText.style.display = '';
             if (enText) enText.style.display = 'none';
@@ -56,10 +60,10 @@ function updateToggleButtons() {
 }
 
 // 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // localStorage에서 저장된 언어 설정 불러오기
     const savedLang = localStorage.getItem('preferredLanguage') || 'ko';
-    
+
     // 언어 버튼 초기화
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -67,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.add('active');
         }
     });
-    
+
     // 초기 언어 설정
     currentLang = savedLang;
     document.documentElement.lang = savedLang;
-    
+
     // 언어별 요소 초기 설정
     document.querySelectorAll('[data-lang]').forEach(element => {
         if (element.getAttribute('data-lang') === savedLang) {
@@ -82,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             element.classList.remove('active-lang');
         }
     });
-    
+
     // 토글 버튼 초기화
     updateToggleButtons();
 });
