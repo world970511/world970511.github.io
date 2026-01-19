@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Layer Image Filter - 박나은</title>
+    <meta name="description" content="개인 프로젝트 기록: AI 생성 이미지 탐지 파이프라인 만들어보기">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
+    <meta property="og:title" content="3-Layer Image Filter">
+    <meta property="og:description" content="개인 프로젝트 기록: AI 생성 이미지 탐지 파이프라인 만들어보기">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">3-Layer Image Filter</h1>
+                <div class="post-meta">
+                    <span>📅 2026년 1월 19일</span>
+                    <span>⏱️ 7분 읽기</span>
+                    <span>📁 Project</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#Image Processing</span><span class="post-tag">#Computer Vision</span><span class="post-tag">#AI Image detector</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="3-layer-image-filter">3-Layer Image Filter</h1>
+<p>예전에 회사에서 이미지 수집을 처리하면서 고민이 된 부분이 ai로 생성된 이미지를 어떻게 탐지할 수 있는가?였다.<br>이게 학습 데이터를 모으다 보니 데이터 품질에 대해 고민할 일이 많았다보니 생각하게 된 거였는데, 지금이야 그냥 찾으면 대부분이 진짜 이미지인 것이 많지만 나중에는 이런 부분으로 문제가 생길 것 같았다.<br>당시에 실제로 그런 상황이 있었던 적도 있고..(수집했더니 생성 이미지여서 지운다든가 등의..)<br>그래서 구글에서 홍보하는 SynthID를 보고 굉장히 흥미롭다고 생각했는데, 생각해보니 ai 생성 이미지들의 특징(메타데이터 부족 등등) + 오픈소스 ai 탐지 모델을 가지고 탐지 파이프라인을 구축할 수 있지 않을까....? 라는 생각이 들어서 일단 만들어 보았다  </p>
+<h2 id="❓-프로젝트-구조는-">❓ 프로젝트 구조는 ?</h2>
+<p><a href="https://github.com/world970511/ai-image-filter">깃허브</a> readme에도 작성하긴 했지만<br>내 기본적인 아이디어는 ai로 생성된 이미지의 경우 일반 디지털 사진에 있는 카메라 모델, 렌즈 유형, 셔터 속도, GPS 위치 정보 등 EXIF 데이터가 존재하지 않는다는 부분에 집중한다.<br>처음에는 그냥 그거만 체크하면 해결 될 것 같은데? 하고 있다가 생각해보니 학습 데이터와 같은 것들은 exif와 메타데이터 다 지우는 경우도 있고, 이미지를 변형하거나 수정할 경우 없어질 수도 있는데 그걸로만 판단을 하는 것은 아닌 것 같았다.  </p>
+<p>그래서 두 번째로 고민한 것은 해시였다. 해시를 사용해서 db에 이미지의 해시값을 저장해서 변형된 이미지의 탐지를 하면... 되지 않을까? 라고 생각했다.<br>그런데 db를 만들고 싶지는 않았고, db로 비교하는 경우 db에 있는 파일들만 분석 가능한거 아닌가? 라는 생각이 들어 조사를 해 보던 중 Provenance Detection for AI-Generated Images라는 논문을 보고 dinoV2를 해시처럼 사용해서 탐지하고, 해시 - 메타데이터 - 오픈소스 탐지 모델 이렇게 3Layer로 탐지 파이프라인을 짜면 정확도를 올릴 수 있지 않을까 싶었다.  </p>
+<p>그래서 이를 머메이드로 나타내면 밑과 같다.</p>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Frontend Layer&quot;
+        UI[Streamlit UI&lt;br/&gt;streamlit_app.py&lt;br/&gt;:8501]
+    end
+    
+    subgraph &quot;API Layer&quot;
+        API[FastAPI Server&lt;br/&gt;app/main.py&lt;br/&gt;:8000]
+        Routes[API Routes&lt;br/&gt;app/api/routes.py]
+        API --&gt; Routes
+    end
+    
+    subgraph &quot;Service Layer - Pipeline Orchestration&quot;
+        Pipeline[Pipeline Service&lt;br/&gt;app/services/pipeline_service.py&lt;br/&gt;가중치 결합 &amp; 최종 판정]
+    end
+    
+    subgraph &quot;Detection Layers - 3층 검증 시스템&quot;
+        Layer1[Layer 1: Hash Service&lt;br/&gt;app/services/hash_service.py&lt;br/&gt;DinoV2 벡터 유사도&lt;br/&gt;가중치 30%]
+        Layer2[Layer 2: Metadata Service&lt;br/&gt;app/services/metadata_service.py&lt;br/&gt;EXIF/C2PA 분석&lt;br/&gt;가중치 40%]
+        Layer3[Layer 3: AI Detection&lt;br/&gt;app/services/detection_service.py&lt;br/&gt;HuggingFace 모델&lt;br/&gt;가중치 30%]
+    end
+    
+    subgraph &quot;Data Resources&quot;
+        DB1[(AI DinoHashes&lt;br/&gt;ai_dinohashes.npy&lt;br/&gt;~40K 벡터)]
+        DB2[(Metadata&lt;br/&gt;ai_metadata.csv)]
+        ML1[HuggingFace Models&lt;br/&gt;Ateeqq/ai-vs-human&lt;br/&gt;facebook/dinov2-small]
+    end
+    
+    UI --&gt;|POST /api/v1/analyze| Routes
+    UI --&gt;|POST /api/v1/analyze/batch| Routes
+    Routes --&gt;|이미지 분석 요청| Pipeline
+    
+    Pipeline --&gt;|벡터 유사도 검사| Layer1
+    Pipeline --&gt;|메타데이터 분석| Layer2
+    Pipeline --&gt;|AI 모델 추론| Layer3
+    
+    Layer1 -.-&gt;|벡터 DB 조회| DB1
+    Layer1 -.-&gt;|메타데이터 참조| DB2
+    Layer2 -.-&gt;|EXIF 추출&lt;br/&gt;AI 서명 검출&lt;br/&gt;C2PA 검증| Layer2
+    Layer3 -.-&gt;|모델 로딩&lt;br/&gt;추론 실행| ML1
+    
+    Layer1 --&gt;|similarity: 0.0-1.0&lt;br/&gt;is_ai: boolean| Pipeline
+    Layer2 --&gt;|exif_authenticity_score&lt;br/&gt;ai_signatures&lt;br/&gt;inconsistencies| Pipeline
+    Layer3 --&gt;|confidence: 0.0-1.0&lt;br/&gt;is_ai_generated: boolean| Pipeline
+    
+    Pipeline --&gt;|최종 판정&lt;br/&gt;ai_generated&lt;br/&gt;likely_real&lt;br/&gt;uncertain| Routes
+    Routes --&gt;|JSON Response| UI
+    
+    style UI fill:#e1f5ff
+    style API fill:#fff4e1
+    style Routes fill:#fff4e1
+    style Pipeline fill:#ffe1f5
+    style Layer1 fill:#e1ffe1
+    style Layer2 fill:#e1ffe1
+    style Layer3 fill:#e1ffe1
+    style DB1 fill:#f0f0f0
+    style DB2 fill:#f0f0f0
+    style ML1 fill:#f0f0f0
+</code></pre>
+<details>
+<summary>Architecture Overview</summary>
+    Frontend Layer
+    - Streamlit UI (Port 8501): 사용자 인터페이스, 단일/배치 이미지 분석 지원
+
+<pre><code>API Layer
+- FastAPI Server (Port 8000): RESTful API 서버
+- API Routes: /api/v1/analyze (단일), /api/v1/analyze/-batch (배치) 엔드포인트
+
+Service Layer
+- Pipeline Service: 3개 레이어를 통합하여 최종 판정 수행
+Detection Layers (3층 검증 시스템)
+- Layer 1 :Hash Service (30%), DinoV2 기반 벡터 유사도 검사
+- Layer 2 :Metadata Service (40%), EXIF/C2PA 메타데이터 분석
+- Layer 3 :AI Detection (30%), HuggingFace 모델 기반 AI 생성 탐지
+
+Data Resources
+- AI DinoHashes: ~40,000개 AI 이미지 벡터 
+
+데이터베이스
+- Metadata CSV: 이미지 메타데이터 참조
+- ML Models: HuggingFace 사전학습 모델
+
+Final Verdict Logic
+- AI 비율 ≥ 70%: ai_generated
+- AI 비율 ≤ 30%: likely_real
+- 30% &lt; AI 비율 &lt; 70%: uncertain
+</code></pre>
+</details>
+
+<h2 id="💡-ai-image-filter-test">💡 AI Image Filter TEST</h2>
+<p>일단 테스트를 위해 밑과 같은 데이터셋을 만들었다.
+<br/></p>
+<ul>
+<li><p><strong>dinoHash</strong>: DinoV2 기반 벡터 유사도를 살펴보기 위한 이미지 데이터셋. AI DinoHashes(백터 데이터소스) 구현 시 사용된 데이터셋 <a href="https://www.kaggle.com/datasets/alessandrasala79/ai-vs-human-generated-dataset/data">ai-vs-human-generated-dataset</a>중 랜덤으로 데이터를 20개 골라서 이미지에 필터 추가/ 사이즈 변형/ 채도&amp;명도 등 변경 등의 작업을 한 데이터이다.  훼손 혹은 변경되었어도 DinoV2 통한 추적이 가능한지 확인하기 위해서 만들었다.</p>
+</li>
+<li><p><strong>human</strong>: 한국인 남녀 증명사진 데이터셋이다. 10~60 대 남녀의 정면 사진을 ChatGPT와 Gemini를 사용하여 생성 후 편집을 진행했다(하단 워터마크 제거, 채도/명도 조정, 사이즈 변형, 필터 추가 등)
+ai로 생성된 인물 사진에 추가 편집을 거친 이미지를 탐지하는 것이 가능한지 확인하기 위해서 만들었다.</p>
+</li>
+</ul>
+<p>데이터셋은 dinohash를 빼고 파이썬을 사용해서 동일한 규격(600*800)으로 변형했고, 파일 형식도 jpg로 통일하였다.  </p>
+<p>테스트 결과는 아래와 같다. </p>
+<p><strong>dinoHash</strong></p>
+<blockquote>
+<p>테스트 20개 이미지 중
+<br/>🤖 AI 생성: 13 | ✅ 실제 이미지: 3 | ❓ 불확실: 4
+<br/>DinoV2를 사용할 경우, 변경된 이미지들도 추적 가능하지만 test_6.jpg 처럼 AI 모델에서도, DinoV2에서도 판단이 어려운 이미지가 있음을 볼 수 있다.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">파일명</th>
+<th align="left">판정</th>
+<th align="left">확신도</th>
+<th align="left">DinoV2 유사도</th>
+<th align="left">EXIF 진위성</th>
+<th align="left">AI 시그니처</th>
+<th align="left">EXIF 비정상</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">test_1.jpg</td>
+<td align="left">uncertain</td>
+<td align="left">67.3%</td>
+<td align="left">78.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_2.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">100.0%</td>
+<td align="left">88.4%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_3.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">75.0%</td>
+<td align="left">71.3%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_4.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">81.8%</td>
+<td align="left">65.2%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_5.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">65.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_6.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">80.9%</td>
+<td align="left">38.2%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_7.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">68.7%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_8.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">74.9%</td>
+<td align="left">71.2%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_9.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">99.1%</td>
+<td align="left">84.5%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_10.jpg</td>
+<td align="left">uncertain</td>
+<td align="left">51.7%</td>
+<td align="left">88.5%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_11.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">54.1%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_12.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">87.3%</td>
+<td align="left">78.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_13.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">96.6%</td>
+<td align="left">83.1%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_14.jpg</td>
+<td align="left">uncertain</td>
+<td align="left">66.1%</td>
+<td align="left">78.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_15.jpg</td>
+<td align="left">uncertain</td>
+<td align="left">57.0%</td>
+<td align="left">83.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_16.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">61.8%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_17.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">81.8%</td>
+<td align="left">59.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_18.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">91.9%</td>
+<td align="left">80.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_19.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">90.7%</td>
+<td align="left">79.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">test_20.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">55.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+</tbody></table>
+<br/>
+
+<p><strong>human</strong></p>
+<blockquote>
+<p>테스트 24개 이미지 중
+<br/>🤖 AI 생성: 21 | ✅ 실제 이미지: 3 | ❓ 불확실: 0
+<br/>AI로 생성된 인물 사진에 추가 편집을 거친 경우에도 대부분 AI 생성물로 탐지되는 것을 확인할 수 있다. 특이점은 백터 데이터소스 생성 시 사용되지 않은 데이터셋임에도 유사도가 높음을 볼 수 있다.(DinoV2로 임베딩한 것 끼리 유사성을 파악할 수 있다.)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">파일명</th>
+<th align="left">판정</th>
+<th align="left">확신도</th>
+<th align="left">DinoV2 유사도</th>
+<th align="left">EXIF 진위성</th>
+<th align="left">AI 시그니처</th>
+<th align="left">EXIF 비정상</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ChatGPT_10_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">68.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_10_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">81.1%</td>
+<td align="left">74.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_20_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">66.5%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_20_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">81.8%</td>
+<td align="left">75.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_30_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">69.7%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_30_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">79.2%</td>
+<td align="left">73.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_40_man.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">77.1%</td>
+<td align="left">72.3%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_40_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">68.1%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_50_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">73.2%</td>
+<td align="left">70.3%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_50_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.6%</td>
+<td align="left">67.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_60_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">67.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_60_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">80.3%</td>
+<td align="left">74.1%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_10_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.7%</td>
+<td align="left">69.8%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_10_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">83.5%</td>
+<td align="left">75.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_20_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">77.6%</td>
+<td align="left">72.7%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_20_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">85.4%</td>
+<td align="left">77.0%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_30_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">78.1%</td>
+<td align="left">72.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_30_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">74.2%</td>
+<td align="left">70.8%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_40_man.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">75.9%</td>
+<td align="left">72.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_40_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">74.2%</td>
+<td align="left">70.8%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_50_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">78.0%</td>
+<td align="left">72.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_50_woman.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">72.4%</td>
+<td align="left">68.7%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_60_man.jpg</td>
+<td align="left">ai_generated</td>
+<td align="left">84.6%</td>
+<td align="left">76.6%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Gemini_60_woman.jpg</td>
+<td align="left">likely_real</td>
+<td align="left">81.8%</td>
+<td align="left">62.9%</td>
+<td align="left">0.00</td>
+<td align="left">-</td>
+<td align="left">0</td>
+</tr>
+</tbody></table>
+<h2 id="💡-gemini-vs-3-layer-ai-image-filter">💡 Gemini vs 3-Layer AI Image Filter</h2>
+<p>그렇다면  3-Layer AI Image Filter와 SynthID를 비교해보면 어떤 결과가 나올까?<br>일단 테스트를 위한 이미지들을 준비해보았다.  </p>
+<p><strong>view</strong>: 실제 이미지/ 실제 이미지를 바탕으로 동일한 프롬프트를 작성한 후 ChatGPT와 Gemini에 제공하여 이미지를 생성/보정한 후 편집한 이미지 데이터셋이다. 그러니까 실제,챗지피티 이미지, 제미니 이미지 이렇게 3가지 형식으로 구현되어 있다.  2가지를 확인하기 위해 구현했는데 하나는 ai가 변형이 아니라 보정 등으로만 사용되었을 경우에도 생성형으로 판정되는지 궁금해서 이를 확인하기 위해서였고, 다른 하나는 프롬프트를 바탕으로 만들어진 이미지와 실제 이미지가 얼마나 비슷한지 확인하기 위해서였다.<br>파이썬을 사용해서 동일한 규격(600*800)으로 변형했고, 파일 형식도 jpg로 통일하였다.<br>또한 실제 이미지도 어느 정도의 변형(색채/선명도 등 변경)을 하여 판별이 어렵도록 만들어보았다.<br>SynthID API를 사용하여 일괄적으로 테스트를 처리하고 싶었지만, 현재 SynthID API는 텍스트만 지원하고 있기 때문에 <a href="https://support.google.com/gemini/answer/16722517?hl=ko&co=GENIE.Platform%3DDesktop">Gemini 고객센터</a>를 참고해서 하나하나 직접 입력하는 식으로 테스트를 진행했다.
+테스트 결과는 아래와 같다.
+<br/></p>
+<p><strong>view</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">파일명</th>
+<th align="left">GEMINI</th>
+<th align="left">3-layers</th>
+<th align="left">일치 여부</th>
+<th align="left">Gemini 판정 이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">real_spring_Sinchon.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">실사 촬영</td>
+<td align="left">일치</td>
+<td align="left">도로명 주소와 브랜드 로고가 실제와 일치하며 건물 투시가 현실적임.</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_spring_Sinchon.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">존재하지 않는 단어(임적증)와 물리적으로 불가능한 파이프 구조물 생성.</td>
+</tr>
+<tr>
+<td align="left">Gemini_spring_Sinchon.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">간판 글자 조합이 비논리적이며 인물의 이목구비가 뭉개진 형태임.</td>
+</tr>
+<tr>
+<td align="left">real_summer_France.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">실사 촬영</td>
+<td align="left">일치</td>
+<td align="left">식물의 무작위적 성장 패턴과 표지판 마모가 실제 물리적 환경과 일치함.</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_summer_France.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">Gemini_summer_France.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">real_autumn_fruit.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">실사 촬영</td>
+<td align="left">일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_autumn_fruit.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">Gemini_autumn_fruit.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">일치</td>
+<td align="left">72.5%</td>
+</tr>
+<tr>
+<td align="left">real_winter_Christmas.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">실사 촬영</td>
+<td align="left">일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_winter_Christmas.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">일치</td>
+<td align="left">72.7%</td>
+</tr>
+<tr>
+<td align="left">Gemini_winter_Christmas.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">real_not_edit_1.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">실사 촬영</td>
+<td align="left">일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_edit_1.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">Gemini_edit_1.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">실사 촬영</td>
+<td align="left">불일치</td>
+<td align="left">81.8%</td>
+</tr>
+<tr>
+<td align="left">real_not_edit_2.jpg</td>
+<td align="left">실사 촬영</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">불일치</td>
+<td align="left">72.7%</td>
+</tr>
+<tr>
+<td align="left">ChatGPT_edit_2.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">일치</td>
+<td align="left">72.7%</td>
+</tr>
+<tr>
+<td align="left">Gemini_edit_2.jpg</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">ai 편집/변형 유력</td>
+<td align="left">일치</td>
+<td align="left">72.7%</td>
+</tr>
+<tr>
+<td align="left"><br/></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="🔚결론">🔚결론</h2>
+<p>AI모델 성능에 따라 판정이 달라질 수 있는 점이 아쉽기는 해도, 상용 모델을 사용하여 판정하지 않아도 여러 레이어를 통해 어느 정도의 필터링이 가능하다는 장점이 있다.<br>SynthID 가 다른 생성형 AI에서도 보편적으로 사용되거나, 생성형 AI로 생성된 이미지를 구분할 수 있도록 워터마크 혹은 메타데이터 입력이 강제화되거나 한다면 더 좋겠지만 현재 상황에서 이미지 데이터 오염을 막기에는 나쁘지 않은 방법이라고 생각한다.<br>또한 DinoV2를 지각적 해싱으로 사용할 때 미리 임베딩된 데이터셋이 아니더라도 어느 정도의 유사도를 비교할 수 있다는 것은 추후 다른 방도로도 활용될 수 있지 않을까? 라는 생각을 하게 되었다.  </p>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
