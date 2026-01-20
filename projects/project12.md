@@ -41,4 +41,3 @@ You can test it at [huggingface](https://huggingface.co/spaces/nepark/ai-image-f
 **[en]**
 - Batch and single processing testing is possible on Huggingface
 - Performance related tests are being conducted. [Blog](https://world970511.github.io/blog/posts/2026-01-19-3-layers-image-filter.html) for more details
-
