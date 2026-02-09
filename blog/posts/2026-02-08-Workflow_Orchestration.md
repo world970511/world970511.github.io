@@ -1,6 +1,6 @@
 ---
 title: "Workflow Orchestration"
-category: "tech
+category: "tech"
 tags: ["Data Lake", " Kestra"]
 excerpt: "Data Engineering Zoomcamp 2026 스터디 정리"
 readTime: 7

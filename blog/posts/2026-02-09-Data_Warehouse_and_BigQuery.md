@@ -1,6 +1,6 @@
 ---
 title: "Data Warehouse and BigQuery"
-category: "tech
+category: "tech"
 tags: ["Data Warehouse", "BigQuery"]
 excerpt: "Data Engineering Zoomcamp 2026 스터디 정리"
 readTime: 5
