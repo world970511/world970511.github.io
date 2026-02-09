@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Orchestration - 박나은</title>
+    <meta name="description" content="Data Engineering Zoomcamp 2026 스터디 정리">
+    <meta name="google-site-verification" content="lb30pDDWow-sRJaP0kOtYGGmFU5NTD9i_hNGZIeWHlM" />
+    <meta property="og:title" content="Workflow Orchestration">
+    <meta property="og:description" content="Data Engineering Zoomcamp 2026 스터디 정리">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../../images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../../images/favicon/site.webmanifest" />
+    
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/blog-post.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a class="nav-brand" href="../../index.html">박나은</a>
+            <div class="nav-tabs">
+                <a class="nav-tab" href="../blog-index.html">Blog</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <article class="blog-post-full">
+            <header class="post-header">
+                <h1 class="post-title">Workflow Orchestration</h1>
+                <div class="post-meta">
+                    <span>📅 2026년 2월 8일</span>
+                    <span>⏱️ 7분 읽기</span>
+                    <span>📁 Tech</span>
+                </div>
+                <div class="post-tags">
+                    <span class="post-tag">#Data Lake</span><span class="post-tag"># Kestra</span>
+                </div>
+            </header>
+            <div class="post-content">
+                <h1 id="workflow-orchestration">Workflow Orchestration</h1>
+<p>Data Engineering Zoomcamp 2026 스터디의 모듈 2 내용을 정리했다. </p>
+<h2 id="💡-data-lake-란">💡 Data Lake 란?</h2>
+<ul>
+<li>정형, 반정형, 비정형 데이터를 포함한 <strong>모든 형태의 데이터를 원시(Raw) 상태 그대로 저장</strong>하는 대규모 중앙 저장소
+• 특징:<ul>
+<li>데이터를 가공하지 않고 원본 그대로 저장하며, 데이터를 읽을 때 스키마를 정의하는 Schema-on-read 방식을 사용</li>
+<li>**비정형 데이터(텍스트, 이미지, 로그 등)**를 포함한 모든 종류의 데이터를 수용 가능</li>
+<li>저장소와 컴퓨팅을 분리하여 저렴한 비용으로 무제한에 가까운 확장이 가능
+• 목적: 데이터 과학자나 엔지니어가 머신러닝, 탐색적 데이터 분석, 스트리밍 분석 등을 수행하기 위해 사용
+• 주의점: 메타데이터 관리나 데이터 거버넌스가 부재할 경우, 데이터가 무엇인지 알 수 없는 **데이터 늪(Data Swamp)**이 될 위험이 있음</li>
+</ul>
+</li>
+</ul>
+<h2 id="💡-kestra-란">💡 Kestra 란?</h2>
+<p><strong>Kestra</strong>는 이벤트 네이티브 워크플로 오케스트레이터로, 스트리밍/이벤트 처리에 강점이 있으며 이벤트 작업 뿐만 아니라 배치 작업 또한 지원한다.<br>단 몇 줄의 YAML 코드만으로 UI에서 직접 안정적인 워크플로우를 구축할 수 있다. 고 홍보중인데, <a href="https://github.com/kestra-io/kestra">깃허브</a>의 리드미를 보면 밑과 같은 특징이 정리되어 있다.</p>
+<p><strong>주요 특징</strong></p>
+<ul>
+<li>UI에서 워크플로우를 구축하더라도 Git 버전 관리와 통합되어 모든 프로세스를 코드로 유지</li>
+<li>단순한 트리거 정의를 통해 정기 예약 작업과 실시간 이벤트 기반 자동화를 모두 지원</li>
+<li>내장된 코드 에디터에서 단순한 설정 방식을 통해 워크플로우를 정의</li>
+<li>수백 개의 내장 플러그인을 활용하여 모든 데이터베이스, 클라우드 스토리지, API에서 데이터를 추출하고 다양한 언어의 스크립트를 실행할 수 있음</li>
+<li>구문 강조(Syntax Highlighting), 자동 완성, 실시간 구문 검증 기능을 갖춘 UI에서 워크플로우를 직접 구축하고 시각화</li>
+<li>고가용성(High Availability) 및 결함 허용(Fault Tolerance)을 바탕으로 수백만 개의 워크플로우를 처리할 수 있도록 설계</li>
+<li>내장 에디터에서 작성한 워크플로우를 Git 브랜치로 직접 푸시할 수 있어, CI/CD 파이프라인 및 버전 관리 시스템의 모범 사례를 구현</li>
+<li>네임스페이스, 라벨, 서브플로우, 재시도, 타임아웃, 에러 핸들링, 입력/출력 유효성 검사, 변수, 조건부 분기, 동적 태스크 등을 통해 복잡한 워크플로우를 체계적으로 관리하고 복구 능력을 강화</li>
+<li>UI 또는 API 호출을 통해 워크플로우를 수정하면 YAML 정의가 자동으로 조정됨. 따라서 수정 방식(UI, CI/CD, Terraform, API)에 관계없이 오케스트레이션 로직은 항상 선언적 코드로 관리됨</li>
+</ul>
+<h4 id="🆚-kestra와-airflow-비교">🆚 kestra와 airflow 비교</h4>
+<p>그럼 궁금함이 생긴다.<br>그럼 기존까지 가장 자주 사용되던 Airflow와 차이점이 무엇일까?
+kestra는 airflow와 유사한 점이 많다는 것을 아는지 <a href="https://kestra.io/vs/airflow">공식 문서</a>에 두 오케스트레이터의 비교를 올려놨다.<br>그런 걸 포함해서 내용을 정리했다. </p>
+<table>
+<thead>
+<tr>
+<th align="left">구분</th>
+<th align="left">Kestra</th>
+<th align="left">Airflow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>기본 개념</strong></td>
+<td align="left">이벤트 기반 워크플로 오케스트레이터</td>
+<td align="left">배치 중심 워크플로 오케스트레이터</td>
+</tr>
+<tr>
+<td align="left"><strong>핵심 철학</strong></td>
+<td align="left"><strong>선언형(YAML)</strong> + 이벤트 드리븐</td>
+<td align="left"><strong>코드 기반(Python)</strong> + 스케줄 드리븐</td>
+</tr>
+<tr>
+<td align="left"><strong>워크플로 정의</strong></td>
+<td align="left">YAML</td>
+<td align="left">Python (DAG)</td>
+</tr>
+<tr>
+<td align="left"><strong>실행 모델</strong></td>
+<td align="left">Stateless 실행, 태스크 단위 격리</td>
+<td align="left">Stateful 스케줄러 + 워커</td>
+</tr>
+<tr>
+<td align="left"><strong>스케줄링</strong></td>
+<td align="left">Cron + 이벤트 트리거</td>
+<td align="left">Cron 기반</td>
+</tr>
+<tr>
+<td align="left"><strong>이벤트 트리거</strong></td>
+<td align="left">강력 지원 (Webhook, Queue, File 등)</td>
+<td align="left">제한적 (외부 연동 시 추가 작업 필요)</td>
+</tr>
+<tr>
+<td align="left"><strong>데이터 파이프라인</strong></td>
+<td align="left">스트리밍/이벤트 처리에 강점</td>
+<td align="left">배치 데이터 처리에 강점</td>
+</tr>
+<tr>
+<td align="left"><strong>플러그인/확장</strong></td>
+<td align="left">내장 플러그인 중심</td>
+<td align="left">방대한 커뮤니티 플러그인</td>
+</tr>
+<tr>
+<td align="left"><strong>재시도/에러 처리</strong></td>
+<td align="left">YAML에서 명시적으로 설정</td>
+<td align="left">Python 코드로 세밀하게 제어</td>
+</tr>
+<tr>
+<td align="left"><strong>배포/운영</strong></td>
+<td align="left">단일 바이너리 + Docker 친화적</td>
+<td align="left">구성 요소 많음 (Scheduler, Webserver, Worker 등)</td>
+</tr>
+</tbody></table>
+<p>개인적으로 둘을 잘 확인해본 해외 블로그 글은 <a href="https://medium.pimpaudben.fr/airflow-kestra-a-simple-benchmark-ffc5a533aa85">여기</a>에 있다.</p>
+<p>kestra는 이벤트 네이티브라, Airflow가 가지고 있는 스케줄링의 한계를 극복할 수 있다는 점이 매력적이었다.</p>
+
+            </div>
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="../blog-index.html" class="back-to-blog">← 블로그로 돌아가기</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Mermaid 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid 초기화 및 렌더링
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+        
+        // 페이지 로드 후 실행
+        window.addEventListener('DOMContentLoaded', function() {
+            // language-mermaid 클래스를 가진 코드 블록 찾기
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeElement) {
+                const pre = codeElement.parentElement;
+                const mermaidCode = codeElement.textContent;
+                
+                // 새로운 mermaid div 생성
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = mermaidCode;
+                
+                // pre 태그를 mermaid div로 교체
+                pre.parentNode.replaceChild(mermaidDiv, pre);
+            });
+            
+            // Mermaid 렌더링
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>
