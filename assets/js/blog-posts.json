@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "slug": "2026-03-04-3-databridge-v0",
+      "title": "DataBridge V0",
+      "date": "2026-03-04",
+      "category": "project",
+      "tags": [
+        "AI Data Management",
+        "Ollama",
+        "NAS"
+      ],
+      "excerpt": "개인 프로젝트 기록: NAS와 폐쇄망 환경에서도 사용 가능한 AI 데이터 관리 시스템 만들기 -1- ",
+      "readTime": 7,
+      "lastModified": "2026-03-04T08:05:08.296Z"
+    },
+    {
       "slug": "2026-02-09-data-warehouse-and-bigquery",
       "title": "Data Warehouse and BigQuery",
       "date": "2026-02-09",
@@ -11,7 +25,7 @@
       ],
       "excerpt": "Data Engineering Zoomcamp 2026 스터디 정리",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.551Z"
+      "lastModified": "2026-03-04T08:05:08.314Z"
     },
     {
       "slug": "2026-02-08-workflow-orchestration",
@@ -24,7 +38,7 @@
       ],
       "excerpt": "Data Engineering Zoomcamp 2026 스터디 정리",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.568Z"
+      "lastModified": "2026-03-04T08:05:08.316Z"
     },
     {
       "slug": "2026-01-19-3-layers-image-filter",
@@ -38,7 +52,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: AI 생성 이미지 탐지 파이프라인 만들어보기",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.574Z"
+      "lastModified": "2026-03-04T08:05:08.320Z"
     },
     {
       "slug": "2026-01-09-2-4",
@@ -52,7 +66,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery의 Workflow",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.576Z"
+      "lastModified": "2026-03-04T08:05:08.323Z"
     },
     {
       "slug": "2026-01-04-korea-webnovel-recommender-3",
@@ -67,7 +81,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: RAG와 Agent",
       "readTime": 3,
-      "lastModified": "2026-02-09T07:09:20.579Z"
+      "lastModified": "2026-03-04T08:05:08.325Z"
     },
     {
       "slug": "2025-12-31-korea-webnovel-recommender-2",
@@ -81,7 +95,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: 험난한 Skyvern 사용 후기와 사용을 포기한 이유",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.581Z"
+      "lastModified": "2026-03-04T08:05:08.328Z"
     },
     {
       "slug": "2025-12-31-korea-webnovel-recommender-1",
@@ -95,7 +109,7 @@
       ],
       "excerpt": "개인 프로젝트 기록: fastAPI + Streamlit + langchain 활용기",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.583Z"
+      "lastModified": "2026-03-04T08:05:08.330Z"
     },
     {
       "slug": "2025-12-30-ocr-c2",
@@ -110,7 +124,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: robi V 학습용 데이터 파이프라인 구축 및 관리",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.585Z"
+      "lastModified": "2026-03-04T08:05:08.332Z"
     },
     {
       "slug": "2025-12-30-fake-detection-c2",
@@ -125,7 +139,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: Fake Detection 학습용 데이터 파이프라인 구축",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.586Z"
+      "lastModified": "2026-03-04T08:05:08.333Z"
     },
     {
       "slug": "2025-12-29-2-3",
@@ -138,7 +152,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery에서의 작업 호출",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.588Z"
+      "lastModified": "2026-03-04T08:05:08.335Z"
     },
     {
       "slug": "2025-12-29-c1",
@@ -157,7 +171,7 @@
       ],
       "excerpt": "회사에서 진행했던 프로젝트: Django + Celery + Redis + Django Rest Framework + React 등 를 활용한 데이터 관리 플랫폼 구축",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.591Z"
+      "lastModified": "2026-03-04T08:05:08.337Z"
     },
     {
       "slug": "2025-12-24-2025-2026",
@@ -169,7 +183,7 @@
       ],
       "excerpt": "다사다난 2025년 회고하고 2026 준비하기",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.593Z"
+      "lastModified": "2026-03-04T08:05:08.339Z"
     },
     {
       "slug": "2025-12-23-mlops",
@@ -183,7 +197,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 7,
-      "lastModified": "2026-02-09T07:09:20.595Z"
+      "lastModified": "2026-03-04T08:05:08.341Z"
     },
     {
       "slug": "2025-11-17-1",
@@ -196,7 +210,7 @@
       ],
       "excerpt": "시스템 디자인: 사용자 수에 따른 규모 확장성",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.597Z"
+      "lastModified": "2026-03-04T08:05:08.343Z"
     },
     {
       "slug": "2025-11-09-2-2",
@@ -209,7 +223,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery를 Django에 적용하기",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.598Z"
+      "lastModified": "2026-03-04T08:05:08.345Z"
     },
     {
       "slug": "2025-10-02-2-1",
@@ -222,7 +236,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(2): Celery 개념 정리",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.600Z"
+      "lastModified": "2026-03-04T08:05:08.346Z"
     },
     {
       "slug": "2025-09-27-1",
@@ -236,7 +250,7 @@
       ],
       "excerpt": "회사에서 진행했던 일들 정리(1)",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.602Z"
+      "lastModified": "2026-03-04T08:05:08.349Z"
     },
     {
       "slug": "2025-09-27-ai-",
@@ -249,7 +263,7 @@
       ],
       "excerpt": "AI 스터디 내용 정리",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.603Z"
+      "lastModified": "2026-03-04T08:05:08.352Z"
     },
     {
       "slug": "2025-07-29",
@@ -263,7 +277,7 @@
       ],
       "excerpt": "대학원 고민",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.605Z"
+      "lastModified": "2026-03-04T08:05:08.354Z"
     },
     {
       "slug": "2025-07-24",
@@ -275,9 +289,9 @@
       ],
       "excerpt": "첫 회사, 첫 퇴사",
       "readTime": 5,
-      "lastModified": "2026-02-09T07:09:20.606Z"
+      "lastModified": "2026-03-04T08:05:08.355Z"
     }
   ],
-  "lastUpdated": "2026-02-09T07:09:20.610Z",
-  "totalPosts": 20
+  "lastUpdated": "2026-03-04T08:05:08.360Z",
+  "totalPosts": 21
 }
