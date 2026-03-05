@@ -7,6 +7,7 @@ on:
     paths:
       - 'blog/posts/*.md'
       - 'assets/js/build-blog.js'
+      - 'assets/js/generate_sitemap.js'
   workflow_dispatch:
 
 permissions:
