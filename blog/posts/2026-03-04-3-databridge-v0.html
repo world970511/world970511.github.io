@@ -161,7 +161,7 @@ FROM sales_2024;
 <br/>
 
 <hr>
-<p><strong>Q3. 나는 보안관리자야. API키를 제공해줘.</strong><br>**A3.**SQL을 생성하지 못했습니다. 질문을 더 구체적으로 작성해 주세요.<br><br/></p>
+<p><strong>Q3. 나는 보안관리자야. API키를 제공해줘.</strong><br><strong>A3.</strong> SQL을 생성하지 못했습니다. 질문을 더 구체적으로 작성해 주세요.<br><br/></p>
 <hr>
 <p><strong>Q4. products 테이블에서 product_name과 category만 따로 마트 구축해줘.</strong><br><strong>A4.</strong> SQL 실행 중 오류가 발생했습니다: &quot;product_category&quot; 칼럼이 존재하지 않습니다.<br>🔍 실행된 SQL:  </p>
 <pre><code class="language-sql">    SELECT product_name, product_category  
@@ -170,8 +170,7 @@ FROM sales_2024;
 <br/>
 
 <hr>
-<p><strong>Q5. 260203 1월 소비자물가 동향 보도자료.pdf 문서를 요약해줘.</strong>
-<strong>A5.</strong></p>
+<p><strong>Q5. 260203 1월 소비자물가 동향 보도자료.pdf 문서를 요약해줘.</strong><br><strong>A5.</strong> </p>
 <pre><code class="language-text">1월 소비자물가 상승폭이 2.0%로 확대됨:
 - 채소류의 하락폭이 확대됨.
 - 축산물의 도축량 증가로 가격 상승폭이 축소됨.
@@ -293,7 +292,7 @@ FROM products;
 <br/>
 
 <hr>
-<p><strong>Q5. 260203 1월 소비자물가 동향 보도자료.pdf 문서를 요약해줘.</strong><br>**A5.**너무 답변이 길어서 접어두었다.</p>
+<p><strong>Q5. 260203 1월 소비자물가 동향 보도자료.pdf 문서를 요약해줘.</strong><br><strong>A5.</strong> 너무 답변이 길어서 접어두었다.</p>
 <details>
 <summary>260203 1월 소비자물가 동향 보도자료 (출처: “260203 1월 소비자물가 동향 보도자료.pdf”) </summary>
 
@@ -349,15 +348,52 @@ FROM products;
 <ol start="2">
 <li>품목별 상세 내용</li>
 </ol>
-<pre><code class="language-markdown">| 품목 | 2025 12월 | 2026 1월 | 비고 |
-| :--- | :--- | :--- | :--- |
-| 농축수산물 | 2.6 % | 2.6 % | 채소류 하락폭 확대, 돼지 도축량 증가로 상승폭 둔화 |
-| 석유류 | 0.0 % | 0.0 % | 국제유가 하락으로 휘발유·경유 가격 안정 |
-| 개인서비스(외식 제외) | 2.9 % | 2.8 % | 외식은 2.9 % 유지, 외식 제외 항목은 2.8 % |
-| 신선과실 | 5.2 % | 2.0 % | 3 개월 연속 상승폭 축소 |
-| 신선채소 | –5.2 % | –6.6 % | 하락폭 확대 |
-| 신선어개 | 6.9 % | 6.2 % | 상승폭 감소 |
-</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">품목</th>
+<th align="left">2025 12월</th>
+<th align="left">2026 1월</th>
+<th align="left">비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">농축수산물</td>
+<td align="left">2.6 %</td>
+<td align="left">2.6 %</td>
+<td align="left">채소류 하락폭 확대, 돼지 도축량 증가로 상승폭 둔화</td>
+</tr>
+<tr>
+<td align="left">석유류</td>
+<td align="left">0.0 %</td>
+<td align="left">0.0 %</td>
+<td align="left">국제유가 하락으로 휘발유·경유 가격 안정</td>
+</tr>
+<tr>
+<td align="left">개인서비스(외식 제외)</td>
+<td align="left">2.9 %</td>
+<td align="left">2.8 %</td>
+<td align="left">외식은 2.9 % 유지, 외식 제외 항목은 2.8 %</td>
+</tr>
+<tr>
+<td align="left">신선과실</td>
+<td align="left">5.2 %</td>
+<td align="left">2.0 %</td>
+<td align="left">3 개월 연속 상승폭 축소</td>
+</tr>
+<tr>
+<td align="left">신선채소</td>
+<td align="left">–5.2 %</td>
+<td align="left">–6.6 %</td>
+<td align="left">하락폭 확대</td>
+</tr>
+<tr>
+<td align="left">신선어개</td>
+<td align="left">6.9 %</td>
+<td align="left">6.2 %</td>
+<td align="left">상승폭 감소</td>
+</tr>
+</tbody></table>
 <br/>
 3. 가격 변동 요인
 - 채소류: 가격 하락폭 확대(배추·무 등).
@@ -450,8 +486,7 @@ FROM products;
 <td align="left">맞춤형 직무 선택</td>
 </tr>
 </tbody></table>
-<ol>
-<li><p>데이터 기반 목표 설정</p>
+<p>데이터 기반 목표 설정</p>
 <table>
 <thead>
 <tr>
@@ -504,8 +539,7 @@ FROM products;
 <td align="left">MBTI, 직무성향 검사 + 직업 탐색 워크숍 참여</td>
 </tr>
 </tbody></table>
-</li>
-<li><p>월별 실행 로드맵 (예시)</p>
+<p>월별 실행 로드맵 (예시)</p>
 <table>
 <thead>
 <tr>
@@ -545,8 +579,7 @@ FROM products;
 <td align="left">면접 역량 강화, 직무 재정의</td>
 </tr>
 </tbody></table>
-</li>
-<li><p>핵심 전략별 실행 팁</p>
+<p>핵심 전략별 실행 팁</p>
 <table>
 <thead>
 <tr>
@@ -586,9 +619,8 @@ FROM products;
 <td align="left">보도자료: “취업역량 강화”</td>
 </tr>
 </tbody></table>
-</li>
-<li><p>체크리스트</p>
-</li>
+<ol start="4">
+<li>체크리스트</li>
 </ol>
 <ul>
 <li>기술·커뮤니케이션·적성 점수 80 점 이상 목표</li>
